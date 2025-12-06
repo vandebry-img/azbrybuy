@@ -1078,7 +1078,104 @@ button,
 .loading {
     z-index: 9999 !important;
 }
+/* ===== FIX UNTUK TOMBOL YANG TERTUTUP ===== */
 
+/* PASTIKAN TOMBOL SELECTOR DI BERANDA BISA DIKLIK */
+.selector-buttons {
+    position: relative;
+    z-index: 100 !important;
+}
+
+.selector-btn {
+    position: relative !important;
+    z-index: 101 !important;
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1) !important;
+}
+
+/* FIX: Pastikan button tidak tertutup */
+.selector-btn::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* PASTIKAN PRODUCT CONTAINER MUNCUL DI TEMPAT YANG BENAR */
+.product-lists-container {
+    position: relative !important;
+    z-index: 50 !important;
+    margin-top: 0 !important;
+    padding-top: 20px !important;
+}
+
+/* FIX: Hilangkan overlap dengan hero section */
+.hero {
+    position: relative;
+    z-index: 40 !important;
+}
+
+/* FIX: Pastikan product cards bisa diklik */
+.product-card {
+    position: relative;
+    z-index: 60 !important;
+    overflow: visible !important;
+}
+
+.btn-order {
+    position: relative !important;
+    z-index: 70 !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    transform: translateZ(0) !important; /* Force GPU rendering */
+}
+
+/* FIX: Touch target lebih besar untuk mobile */
+@media (max-width: 768px) {
+    .selector-btn {
+        padding: 15px 10px !important;
+        margin: 5px !important;
+        min-height: 60px !important;
+    }
+    
+    /* Pastikan area klik lebih luas */
+    .selector-btn::after {
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+    }
+}
+
+/* FIX: Hapus semua overlay yang mungkin menutupi */
+.hero::before,
+.hero::after {
+    pointer-events: none !important;
+}
+
+/* FIX: Pastikan tidak ada element yang overlap */
+.container {
+    position: relative;
+    z-index: 10;
+}
+
+/* DEBUG BORDER - Hapus setelah fix */
+/* .selector-btn {
+    border: 2px solid red !important;
+}
+
+.product-lists-container {
+    border: 2px solid blue !important;
+}
+
+.product-card {
+    border: 2px solid green !important;
+} */
 /* Fix untuk header */
 header {
     z-index: 1000 !important;
