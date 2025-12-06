@@ -32,8 +32,8 @@ const products = {
                 popular: false
             },
             {
-                title: "📦 PREMIUM - 20K",
-                price: "Rp 20.000",
+                title: "📦 PREMIUM - xxK",
+                price: "Rp xx.000",
                 period: "",
                 features: [
                     "Script original",
