@@ -1,6 +1,6 @@
 // ===== KONFIGURASI UTAMA =====
-const ADMIN_PHONE = "628xxxxxxxxxx"; // ⚠️ GANTI DENGAN NOMOR ADMIN ANDA!
-const ADMIN_NAME = "Admin Azbry-MD";
+const ADMIN_PHONE = "6285189988271"; // ⚠️ GANTI DENGAN NOMOR ADMIN ANDA!
+const ADMIN_NAME = "FebryWesker";
 
 // ===== VARIABEL GLOBAL =====
 let currentProduct = null;
