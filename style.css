@@ -1047,3 +1047,72 @@ footer {
         padding: var(--space-xl);
     }
         }
+/* ===== FIX UNTUK TOMBOL YANG TIDAK BISA DIKLIK ===== */
+
+/* Pastikan semua button bisa diklik */
+button, 
+.btn-order, 
+.selector-btn, 
+.theme-toggle, 
+.back-to-top,
+.hamburger {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* Fix untuk product cards */
+.product-card {
+    position: relative;
+    overflow: visible !important;
+}
+
+/* Fix untuk order button di dalam product card */
+.product-card .btn-order {
+    position: relative;
+    z-index: 20 !important;
+}
+
+/* Fix untuk loading overlay */
+.loading {
+    z-index: 9999 !important;
+}
+
+/* Fix untuk header */
+header {
+    z-index: 1000 !important;
+}
+
+/* Fix untuk floating buttons */
+.theme-toggle,
+.back-to-top {
+    z-index: 1001 !important;
+}
+
+/* Fix untuk touch devices */
+@media (max-width: 768px) {
+    button, 
+    .btn-order, 
+    .selector-btn {
+        min-height: 44px !important; /* Minimum touch target size */
+        min-width: 44px !important;
+    }
+    
+    .selector-btn {
+        padding: 12px !important;
+    }
+}
+
+/* Fix untuk button hover di mobile */
+@media (hover: none) {
+    .selector-btn:hover,
+    .btn-order:hover {
+        transform: none !important;
+    }
+    
+    .selector-btn:active,
+    .btn-order:active {
+        transform: scale(0.95) !important;
+    }
+}
