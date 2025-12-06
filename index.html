@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azbry-MD - WhatsApp Bot Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1><i class="fas fa-robot"></i> Azbry-MD</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#script">Script</a></li>
+                    <li><a href="#sewa">Sewa Bot</a></li>
+                    <li><a href="#role">Role Premium</a></li>
+                    <li><a href="#nokos">NOKOS</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>🤖 AZBRY-MD BOT</h2>
+                <p>Script WhatsApp Bot Terlengkap dengan Fitur AI & Downloader</p>
+                <div class="cta-buttons">
+                    <a href="#script" class="btn-primary">Beli Script</a>
+                    <a href="#sewa" class="btn-secondary">Sewa Bot</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Script Packages -->
+    <section id="script" class="packages">
+        <div class="container">
+            <h2 class="section-title">🚀 PAKET SCRIPT AZBRY-MD</h2>
+            <div class="packages-grid">
+                <!-- Paket Basic -->
+                <div class="package-card basic">
+                    <div class="package-header">
+                        <h3>📦 PAKET 1: BASIC - 15K</h3>
+                        <div class="price">Rp 15.000</div>
+                    </div>
+                    <div class="package-features">
+                        <h4>🎯 Fitur:</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Script terbaru saja</li>
+                            <li><i class="fas fa-times-circle"></i> Tanpa tutor pemasangan</li>
+                            <li><i class="fas fa-times-circle"></i> Tanpa bimbingan</li>
+                            <li><i class="fas fa-times-circle"></i> Support terbatas</li>
+                        </ul>
+                    </div>
+                    <button class="btn-order" onclick="orderScript('basic')">
+                        <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </button>
+                </div>
+
+                <!-- Paket Premium -->
+                <div class="package-card premium">
+                    <div class="package-header">
+                        <h3>📦 PAKET 2: PREMIUM - 20K</h3>
+                        <div class="price">Rp 20.000</div>
+                    </div>
+                    <div class="package-features">
+                        <h4>🎯 Keunggulan:</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Script original & terbaru</li>
+                            <li><i class="fas fa-check-circle"></i> Tutorial lengkap pemula</li>
+                            <li><i class="fas fa-check-circle"></i> Bimbingan sampai jadi</li>
+                            <li><i class="fas fa-check-circle"></i> No enc 100%</li>
+                            <li><i class="fas fa-check-circle"></i> Support 24 jam</li>
+                            <li><i class="fas fa-check-circle"></i> Priority response</li>
+                        </ul>
+                    </div>
+                    <button class="btn-order" onclick="orderScript('premium')">
+                        <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </button>
+                </div>
+            </div>
+
+            <!-- Syarat & Ketentuan -->
+            <div class="terms">
+                <h3>⚠️ SYARAT & KETENTUAN:</h3>
+                <ul>
+                    <li>➤ WAJIB punya panel sendiri</li>
+                    <li>➤ TIDAK menyediakan panel gratis</li>
+                    <li>➤ Beli = Paham konsekuensi</li>
+                    <li>➤ Tidak accept komplain gagal paham</li>
+                    <li>➤ Bot resiko banned? ITU NORMAL!</li>
+                    <li>➤ No refund garansi jiwa</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sewa Bot Section -->
+    <section id="sewa" class="rental">
+        <div class="container">
+            <h2 class="section-title">💰 PAKET SEWA BOT</h2>
+            <p class="section-subtitle">NOTE : 1 TRANSAKSI UNTUK 1 GRUP</p>
+            
+            <div class="rental-grid">
+                <div class="rental-card">
+                    <h3>📅 3 Hari</h3>
+                    <div class="price">Rp 10.000</div>
+                    <button class="btn-order" onclick="orderRental('3hari')">Sewa Sekarang</button>
+                </div>
+                
+                <div class="rental-card">
+                    <h3>📅 1 Minggu</h3>
+                    <div class="price">Rp 15.000</div>
+                    <button class="btn-order" onclick="orderRental('1minggu')">Sewa Sekarang</button>
+                </div>
+                
+                <div class="rental-card">
+                    <h3>📅 2 Minggu</h3>
+                    <div class="price">Rp 25.000</div>
+                    <button class="btn-order" onclick="orderRental('2minggu')">Sewa Sekarang</button>
+                </div>
+                
+                <div class="rental-card">
+                    <h3>📅 1 Bulan</h3>
+                    <div class="price">Rp 45.000</div>
+                    <button class="btn-order" onclick="orderRental('1bulan')">Sewa Sekarang</button>
+                </div>
+            </div>
+
+            <!-- Fitur Utama -->
+            <div class="features">
+                <h3>🚀 FITUR UTAMA</h3>
+                <div class="features-grid">
+                    <div class="feature-item">✅ Downloader ALL SOSMED</div>
+                    <div class="feature-item">✅ Antilink & Antitagsw</div>
+                    <div class="feature-item">✅ Auto Welcome/Bye</div>
+                    <div class="feature-item">✅ Tools Admin Lengkap</div>
+                    <div class="feature-item">✅ Auto Responder AI</div>
+                    <div class="feature-item">✅ Support 24/7 Active</div>
+                </div>
+            </div>
+
+            <!-- Sistem Keamanan -->
+            <div class="security">
+                <h3>🔒 SISTEM 100% AMAN</h3>
+                <div class="security-content">
+                    <p><strong>KEAMANAN TERJAMIN:</strong></p>
+                    <ul>
+                        <li>• NOMOR BOT KAMI MASUK KE GRUP ANDA</li>
+                        <li>• TIDAK PAKAI NOMOR ANDA SAMA SEKALI</li>
+                        <li>• TIDAK ADA RISIKO BANNED NOMOR ANDA</li>
+                        <li>• BOT KAMI YANG MENANGGUNG RISIKO</li>
+                        <li>• 100% AMAN UNTUK NOMOR UTAMA ANDA</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Role Premium -->
+    <section id="role" class="role-premium">
+        <div class="container">
+            <h2 class="section-title">💎 ROLE PREMIUM</h2>
+            
+            <div class="role-grid">
+                <div class="role-card">
+                    <h3>📅 1 Minggu</h3>
+                    <div class="price">Rp 7.000</div>
+                    <button class="btn-order" onclick="orderRole('1minggu')">Beli Sekarang</button>
+                </div>
+                
+                <div class="role-card">
+                    <h3>📅 2 Minggu</h3>
+                    <div class="price">Rp 10.000</div>
+                    <button class="btn-order" onclick="orderRole('2minggu')">Beli Sekarang</button>
+                </div>
+                
+                <div class="role-card">
+                    <h3>📅 1 Bulan</h3>
+                    <div class="price">Rp 15.000</div>
+                    <button class="btn-order" onclick="orderRole('1bulan')">Beli Sekarang</button>
+                </div>
+            </div>
+
+            <!-- Benefit Role -->
+            <div class="benefits">
+                <h3>🚀 BENEFIT ROLE PREMIUM</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-item">✅ Unlimited Limit</div>
+                    <div class="benefit-item">✅ Akses fitur AI</div>
+                    <div class="benefit-item">✅ Auto naik role Yapping Finall boss</div>
+                    <div class="benefit-item">✅ Auto Responder AI</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOKOS Section -->
+    <section id="nokos" class="nokos">
+        <div class="container">
+            <h2 class="section-title">🔐 NOKOS INDO FRESH</h2>
+            <div class="nokos-content">
+                <div class="nokos-card">
+                    <h3><i class="fas fa-sim-card"></i> NOKOS INDO FRESH</h3>
+                    <div class="price">Rp 7.000 / Nomor</div>
+                    <p>Untuk keamanan bot Anda, gunakan NOKOS (Nomor Kosong)</p>
+                    
+                    <div class="nokos-info">
+                        <h4>🔐 KEAMANAN & REKOMENDASI:</h4>
+                        <ul>
+                            <li>➤ UNTUK KEAMANAN, PAKAI NOKOS!</li>
+                            <li>➤ Jangan pakai nomor utama/pribadi</li>
+                            <li>➤ Bot bisa kena banned anytime</li>
+                            <li>➤ Kami sediakan NOKOS INDO FRESH (7K)</li>
+                            <li>➤ Nomor tumbal = aman nomor utama</li>
+                            <li>➤ No ribet, no takut banned</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="btn-order" onclick="orderNokos()">
+                        <i class="fab fa-whatsapp"></i> Pesan NOKOS
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">📞 HUBUNGI KAMI</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3><i class="fab fa-whatsapp"></i> WhatsApp Admin</h3>
+                    <p>Klik tombol di bawah untuk langsung chat admin:</p>
+                    <a href="https://wa.me/628xxxxxxxxxx?text=Halo%20admin,%20saya%20mau%20tanya%20tentang%20Azbry-MD" 
+                       class="btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Chat via WhatsApp
+                    </a>
+                    
+                    <div class="payment-info">
+                        <h4>💳 Metode Pembayaran:</h4>
+                        <p>• Dana / OVO / Gopay</p>
+                        <p>• ShopeePay</p>
+                        <p>• QRIS</p>
+                        <p>• Transfer Bank</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3><i class="fas fa-robot"></i> Azbry-MD</h3>
+                    <p>WhatsApp Bot Script Terlengkap</p>
+                </div>
+                <div class="footer-links">
+                    <h4>LINK CEPAT</h4>
+                    <a href="#script">Script Bot</a>
+                    <a href="#sewa">Sewa Bot</a>
+                    <a href="#role">Role Premium</a>
+                    <a href="#nokos">NOKOS</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>KONTAK</h4>
+                    <p><i class="fab fa-whatsapp"></i> WhatsApp: 628518988271</p>
+                    <p>© 2024 Azbry-MD. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
