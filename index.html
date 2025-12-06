@@ -29,12 +29,24 @@
     <!-- Header -->
     <header>
         <div class="container">
-            <nav>
+            <nav class="navbar">
                 <div class="logo">
                     <h1><i class="fas fa-robot"></i> Azbry<span class="logo-highlight">MD</span></h1>
                 </div>
                 
-                <div class="header-right">
+                <ul class="nav-links">
+                    <li><a href="#home" class="active"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li><a href="#products"><i class="fas fa-box"></i> Produk</a></li>
+                    <li><a href="#contact"><i class="fas fa-phone"></i> Kontak</a></li>
+                </ul>
+                
+                <div class="header-controls">
+                    <!-- Theme Toggle di Header -->
+                    <button id="themeToggle" class="theme-toggle-header">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    
                     <div class="realtime-info">
                         <div class="clock" id="realTimeClock">
                             <i class="far fa-clock"></i>
@@ -46,12 +58,6 @@
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
-                
-                <ul class="nav-links">
-                    <li><a href="#home" class="active"><i class="fas fa-home"></i> Beranda</a></li>
-                    <li><a href="#products"><i class="fas fa-box"></i> Produk</a></li>
-                    <li><a href="#contact"><i class="fas fa-phone"></i> Kontak</a></li>
-                </ul>
             </nav>
         </div>
     </header>
@@ -78,7 +84,7 @@
                         <button class="selector-btn" data-product="script">
                             <i class="fas fa-code"></i>
                             <span>Script Bot</span>
-                            <small>15K</small>
+                            <small>xxK</small>
                         </button>
                         
                         <button class="selector-btn" data-product="rental">
@@ -194,13 +200,7 @@
         </div>
     </footer>
 
-    <!-- Floating Theme Toggle Button -->
-    <button id="themeToggle" class="theme-toggle">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-    </button>
-
-    <!-- Back to Top Button -->
+    <!-- Back to Top Button (HAPUS TOMBOL THEME DI SINI) -->
     <button id="backToTop" class="back-to-top">
         <i class="fas fa-chevron-up"></i>
     </button>
@@ -215,4 +215,4 @@
 
     <script src="./script.js"></script>
 </body>
-</html>
+                           </html>
