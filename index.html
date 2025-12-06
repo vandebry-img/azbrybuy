@@ -1,29 +1,43 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Azbry-MD - WhatsApp Bot Shop</title>
+    <title>Azbry-MD - WhatsApp Bot Script</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header dengan Jam Real-time -->
     <header>
         <div class="container">
             <nav>
                 <div class="logo">
-                    <h1><i class="fas fa-robot"></i> Azbry-MD</h1>
+                    <h1><i class="fas fa-robot"></i> Azbry<span class="logo-highlight">MD</span></h1>
+                    <div class="tagline">WhatsApp Bot Premium</div>
                 </div>
-                <ul class="nav-links">
-                    <li><a href="#home">Beranda</a></li>
-                    <li><a href="#script">Script</a></li>
-                    <li><a href="#sewa">Sewa Bot</a></li>
-                    <li><a href="#role">Role Premium</a></li>
-                    <li><a href="#nokos">NOKOS</a></li>
-                    <li><a href="#contact">Kontak</a></li>
-                </ul>
+                
+                <div class="header-right">
+                    <div class="realtime-info">
+                        <div class="clock" id="realTimeClock">
+                            <i class="far fa-clock"></i>
+                            <span id="clock">00:00:00</span>
+                        </div>
+                        <div class="date" id="realTimeDate">
+                            <i class="far fa-calendar"></i>
+                            <span id="date">Sen, 1 Jan 2024</span>
+                        </div>
+                    </div>
+                    
+                    <ul class="nav-links">
+                        <li><a href="#home" class="active"><i class="fas fa-home"></i> Beranda</a></li>
+                        <li><a href="#products"><i class="fas fa-box"></i> Produk</a></li>
+                        <li><a href="#contact"><i class="fas fa-phone"></i> Kontak</a></li>
+                    </ul>
+                </div>
+                
                 <div class="hamburger">
                     <i class="fas fa-bars"></i>
                 </div>
@@ -34,229 +48,104 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h2>🤖 AZBRY-MD BOT</h2>
-                <p>Script WhatsApp Bot Terlengkap dengan Fitur AI & Downloader</p>
-                <div class="cta-buttons">
-                    <a href="#script" class="btn-primary">Beli Script</a>
-                    <a href="#sewa" class="btn-secondary">Sewa Bot</a>
+            <div class="hero-content animate__animated animate__fadeInUp">
+                <div class="hero-badge">
+                    <span class="badge">🔥 TERBARU 2024</span>
+                </div>
+                <h2 class="hero-title">
+                    <span class="gradient-text">AZBRY-MD</span>
+                    <br>WhatsApp Bot Premium
+                </h2>
+                <p class="hero-subtitle">
+                    Script WhatsApp Bot terlengkap dengan fitur AI, Downloader, dan 200+ fitur lainnya!
+                </p>
+                
+                <!-- Tombol Pilihan Produk -->
+                <div class="product-selector animate__animated animate__fadeInUp animate__delay-1s">
+                    <h3 class="selector-title">🎯 PILIH PRODUK</h3>
+                    <div class="selector-buttons">
+                        <button class="selector-btn" data-product="script">
+                            <i class="fas fa-code"></i>
+                            <span>Script Bot</span>
+                        </button>
+                        
+                        <button class="selector-btn" data-product="rental">
+                            <i class="fas fa-server"></i>
+                            <span>Sewa Bot</span>
+                        </button>
+                        
+                        <button class="selector-btn" data-product="role">
+                            <i class="fas fa-crown"></i>
+                            <span>Role Premium</span>
+                        </button>
+                        
+                        <button class="selector-btn" data-product="nokos">
+                            <i class="fas fa-sim-card"></i>
+                            <span>NOKOS</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Pengguna Aktif</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <span class="stat-number">4.9</span>
+                            <span class="stat-label">Rating</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-bolt"></i>
+                        <div>
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Support</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Script Packages -->
-    <section id="script" class="packages">
-        <div class="container">
-            <h2 class="section-title">🚀 PAKET SCRIPT AZBRY-MD</h2>
-            <div class="packages-grid">
-                <!-- Paket Basic -->
-                <div class="package-card basic">
-                    <div class="package-header">
-                        <h3>📦 PAKET 1: BASIC - 15K</h3>
-                        <div class="price">Rp 15.000</div>
-                    </div>
-                    <div class="package-features">
-                        <h4>🎯 Fitur:</h4>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Script terbaru saja</li>
-                            <li><i class="fas fa-times-circle"></i> Tanpa tutor pemasangan</li>
-                            <li><i class="fas fa-times-circle"></i> Tanpa bimbingan</li>
-                            <li><i class="fas fa-times-circle"></i> Support terbatas</li>
-                        </ul>
-                    </div>
-                    <button class="btn-order" onclick="orderScript('basic')">
-                        <i class="fab fa-whatsapp"></i> Pesan Sekarang
-                    </button>
-                </div>
-
-                <!-- Paket Premium -->
-                <div class="package-card premium">
-                    <div class="package-header">
-                        <h3>📦 PAKET 2: PREMIUM - 20K</h3>
-                        <div class="price">Rp 20.000</div>
-                    </div>
-                    <div class="package-features">
-                        <h4>🎯 Keunggulan:</h4>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Script original & terbaru</li>
-                            <li><i class="fas fa-check-circle"></i> Tutorial lengkap pemula</li>
-                            <li><i class="fas fa-check-circle"></i> Bimbingan sampai jadi</li>
-                            <li><i class="fas fa-check-circle"></i> No enc 100%</li>
-                            <li><i class="fas fa-check-circle"></i> Support 24 jam</li>
-                            <li><i class="fas fa-check-circle"></i> Priority response</li>
-                        </ul>
-                    </div>
-                    <button class="btn-order" onclick="orderScript('premium')">
-                        <i class="fab fa-whatsapp"></i> Pesan Sekarang
-                    </button>
-                </div>
-            </div>
-
-            <!-- Syarat & Ketentuan -->
-            <div class="terms">
-                <h3>⚠️ SYARAT & KETENTUAN:</h3>
-                <ul>
-                    <li>➤ WAJIB punya panel sendiri</li>
-                    <li>➤ TIDAK menyediakan panel gratis</li>
-                    <li>➤ Beli = Paham konsekuensi</li>
-                    <li>➤ Tidak accept komplain gagal paham</li>
-                    <li>➤ Bot resiko banned? ITU NORMAL!</li>
-                    <li>➤ No refund garansi jiwa</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sewa Bot Section -->
-    <section id="sewa" class="rental">
-        <div class="container">
-            <h2 class="section-title">💰 PAKET SEWA BOT</h2>
-            <p class="section-subtitle">NOTE : 1 TRANSAKSI UNTUK 1 GRUP</p>
-            
-            <div class="rental-grid">
-                <div class="rental-card">
-                    <h3>📅 3 Hari</h3>
-                    <div class="price">Rp 10.000</div>
-                    <button class="btn-order" onclick="orderRental('3hari')">Sewa Sekarang</button>
-                </div>
-                
-                <div class="rental-card">
-                    <h3>📅 1 Minggu</h3>
-                    <div class="price">Rp 15.000</div>
-                    <button class="btn-order" onclick="orderRental('1minggu')">Sewa Sekarang</button>
-                </div>
-                
-                <div class="rental-card">
-                    <h3>📅 2 Minggu</h3>
-                    <div class="price">Rp 25.000</div>
-                    <button class="btn-order" onclick="orderRental('2minggu')">Sewa Sekarang</button>
-                </div>
-                
-                <div class="rental-card">
-                    <h3>📅 1 Bulan</h3>
-                    <div class="price">Rp 45.000</div>
-                    <button class="btn-order" onclick="orderRental('1bulan')">Sewa Sekarang</button>
-                </div>
-            </div>
-
-            <!-- Fitur Utama -->
-            <div class="features">
-                <h3>🚀 FITUR UTAMA</h3>
-                <div class="features-grid">
-                    <div class="feature-item">✅ Downloader ALL SOSMED</div>
-                    <div class="feature-item">✅ Antilink & Antitagsw</div>
-                    <div class="feature-item">✅ Auto Welcome/Bye</div>
-                    <div class="feature-item">✅ Tools Admin Lengkap</div>
-                    <div class="feature-item">✅ Auto Responder AI</div>
-                    <div class="feature-item">✅ Support 24/7 Active</div>
-                </div>
-            </div>
-
-            <!-- Sistem Keamanan -->
-            <div class="security">
-                <h3>🔒 SISTEM 100% AMAN</h3>
-                <div class="security-content">
-                    <p><strong>KEAMANAN TERJAMIN:</strong></p>
-                    <ul>
-                        <li>• NOMOR BOT KAMI MASUK KE GRUP ANDA</li>
-                        <li>• TIDAK PAKAI NOMOR ANDA SAMA SEKALI</li>
-                        <li>• TIDAK ADA RISIKO BANNED NOMOR ANDA</li>
-                        <li>• BOT KAMI YANG MENANGGUNG RISIKO</li>
-                        <li>• 100% AMAN UNTUK NOMOR UTAMA ANDA</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Role Premium -->
-    <section id="role" class="role-premium">
-        <div class="container">
-            <h2 class="section-title">💎 ROLE PREMIUM</h2>
-            
-            <div class="role-grid">
-                <div class="role-card">
-                    <h3>📅 1 Minggu</h3>
-                    <div class="price">Rp 7.000</div>
-                    <button class="btn-order" onclick="orderRole('1minggu')">Beli Sekarang</button>
-                </div>
-                
-                <div class="role-card">
-                    <h3>📅 2 Minggu</h3>
-                    <div class="price">Rp 10.000</div>
-                    <button class="btn-order" onclick="orderRole('2minggu')">Beli Sekarang</button>
-                </div>
-                
-                <div class="role-card">
-                    <h3>📅 1 Bulan</h3>
-                    <div class="price">Rp 15.000</div>
-                    <button class="btn-order" onclick="orderRole('1bulan')">Beli Sekarang</button>
-                </div>
-            </div>
-
-            <!-- Benefit Role -->
-            <div class="benefits">
-                <h3>🚀 BENEFIT ROLE PREMIUM</h3>
-                <div class="benefits-grid">
-                    <div class="benefit-item">✅ Unlimited Limit</div>
-                    <div class="benefit-item">✅ Akses fitur AI</div>
-                    <div class="benefit-item">✅ Auto naik role Yapping Finall boss</div>
-                    <div class="benefit-item">✅ Auto Responder AI</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NOKOS Section -->
-    <section id="nokos" class="nokos">
-        <div class="container">
-            <h2 class="section-title">🔐 NOKOS INDO FRESH</h2>
-            <div class="nokos-content">
-                <div class="nokos-card">
-                    <h3><i class="fas fa-sim-card"></i> NOKOS INDO FRESH</h3>
-                    <div class="price">Rp 7.000 / Nomor</div>
-                    <p>Untuk keamanan bot Anda, gunakan NOKOS (Nomor Kosong)</p>
-                    
-                    <div class="nokos-info">
-                        <h4>🔐 KEAMANAN & REKOMENDASI:</h4>
-                        <ul>
-                            <li>➤ UNTUK KEAMANAN, PAKAI NOKOS!</li>
-                            <li>➤ Jangan pakai nomor utama/pribadi</li>
-                            <li>➤ Bot bisa kena banned anytime</li>
-                            <li>➤ Kami sediakan NOKOS INDO FRESH (7K)</li>
-                            <li>➤ Nomor tumbal = aman nomor utama</li>
-                            <li>➤ No ribet, no takut banned</li>
-                        </ul>
-                    </div>
-                    
-                    <button class="btn-order" onclick="orderNokos()">
-                        <i class="fab fa-whatsapp"></i> Pesan NOKOS
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Container untuk List Produk (Awalnya Tersembunyi) -->
+    <main id="product-lists" class="product-lists-container">
+        <!-- List akan dimuat di sini via JavaScript -->
+    </main>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">📞 HUBUNGI KAMI</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3><i class="fab fa-whatsapp"></i> WhatsApp Admin</h3>
-                    <p>Klik tombol di bawah untuk langsung chat admin:</p>
-                    <a href="https://wa.me/628xxxxxxxxxx?text=Halo%20admin,%20saya%20mau%20tanya%20tentang%20Azbry-MD" 
+            <h2 class="section-title animate__animated">📞 HUBUNGI KAMI</h2>
+            <div class="contact-content animate__animated">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp Admin</h3>
+                    <p>Pesan langsung via WhatsApp untuk konsultasi & pemesanan</p>
+                    <a href="https://wa.me/628xxxxxxxxxx?text=Halo%20admin%20Azbry-MD,%20saya%20mau%20tanya%20tentang%20produk%20Anda" 
                        class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Chat via WhatsApp
+                        <i class="fab fa-whatsapp"></i> Chat Sekarang
                     </a>
                     
-                    <div class="payment-info">
-                        <h4>💳 Metode Pembayaran:</h4>
-                        <p>• Dana / OVO / Gopay</p>
-                        <p>• ShopeePay</p>
-                        <p>• QRIS</p>
-                        <p>• Transfer Bank</p>
+                    <div class="contact-info">
+                        <h4><i class="fas fa-clock"></i> Jam Operasional</h4>
+                        <p>08:00 - 22:00 WIB (Setiap Hari)</p>
+                        
+                        <h4><i class="fas fa-credit-card"></i> Metode Pembayaran</h4>
+                        <div class="payment-methods">
+                            <span class="payment-method">Dana</span>
+                            <span class="payment-method">OVO</span>
+                            <span class="payment-method">Gopay</span>
+                            <span class="payment-method">ShopeePay</span>
+                            <span class="payment-method">QRIS</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -267,25 +156,53 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <h3><i class="fas fa-robot"></i> Azbry-MD</h3>
-                    <p>WhatsApp Bot Script Terlengkap</p>
+                <div class="footer-brand">
+                    <h3><i class="fas fa-robot"></i> Azbry<span class="logo-highlight">MD</span></h3>
+                    <p>WhatsApp Bot Script Premium dengan fitur terlengkap dan support 24/7.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
+                
                 <div class="footer-links">
-                    <h4>LINK CEPAT</h4>
-                    <a href="#script">Script Bot</a>
-                    <a href="#sewa">Sewa Bot</a>
-                    <a href="#role">Role Premium</a>
-                    <a href="#nokos">NOKOS</a>
+                    <h4>Produk</h4>
+                    <a href="#" class="product-link" data-product="script">Script Bot</a>
+                    <a href="#" class="product-link" data-product="rental">Sewa Bot</a>
+                    <a href="#" class="product-link" data-product="role">Role Premium</a>
+                    <a href="#" class="product-link" data-product="nokos">NOKOS</a>
                 </div>
-                <div class="footer-contact">
-                    <h4>KONTAK</h4>
-                    <p><i class="fab fa-whatsapp"></i> WhatsApp: 628518988271</p>
+                
+                <div class="footer-info">
+                    <h4>Informasi</h4>
+                    <p><i class="fas fa-shield-alt"></i> 100% Aman & Terpercaya</p>
+                    <p><i class="fas fa-headset"></i> Support 24/7</p>
+                    <p><i class="fas fa-bolt"></i> Instant Delivery</p>
                     <p>© 2024 Azbry-MD. All rights reserved.</p>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Floating Theme Toggle Button -->
+    <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Loading Animation -->
+    <div id="loading" class="loading">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Memuat produk...</p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
