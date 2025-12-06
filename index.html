@@ -29,24 +29,12 @@
     <!-- Header -->
     <header>
         <div class="container">
-            <nav class="navbar">
+            <nav>
                 <div class="logo">
                     <h1><i class="fas fa-robot"></i> Azbry<span class="logo-highlight">MD</span></h1>
                 </div>
                 
-                <ul class="nav-links">
-                    <li><a href="#home" class="active"><i class="fas fa-home"></i> Beranda</a></li>
-                    <li><a href="#products"><i class="fas fa-box"></i> Produk</a></li>
-                    <li><a href="#contact"><i class="fas fa-phone"></i> Kontak</a></li>
-                </ul>
-                
-                <div class="header-controls">
-                    <!-- Theme Toggle di Header -->
-                    <button id="themeToggle" class="theme-toggle-header">
-                        <i class="fas fa-moon"></i>
-                        <i class="fas fa-sun"></i>
-                    </button>
-                    
+                <div class="header-right">
                     <div class="realtime-info">
                         <div class="clock" id="realTimeClock">
                             <i class="far fa-clock"></i>
@@ -58,6 +46,12 @@
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
+                
+                <ul class="nav-links">
+                    <li><a href="#home" class="active"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li><a href="#products"><i class="fas fa-box"></i> Produk</a></li>
+                    <li><a href="#contact"><i class="fas fa-phone"></i> Kontak</a></li>
+                </ul>
             </nav>
         </div>
     </header>
@@ -67,7 +61,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge">
-                    <span class="badge">🔥 TERBARU</span>
+                    <span class="badge">🔥 Happy Shop!</span>
                 </div>
                 <h2 class="hero-title">
                     <span class="gradient-text">AZBRY-MD</span>
@@ -84,7 +78,7 @@
                         <button class="selector-btn" data-product="script">
                             <i class="fas fa-code"></i>
                             <span>Script Bot</span>
-                            <small>xxK</small>
+                            <small>15K</small>
                         </button>
                         
                         <button class="selector-btn" data-product="rental">
@@ -200,7 +194,13 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button (HAPUS TOMBOL THEME DI SINI) -->
+    <!-- Floating Theme Toggle Button -->
+    <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+
+    <!-- Back to Top Button -->
     <button id="backToTop" class="back-to-top">
         <i class="fas fa-chevron-up"></i>
     </button>
@@ -215,4 +215,4 @@
 
     <script src="./script.js"></script>
 </body>
-                           </html>
+</html>
