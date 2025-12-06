@@ -4,6 +4,7 @@ const ADMIN_NAME = "Febry";
 
 // ===== VARIABEL =====
 let currentProduct = null;
+let isProductLoaded = false;
 
 // ===== ELEMEN DOM =====
 const themeToggle = document.getElementById('themeToggle');
@@ -16,7 +17,7 @@ const navLinks = document.querySelector('.nav-links');
 // ===== DATA PRODUK =====
 const products = {
     script: {
-        title: "🚀 PAKET SCRIPT AZBRY-MD (PRICE TANYA LANGSUNG)",
+        title: "🚀 PAKET SCRIPT AZBRY-MD (Price tanya admin)",
         items: [
             {
                 title: "📦 BASIC - xxK",
@@ -210,6 +211,8 @@ const products = {
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Azbry-MD Website Loaded');
+    
     // 1. Setup real-time clock
     updateDateTime();
     setInterval(updateDateTime, 1000);
@@ -234,7 +237,12 @@ function updateDateTime() {
     // Format waktu: HH:MM
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
-    document.getElementById('clock').textContent = `${hours}:${minutes}`;
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    
+    const timeElement = document.getElementById('clock');
+    if (timeElement) {
+        timeElement.textContent = `${hours}:${minutes}`;
+    }
 }
 
 // ===== FUNGSI TEMA =====
@@ -251,6 +259,12 @@ function toggleTheme() {
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeIcon();
+    
+    // Add click effect
+    themeToggle.style.transform = 'scale(0.9)';
+    setTimeout(() => {
+        themeToggle.style.transform = 'scale(1)';
+    }, 150);
 }
 
 function updateThemeIcon() {
@@ -271,51 +285,81 @@ function updateThemeIcon() {
     }
 }
 
-// ===== FUNGSI PRODUK =====
+// ===== FUNGSI PRODUK SELECTOR (TOMBOL DI BERANDA) =====
 function setupProductSelector() {
     const selectorButtons = document.querySelectorAll('.selector-btn');
     
+    console.log(`Found ${selectorButtons.length} selector buttons`);
+    
     selectorButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const product = this.dataset.product;
-            
-            // Remove active class
-            selectorButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class
-            this.classList.add('active');
-            
-            // Show loading
-            showLoading();
-            
-            // Load product
-            setTimeout(() => {
-                loadProduct(product);
-                hideLoading();
-            }, 300);
-        });
+        // Remove existing listeners
+        button.removeEventListener('click', handleProductSelect);
+        // Add new listener
+        button.addEventListener('click', handleProductSelect, { passive: true });
+        
+        // Add pointer cursor
+        button.style.cursor = 'pointer';
     });
 }
 
-function loadProduct(product) {
-    currentProduct = product;
+function handleProductSelect(event) {
+    console.log('Product button clicked:', event.target);
     
-    // Show container
-    productListsContainer.classList.add('active');
+    const product = this.dataset.product;
+    console.log(`Selected product: ${product}`);
     
-    // Scroll to products
+    // Remove active class from all buttons
+    document.querySelectorAll('.selector-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Add active class to clicked button
+    this.classList.add('active');
+    this.style.transform = 'translateY(-3px)';
+    
+    // Add click effect
+    this.style.transform = 'scale(0.95)';
     setTimeout(() => {
-        productListsContainer.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
+        this.style.transform = 'scale(1)';
+    }, 150);
+    
+    // Show loading
+    showLoading();
+    
+    // Load product with delay for animation
+    setTimeout(() => {
+        loadProduct(product);
+        hideLoading();
+    }, 400);
+}
+
+function loadProduct(product) {
+    console.log(`Loading product: ${product}`);
+    currentProduct = product;
+    isProductLoaded = true;
+    
+    // Show product lists container
+    productListsContainer.classList.add('active');
+    productListsContainer.style.display = 'block';
+    
+    // Scroll to products with offset for header
+    setTimeout(() => {
+        const offset = 80; // Height of header
+        const elementPosition = productListsContainer.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
         });
     }, 100);
     
-    // Load HTML
-    productListsContainer.innerHTML = generateProductHTML(product);
+    // Load product HTML
+    const productHTML = generateProductHTML(product);
+    productListsContainer.innerHTML = productHTML;
     
-    // Setup order buttons
-    setupOrderButtons();
+    // Setup order buttons after HTML is loaded
+    setTimeout(setupOrderButtons, 50);
 }
 
 function generateProductHTML(product) {
@@ -332,7 +376,7 @@ function generateProductHTML(product) {
     // Product cards
     productData.items.forEach((item, index) => {
         html += `
-            <div class="product-card ${item.popular ? 'popular' : ''}">
+            <div class="product-card ${item.popular ? 'popular' : ''}" style="cursor: default;">
                 <div class="product-header">
                     <h3>${item.title}</h3>
                     <div class="price">
@@ -350,7 +394,7 @@ function generateProductHTML(product) {
                 
                 ${item.note ? `<div class="product-note">${item.note}</div>` : ''}
                 
-                <button class="btn-order" data-product="${product}" data-index="${index}">
+                <button class="btn-order" data-product="${product}" data-index="${index}" style="cursor: pointer; z-index: 10; position: relative;">
                     <i class="fab fa-whatsapp"></i> Pesan Sekarang
                 </button>
             </div>
@@ -362,7 +406,7 @@ function generateProductHTML(product) {
     `;
     
     // Additional sections
-    if (productData.terms) {
+    if (productData.terms && productData.terms.length > 0) {
         html += `
             <div class="product-terms">
                 <h3><i class="fas fa-exclamation-triangle"></i> Syarat & Ketentuan:</h3>
@@ -373,7 +417,7 @@ function generateProductHTML(product) {
         `;
     }
     
-    if (productData.features) {
+    if (productData.features && productData.features.length > 0) {
         html += `
             <div class="product-features-list">
                 <h3><i class="fas fa-rocket"></i> Fitur Utama:</h3>
@@ -384,7 +428,7 @@ function generateProductHTML(product) {
         `;
     }
     
-    if (productData.security) {
+    if (productData.security && productData.security.length > 0) {
         html += `
             <div class="product-security">
                 <h3><i class="fas fa-shield-alt"></i> Keamanan:</h3>
@@ -397,7 +441,7 @@ function generateProductHTML(product) {
         `;
     }
     
-    if (productData.benefits) {
+    if (productData.benefits && productData.benefits.length > 0) {
         html += `
             <div class="product-benefits">
                 <h3><i class="fas fa-gem"></i> Benefit:</h3>
@@ -408,7 +452,7 @@ function generateProductHTML(product) {
         `;
     }
     
-    if (productData.info) {
+    if (productData.info && productData.info.length > 0) {
         html += `
             <div class="product-info">
                 <h3><i class="fas fa-info-circle"></i> Info:</h3>
@@ -429,43 +473,76 @@ function generateProductHTML(product) {
     return html;
 }
 
-// ===== FUNGSI ORDER =====
+// ===== FUNGSI ORDER BUTTONS (TOMBOL "PESAN SEKARANG") =====
 function setupOrderButtons() {
-    const orderButtons = document.querySelectorAll('.btn-order');
+    const orderButtons = productListsContainer.querySelectorAll('.btn-order');
+    
+    console.log(`Found ${orderButtons.length} order buttons`);
     
     orderButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const product = this.dataset.product;
-            const index = this.dataset.index;
-            
-            const productData = products[product];
-            const item = productData.items[index];
-            
-            let message = `Halo ${ADMIN_NAME}, saya mau pesan:\n\n`;
-            message += `📦 *${item.title}*\n`;
-            message += `💰 ${item.price}${item.period ? ` (${item.period})` : ''}\n\n`;
-            
-            if (product === 'nokos') {
-                message += `🔐 NOKOS INDO FRESH\n`;
-            } else if (product === 'script') {
-                message += `🚀 SCRIPT AZBRY-MD\n`;
-            } else if (product === 'rental') {
-                message += `🤖 SEWA BOT AZBRY-MD\n`;
-            } else if (product === 'role') {
-                message += `💎 ROLE PREMIUM\n`;
-            }
-            
-            message += `Mohon info untuk pemesanan.`;
-            
-            sendToWhatsApp(message);
-        });
+        // Remove existing listeners first
+        button.removeEventListener('click', handleOrderClick);
+        // Add new listener
+        button.addEventListener('click', handleOrderClick, { passive: true });
+        
+        // Make sure button is clickable
+        button.style.cursor = 'pointer';
+        button.style.pointerEvents = 'auto';
+        button.style.zIndex = '10';
+        button.style.position = 'relative';
     });
 }
 
+function handleOrderClick(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    console.log('Order button clicked:', event.target);
+    
+    const product = this.dataset.product;
+    const index = parseInt(this.dataset.index);
+    
+    const productData = products[product];
+    const item = productData.items[index];
+    
+    let message = `Halo ${ADMIN_NAME}, saya mau pesan:\n\n`;
+    message += `📦 *${item.title}*\n`;
+    message += `💰 ${item.price}${item.period ? ` (${item.period})` : ''}\n\n`;
+    
+    if (product === 'nokos') {
+        message += `🔐 NOKOS INDO FRESH\n`;
+        message += `Saya ingin memesan NOKOS untuk bot WhatsApp.\n\n`;
+    } else if (product === 'script') {
+        message += `🚀 SCRIPT AZBRY-MD\n`;
+        message += `Saya ingin membeli script ${item.title.includes('PREMIUM') ? 'Premium' : 'Basic'}.\n\n`;
+    } else if (product === 'rental') {
+        message += `🤖 SEWA BOT AZBRY-MD\n`;
+        message += `Saya ingin menyewa bot untuk ${item.period}.\n\n`;
+    } else if (product === 'role') {
+        message += `💎 ROLE PREMIUM\n`;
+        message += `Saya ingin membeli role premium untuk ${item.period}.\n\n`;
+    }
+    
+    message += `Mohon info untuk proses pemesanan. Terima kasih!`;
+    
+    // Send to WhatsApp
+    sendToWhatsApp(message);
+    
+    // Add click animation
+    this.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        this.style.transform = 'scale(1)';
+    }, 150);
+}
+
 function sendToWhatsApp(message) {
+    console.log('Sending message:', message);
+    
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/${ADMIN_PHONE}?text=${encodedMessage}`;
-    window.open(whatsappURL, '_blank');
+    
+    // Open in new tab
+    window.open(whatsappURL, '_blank', 'noopener,noreferrer');
 }
 
 function updateWhatsAppLink() {
@@ -478,102 +555,259 @@ function updateWhatsAppLink() {
 // ===== FUNGSI LOADING =====
 function showLoading() {
     loading.classList.add('active');
+    loading.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
 }
 
 function hideLoading() {
     loading.classList.remove('active');
+    loading.style.display = 'none';
+    document.body.style.overflow = 'auto';
 }
 
-// ===== EVENT LISTENERS =====
+// ===== EVENT LISTENERS UTAMA =====
 function setupEventListeners() {
+    console.log('Setting up event listeners');
+    
     // Theme toggle
     themeToggle.addEventListener('click', toggleTheme);
+    themeToggle.style.cursor = 'pointer';
     
     // Back to top
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
-        }
-    });
-    
-    backToTop.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    window.addEventListener('scroll', handleScroll);
+    backToTop.addEventListener('click', scrollToTop);
+    backToTop.style.cursor = 'pointer';
     
     // Mobile menu
-    hamburger.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
-        
-        // Change icon
-        const icon = this.querySelector('i');
-        if (navLinks.classList.contains('active')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-        } else {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        }
-    });
+    hamburger.addEventListener('click', toggleMobileMenu);
+    hamburger.style.cursor = 'pointer';
     
-    // Close menu on click outside
-    document.addEventListener('click', function(event) {
-        if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
-            navLinks.classList.remove('active');
-            const icon = hamburger.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        }
-    });
+    // Close mobile menu on outside click
+    document.addEventListener('click', closeMobileMenuOnClickOutside);
+    
+    // Navigation links
+    setupNavigationLinks();
     
     // Product links in footer
-    document.querySelectorAll('.product-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const product = this.dataset.product;
-            const selectorBtn = document.querySelector(`.selector-btn[data-product="${product}"]`);
-            if (selectorBtn) {
-                selectorBtn.click();
-            }
-        });
-    });
+    setupProductLinks();
     
-    // Smooth scroll for nav links
-    document.querySelectorAll('.nav-links a').forEach(link => {
+    // Touch events for mobile
+    setupTouchEvents();
+    
+    // Window resize
+    window.addEventListener('resize', handleResize);
+}
+
+function handleScroll() {
+    // Show/hide back to top button
+    if (window.pageYOffset > 300) {
+        backToTop.classList.add('visible');
+        backToTop.style.opacity = '1';
+        backToTop.style.visibility = 'visible';
+    } else {
+        backToTop.classList.remove('visible');
+        backToTop.style.opacity = '0';
+        backToTop.style.visibility = 'hidden';
+    }
+}
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+function toggleMobileMenu() {
+    navLinks.classList.toggle('active');
+    
+    // Change hamburger icon
+    const icon = this.querySelector('i');
+    if (navLinks.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+        document.body.style.overflow = 'hidden';
+    } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function closeMobileMenuOnClickOutside(event) {
+    if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+        navLinks.classList.remove('active');
+        const icon = hamburger.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function setupNavigationLinks() {
+    const navLinksElements = document.querySelectorAll('.nav-links a');
+    
+    navLinksElements.forEach(link => {
         link.addEventListener('click', function(e) {
+            // For anchor links
             if (this.getAttribute('href').startsWith('#')) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Calculate offset for header
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
                 }
                 
-                // Close mobile menu
-                if (window.innerWidth < 768) {
+                // Close mobile menu if open
+                if (window.innerWidth < 768 && navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
                     const icon = hamburger.querySelector('i');
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
+                    document.body.style.overflow = 'auto';
                 }
             }
         });
     });
 }
 
+function setupProductLinks() {
+    const productLinks = document.querySelectorAll('.product-link');
+    
+    productLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const product = this.dataset.product;
+            
+            // Find and click the corresponding selector button
+            const selectorBtn = document.querySelector(`.selector-btn[data-product="${product}"]`);
+            if (selectorBtn) {
+                selectorBtn.click();
+                
+                // Scroll to hero section first
+                const heroSection = document.getElementById('home');
+                if (heroSection) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const heroPosition = heroSection.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: heroPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+}
+
+function setupTouchEvents() {
+    // Better touch handling for mobile
+    document.addEventListener('touchstart', function() {}, { passive: true });
+    
+    // Prevent zoom on double tap for buttons
+    const buttons = document.querySelectorAll('button, .btn-order, .selector-btn');
+    buttons.forEach(button => {
+        button.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            this.style.transform = 'scale(0.95)';
+        }, { passive: false });
+        
+        button.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+}
+
+function handleResize() {
+    // Close mobile menu on large screens
+    if (window.innerWidth >= 768 && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        const icon = hamburger.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+        document.body.style.overflow = 'auto';
+    }
+}
+
 // ===== INITIAL ANIMATION =====
 window.addEventListener('load', function() {
-    // Add fade-in animation to hero
-    const heroElements = document.querySelectorAll('.hero-badge, .hero-title, .hero-subtitle, .product-selector');
+    console.log('Window loaded');
     
-    heroElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-        }, index * 100);
+    // Add loaded class to body
+    document.body.classList.add('loaded');
+    
+    // Animate hero elements
+    const heroElements = [
+        '.hero-badge',
+        '.hero-title',
+        '.hero-subtitle',
+        '.product-selector',
+        '.hero-stats'
+    ];
+    
+    heroElements.forEach((selector, index) => {
+        const element = document.querySelector(selector);
+        if (element) {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, index * 150);
+        }
     });
+    
+    // Make sure all buttons are clickable
+    setTimeout(() => {
+        document.querySelectorAll('button').forEach(btn => {
+            btn.style.cursor = 'pointer';
+            btn.style.pointerEvents = 'auto';
+        });
+    }, 500);
 });
+
+// ===== DEBUG FUNCTIONS =====
+// Untuk debugging, buka console dan ketik:
+// window.testButtons() - untuk test semua tombol
+// window.testProduct('script') - untuk test produk tertentu
+
+window.testButtons = function() {
+    console.log('=== TESTING BUTTONS ===');
+    
+    // Test selector buttons
+    const selectorButtons = document.querySelectorAll('.selector-btn');
+    console.log(`Selector buttons: ${selectorButtons.length}`);
+    selectorButtons.forEach((btn, i) => {
+        console.log(`Button ${i}:`, btn.dataset.product, btn.style.cursor);
+    });
+    
+    // Test order buttons
+    const orderButtons = document.querySelectorAll('.btn-order');
+    console.log(`Order buttons: ${orderButtons.length}`);
+}
+
+window.testProduct = function(product) {
+    console.log(`Testing product: ${product}`);
+    loadProduct(product);
+}
+
+// ===== ERROR HANDLING =====
+window.addEventListener('error', function(e) {
+    console.error('Global error:', e.error);
+});
+
+// ===== CONSOLE MESSAGE =====
+console.log('%c🚀 AZBRY-MD WEBSITE 🚀', 'font-size: 16px; font-weight: bold; color: #25D366;');
+console.log('%cSemua tombol seharusnya bisa diklik sekarang!', 'color: #128C7E;');
+console.log('%cJika ada masalah, buka console dan ketik: window.testButtons()', 'color: #FF6B6B;');
