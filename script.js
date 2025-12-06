@@ -1,10 +1,9 @@
 // ===== KONFIGURASI =====
-const ADMIN_PHONE = "6285189988271"; // ⚠️ GANTI DENGAN NOMOR ANDA
-const ADMIN_NAME = "Febry";
+const ADMIN_PHONE = "6285189988271"; // Nomor sudah diganti
+const ADMIN_NAME = "Admin Azbry-MD";
 
 // ===== VARIABEL =====
 let currentProduct = null;
-let isProductLoaded = false;
 
 // ===== ELEMEN DOM =====
 const themeToggle = document.getElementById('themeToggle');
@@ -17,7 +16,7 @@ const navLinks = document.querySelector('.nav-links');
 // ===== DATA PRODUK =====
 const products = {
     script: {
-        title: "🚀 PAKET SCRIPT AZBRY-MD (Price tanya admin)",
+        title: "🚀 PAKET SCRIPT AZBRY-MD",
         items: [
             {
                 title: "📦 BASIC - xxK",
@@ -237,7 +236,6 @@ function updateDateTime() {
     // Format waktu: HH:MM
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
     
     const timeElement = document.getElementById('clock');
     if (timeElement) {
@@ -259,12 +257,6 @@ function toggleTheme() {
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeIcon();
-    
-    // Add click effect
-    themeToggle.style.transform = 'scale(0.9)';
-    setTimeout(() => {
-        themeToggle.style.transform = 'scale(1)';
-    }, 150);
 }
 
 function updateThemeIcon() {
@@ -285,98 +277,117 @@ function updateThemeIcon() {
     }
 }
 
-// ===== FUNGSI PRODUK SELECTOR (TOMBOL DI BERANDA) =====
+// ===== FUNGSI PRODUK SELECTOR =====
 function setupProductSelector() {
     const selectorButtons = document.querySelectorAll('.selector-btn');
     
     console.log(`Found ${selectorButtons.length} selector buttons`);
     
     selectorButtons.forEach(button => {
-        // Remove existing listeners
-        button.removeEventListener('click', handleProductSelect);
-        // Add new listener
-        button.addEventListener('click', handleProductSelect, { passive: true });
+        // Clone button untuk reset event listeners
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+    });
+    
+    // Re-select after clone
+    document.querySelectorAll('.selector-btn').forEach(button => {
+        button.addEventListener('click', handleProductSelect, { 
+            passive: false,
+            capture: true 
+        });
         
-        // Add pointer cursor
+        // Style untuk memastikan bisa diklik
         button.style.cursor = 'pointer';
+        button.style.pointerEvents = 'auto';
+        button.style.userSelect = 'none';
+        button.style.webkitUserSelect = 'none';
+        button.style.touchAction = 'manipulation';
     });
 }
 
 function handleProductSelect(event) {
-    console.log('Product button clicked:', event.target);
+    console.log('=== PRODUCT BUTTON CLICKED ===');
+    console.log('Product:', this.dataset.product);
+    
+    event.preventDefault();
+    event.stopPropagation();
     
     const product = this.dataset.product;
-    console.log(`Selected product: ${product}`);
     
-    // Remove active class from all buttons
+    // 1. Update button state
     document.querySelectorAll('.selector-btn').forEach(btn => {
         btn.classList.remove('active');
+        btn.style.transform = 'scale(1)';
     });
     
-    // Add active class to clicked button
     this.classList.add('active');
-    this.style.transform = 'translateY(-3px)';
+    this.style.transform = 'scale(0.98)';
     
-    // Add click effect
-    this.style.transform = 'scale(0.95)';
+    // 2. Tampilkan product container
+    const productContainer = document.getElementById('product-lists');
+    productContainer.style.display = 'block';
+    productContainer.classList.add('active');
+    productContainer.style.visibility = 'visible';
+    productContainer.style.opacity = '1';
+    
+    // 3. Load product content
+    loadProduct(product);
+    
+    // 4. Scroll ke posisi yang TEPAT
     setTimeout(() => {
-        this.style.transform = 'scale(1)';
-    }, 150);
+        scrollToProductContainer();
+    }, 50);
+}
+
+function scrollToProductContainer() {
+    const productContainer = document.getElementById('product-lists');
+    const header = document.querySelector('header');
     
-    // Show loading
-    showLoading();
+    if (!productContainer || !header) return;
     
-    // Load product with delay for animation
-    setTimeout(() => {
-        loadProduct(product);
-        hideLoading();
-    }, 400);
+    // Hitung posisi dengan benar
+    const headerHeight = header.offsetHeight;
+    const containerTop = productContainer.offsetTop;
+    
+    // Scroll ke posisi container minus header height
+    const targetScroll = containerTop - headerHeight;
+    
+    console.log(`Scrolling to: ${targetScroll}px`);
+    console.log(`Container top: ${containerTop}px`);
+    console.log(`Header height: ${headerHeight}px`);
+    
+    window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+    });
 }
 
 function loadProduct(product) {
-    console.log(`Loading product: ${product}`);
+    console.time('Load Product');
+    
     currentProduct = product;
-    isProductLoaded = true;
-    
-    // Show product lists container
-    productListsContainer.classList.add('active');
-    productListsContainer.style.display = 'block';
-    
-    // Scroll to products with offset for header
-    setTimeout(() => {
-        const offset = 80; // Height of header
-        const elementPosition = productListsContainer.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-        
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
-    }, 100);
-    
-    // Load product HTML
-    const productHTML = generateProductHTML(product);
-    productListsContainer.innerHTML = productHTML;
-    
-    // Setup order buttons after HTML is loaded
-    setTimeout(setupOrderButtons, 50);
-}
-
-function generateProductHTML(product) {
     const productData = products[product];
+    const productContainer = document.getElementById('product-lists');
+    
+    // Generate HTML
     let html = `
         <div class="container">
             <div class="product-list active">
                 <h2 class="section-title">${productData.title}</h2>
-                ${productData.subtitle ? `<p style="text-align: center; color: var(--gray); margin-bottom: 2rem; font-size: 0.9rem;">${productData.subtitle}</p>` : ''}
-                
-                <div class="product-grid">
     `;
+    
+    if (productData.subtitle) {
+        html += `<p class="section-subtitle">${productData.subtitle}</p>`;
+    }
+    
+    html += `<div class="product-grid">`;
     
     // Product cards
     productData.items.forEach((item, index) => {
+        const popularClass = item.popular ? 'popular' : '';
+        
         html += `
-            <div class="product-card ${item.popular ? 'popular' : ''}" style="cursor: default;">
+            <div class="product-card ${popularClass}">
                 <div class="product-header">
                     <h3>${item.title}</h3>
                     <div class="price">
@@ -388,22 +399,20 @@ function generateProductHTML(product) {
                 <div class="product-features">
                     <h4><i class="fas fa-check"></i> Fitur:</h4>
                     <ul class="feature-list">
-                        ${item.features.map(feature => `<li>${feature}</li>`).join('')}
+                        ${item.features.map(f => `<li>${f}</li>`).join('')}
                     </ul>
                 </div>
                 
                 ${item.note ? `<div class="product-note">${item.note}</div>` : ''}
                 
-                <button class="btn-order" data-product="${product}" data-index="${index}" style="cursor: pointer; z-index: 10; position: relative;">
+                <button class="btn-order" data-product="${product}" data-index="${index}">
                     <i class="fab fa-whatsapp"></i> Pesan Sekarang
                 </button>
             </div>
         `;
     });
     
-    html += `
-                </div>
-    `;
+    html += `</div>`;
     
     // Additional sections
     if (productData.terms && productData.terms.length > 0) {
@@ -465,31 +474,38 @@ function generateProductHTML(product) {
         `;
     }
     
-    html += `
-            </div>
-        </div>
-    `;
+    html += `</div></div>`;
     
-    return html;
+    // Render ke container
+    productContainer.innerHTML = html;
+    
+    // Setup order buttons
+    setupOrderButtons();
+    
+    console.timeEnd('Load Product');
 }
 
-// ===== FUNGSI ORDER BUTTONS (TOMBOL "PESAN SEKARANG") =====
+// ===== FUNGSI ORDER BUTTONS =====
 function setupOrderButtons() {
-    const orderButtons = productListsContainer.querySelectorAll('.btn-order');
+    const orderButtons = document.querySelectorAll('.btn-order');
     
     console.log(`Found ${orderButtons.length} order buttons`);
     
     orderButtons.forEach(button => {
-        // Remove existing listeners first
-        button.removeEventListener('click', handleOrderClick);
-        // Add new listener
-        button.addEventListener('click', handleOrderClick, { passive: true });
+        // Clone untuk reset listeners
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+    });
+    
+    // Re-select after clone
+    document.querySelectorAll('.btn-order').forEach(button => {
+        button.addEventListener('click', handleOrderClick, { 
+            passive: false,
+            capture: true 
+        });
         
-        // Make sure button is clickable
         button.style.cursor = 'pointer';
         button.style.pointerEvents = 'auto';
-        button.style.zIndex = '10';
-        button.style.position = 'relative';
     });
 }
 
@@ -497,51 +513,32 @@ function handleOrderClick(event) {
     event.preventDefault();
     event.stopPropagation();
     
-    console.log('Order button clicked:', event.target);
+    console.log('Order button clicked!');
     
     const product = this.dataset.product;
     const index = parseInt(this.dataset.index);
+    const item = products[product].items[index];
     
-    const productData = products[product];
-    const item = productData.items[index];
-    
-    let message = `Halo ${ADMIN_NAME}, saya mau pesan:\n\n`;
-    message += `📦 *${item.title}*\n`;
-    message += `💰 ${item.price}${item.period ? ` (${item.period})` : ''}\n\n`;
-    
-    if (product === 'nokos') {
-        message += `🔐 NOKOS INDO FRESH\n`;
-        message += `Saya ingin memesan NOKOS untuk bot WhatsApp.\n\n`;
-    } else if (product === 'script') {
-        message += `🚀 SCRIPT AZBRY-MD\n`;
-        message += `Saya ingin membeli script ${item.title.includes('PREMIUM') ? 'Premium' : 'Basic'}.\n\n`;
-    } else if (product === 'rental') {
-        message += `🤖 SEWA BOT AZBRY-MD\n`;
-        message += `Saya ingin menyewa bot untuk ${item.period}.\n\n`;
-    } else if (product === 'role') {
-        message += `💎 ROLE PREMIUM\n`;
-        message += `Saya ingin membeli role premium untuk ${item.period}.\n\n`;
-    }
-    
-    message += `Mohon info untuk proses pemesanan. Terima kasih!`;
-    
-    // Send to WhatsApp
-    sendToWhatsApp(message);
-    
-    // Add click animation
+    // Click feedback
     this.style.transform = 'scale(0.95)';
     setTimeout(() => {
         this.style.transform = 'scale(1)';
     }, 150);
+    
+    // Create message
+    let message = `Halo ${ADMIN_NAME}, saya mau pesan:\n\n`;
+    message += `📦 *${item.title}*\n`;
+    message += `💰 ${item.price}${item.period ? ` (${item.period})` : ''}\n\n`;
+    
+    message += `Mohon info untuk pemesanan. Terima kasih!`;
+    
+    // Send to WhatsApp
+    sendToWhatsApp(message);
 }
 
 function sendToWhatsApp(message) {
-    console.log('Sending message:', message);
-    
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/${ADMIN_PHONE}?text=${encodedMessage}`;
-    
-    // Open in new tab
     window.open(whatsappURL, '_blank', 'noopener,noreferrer');
 }
 
@@ -552,50 +549,26 @@ function updateWhatsAppLink() {
     }
 }
 
-// ===== FUNGSI LOADING =====
-function showLoading() {
-    loading.classList.add('active');
-    loading.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
-
-function hideLoading() {
-    loading.classList.remove('active');
-    loading.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// ===== EVENT LISTENERS UTAMA =====
+// ===== EVENT LISTENERS =====
 function setupEventListeners() {
-    console.log('Setting up event listeners');
-    
     // Theme toggle
     themeToggle.addEventListener('click', toggleTheme);
-    themeToggle.style.cursor = 'pointer';
     
     // Back to top
     window.addEventListener('scroll', handleScroll);
     backToTop.addEventListener('click', scrollToTop);
-    backToTop.style.cursor = 'pointer';
     
     // Mobile menu
     hamburger.addEventListener('click', toggleMobileMenu);
-    hamburger.style.cursor = 'pointer';
     
-    // Close mobile menu on outside click
+    // Close mobile menu
     document.addEventListener('click', closeMobileMenuOnClickOutside);
     
-    // Navigation links
+    // Navigation
     setupNavigationLinks();
     
     // Product links in footer
     setupProductLinks();
-    
-    // Touch events for mobile
-    setupTouchEvents();
-    
-    // Window resize
-    window.addEventListener('resize', handleResize);
 }
 
 function handleScroll() {
@@ -645,11 +618,8 @@ function closeMobileMenuOnClickOutside(event) {
 }
 
 function setupNavigationLinks() {
-    const navLinksElements = document.querySelectorAll('.nav-links a');
-    
-    navLinksElements.forEach(link => {
+    document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', function(e) {
-            // For anchor links
             if (this.getAttribute('href').startsWith('#')) {
                 e.preventDefault();
                 
@@ -657,7 +627,6 @@ function setupNavigationLinks() {
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
-                    // Calculate offset for header
                     const headerHeight = document.querySelector('header').offsetHeight;
                     const targetPosition = targetElement.offsetTop - headerHeight;
                     
@@ -667,7 +636,7 @@ function setupNavigationLinks() {
                     });
                 }
                 
-                // Close mobile menu if open
+                // Close mobile menu
                 if (window.innerWidth < 768 && navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
                     const icon = hamburger.querySelector('i');
@@ -681,133 +650,120 @@ function setupNavigationLinks() {
 }
 
 function setupProductLinks() {
-    const productLinks = document.querySelectorAll('.product-link');
-    
-    productLinks.forEach(link => {
+    document.querySelectorAll('.product-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const product = this.dataset.product;
             
-            // Find and click the corresponding selector button
             const selectorBtn = document.querySelector(`.selector-btn[data-product="${product}"]`);
             if (selectorBtn) {
                 selectorBtn.click();
-                
-                // Scroll to hero section first
-                const heroSection = document.getElementById('home');
-                if (heroSection) {
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const heroPosition = heroSection.offsetTop - headerHeight;
-                    
-                    window.scrollTo({
-                        top: heroPosition,
-                        behavior: 'smooth'
-                    });
-                }
             }
         });
     });
 }
 
-function setupTouchEvents() {
-    // Better touch handling for mobile
-    document.addEventListener('touchstart', function() {}, { passive: true });
-    
-    // Prevent zoom on double tap for buttons
-    const buttons = document.querySelectorAll('button, .btn-order, .selector-btn');
-    buttons.forEach(button => {
-        button.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            this.style.transform = 'scale(0.95)';
-        }, { passive: false });
-        
-        button.addEventListener('touchend', function() {
-            this.style.transform = 'scale(1)';
-        });
-    });
-}
-
-function handleResize() {
-    // Close mobile menu on large screens
-    if (window.innerWidth >= 768 && navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
-        const icon = hamburger.querySelector('i');
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-        document.body.style.overflow = 'auto';
-    }
-}
-
-// ===== INITIAL ANIMATION =====
-window.addEventListener('load', function() {
-    console.log('Window loaded');
-    
-    // Add loaded class to body
-    document.body.classList.add('loaded');
-    
-    // Animate hero elements
-    const heroElements = [
-        '.hero-badge',
-        '.hero-title',
-        '.hero-subtitle',
-        '.product-selector',
-        '.hero-stats'
-    ];
-    
-    heroElements.forEach((selector, index) => {
-        const element = document.querySelector(selector);
-        if (element) {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }, index * 150);
-        }
-    });
-    
-    // Make sure all buttons are clickable
-    setTimeout(() => {
-        document.querySelectorAll('button').forEach(btn => {
-            btn.style.cursor = 'pointer';
-            btn.style.pointerEvents = 'auto';
-        });
-    }, 500);
-});
-
 // ===== DEBUG FUNCTIONS =====
-// Untuk debugging, buka console dan ketik:
-// window.testButtons() - untuk test semua tombol
-// window.testProduct('script') - untuk test produk tertentu
-
-window.testButtons = function() {
-    console.log('=== TESTING BUTTONS ===');
+window.debugPosition = function() {
+    console.log('=== DEBUG POSITIONING ===');
     
-    // Test selector buttons
-    const selectorButtons = document.querySelectorAll('.selector-btn');
-    console.log(`Selector buttons: ${selectorButtons.length}`);
-    selectorButtons.forEach((btn, i) => {
-        console.log(`Button ${i}:`, btn.dataset.product, btn.style.cursor);
+    // Debug header
+    const header = document.querySelector('header');
+    const headerRect = header.getBoundingClientRect();
+    console.log('Header:', {
+        top: headerRect.top,
+        height: headerRect.height,
+        offsetTop: header.offsetTop
     });
     
-    // Test order buttons
-    const orderButtons = document.querySelectorAll('.btn-order');
-    console.log(`Order buttons: ${orderButtons.length}`);
-}
+    // Debug hero
+    const hero = document.querySelector('.hero');
+    const heroRect = hero.getBoundingClientRect();
+    console.log('Hero:', {
+        top: heroRect.top,
+        height: heroRect.height,
+        offsetTop: hero.offsetTop
+    });
+    
+    // Debug product container
+    const productContainer = document.getElementById('product-lists');
+    const containerRect = productContainer.getBoundingClientRect();
+    console.log('Product Container:', {
+        top: containerRect.top,
+        height: containerRect.height,
+        offsetTop: productContainer.offsetTop,
+        display: window.getComputedStyle(productContainer).display
+    });
+    
+    // Debug selector buttons
+    const selectorButtons = document.querySelectorAll('.selector-btn');
+    selectorButtons.forEach((btn, i) => {
+        const rect = btn.getBoundingClientRect();
+        console.log(`Button ${i}:`, {
+            top: rect.top,
+            left: rect.left,
+            width: rect.width,
+            height: rect.height
+        });
+    });
+};
 
-window.testProduct = function(product) {
-    console.log(`Testing product: ${product}`);
-    loadProduct(product);
-}
+// ===== FIX ALL BUTTONS EMERGENCY =====
+window.fixAllButtons = function() {
+    console.log('Fixing all buttons...');
+    
+    // Fix semua buttons
+    document.querySelectorAll('button').forEach(btn => {
+        btn.style.position = 'relative';
+        btn.style.zIndex = '9999';
+        btn.style.cursor = 'pointer';
+        btn.style.pointerEvents = 'auto';
+        btn.style.outline = 'none';
+    });
+    
+    // Fix product container
+    const container = document.getElementById('product-lists');
+    if (container) {
+        container.style.position = 'relative';
+        container.style.zIndex = '100';
+        container.style.display = 'block';
+        container.style.top = '0';
+        container.style.left = '0';
+    }
+    
+    alert('All buttons should work now!');
+};
 
-// ===== ERROR HANDLING =====
-window.addEventListener('error', function(e) {
-    console.error('Global error:', e.error);
-});
+// Add emergency CSS fix
+const emergencyStyle = document.createElement('style');
+emergencyStyle.textContent = `
+    /* EMERGENCY FIX - FORCE BUTTONS TO WORK */
+    .selector-btn {
+        z-index: 99999 !important;
+        position: relative !important;
+    }
+    
+    #product-lists {
+        position: relative !important;
+        z-index: 100 !important;
+        margin-top: 0 !important;
+        padding-top: 20px !important;
+    }
+    
+    /* Ensure click area */
+    button::after {
+        content: '' !important;
+        position: absolute !important;
+        top: -10px !important;
+        left: -10px !important;
+        right: -10px !important;
+        bottom: -10px !important;
+        z-index: -1 !important;
+        pointer-events: none !important;
+    }
+`;
+document.head.appendChild(emergencyStyle);
 
-// ===== CONSOLE MESSAGE =====
-console.log('%c🚀 AZBRY-MD WEBSITE 🚀', 'font-size: 16px; font-weight: bold; color: #25D366;');
-console.log('%cSemua tombol seharusnya bisa diklik sekarang!', 'color: #128C7E;');
-console.log('%cJika ada masalah, buka console dan ketik: window.testButtons()', 'color: #FF6B6B;');
+console.log('%c🚀 AZBRY-MD WEBSITE READY 🚀', 'font-size: 16px; font-weight: bold; color: #25D366;');
+console.log('%cUntuk debugging, ketik: window.debugPosition()', 'color: #667EEA;');
+console.log('%cUntuk emergency fix, ketik: window.fixAllButtons()', 'color: #FF6B6B;');
