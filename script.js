@@ -1,6 +1,6 @@
 // ===== KONFIGURASI UTAMA =====
-const ADMIN_PHONE = "628xxxxxxxxxx"; // ⚠️ GANTI DENGAN NOMOR ADMIN ANDA!
-const ADMIN_NAME = "Admin Azbry-MD";
+const ADMIN_PHONE = "6285189988271"; // ⚠️ GANTI DENGAN NOMOR ADMIN ANDA!
+const ADMIN_NAME = "Admin FebryWesker";
 
 // ===== VARIABEL GLOBAL =====
 let currentProduct = null;
@@ -466,4 +466,133 @@ function generateProductHTML(product) {
         `;
     }
     
-    if (productData
+    if (productData.benefits) {
+        html += `
+            <div class="product-benefits animate-on-scroll">
+                <h3><i class="fas fa-gem"></i> Benefit Role Premium:</h3>
+                <div class="benefits-grid">
+                    ${productData.benefits.map(benefit => `<div class="benefit-item">${benefit}</div>`).join('')}
+                </div>
+            </div>
+        `;
+    }
+    
+    if (productData.info) {
+        html += `
+            <div class="product-info animate-on-scroll">
+                <h3><i class="fas fa-info-circle"></i> Keamanan & Rekomendasi:</h3>
+                <div class="info-content">
+                    <ul>
+                        ${productData.info.map(info => `<li>${info}</li>`).join('')}
+                    </ul>
+                </div>
+            </div>
+        `;
+    }
+    
+    html += `
+            </div>
+        </div>
+    `;
+    
+    return html;
+}
+
+// ===== FUNGSI ORDER / PEMESANAN =====
+function setupOrderButtons() {
+    const orderButtons = document.querySelectorAll('.btn-order');
+    
+    orderButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const product = this.dataset.product;
+            const index = parseInt(this.dataset.index);
+            
+            const productData = products[product];
+            const item = productData.items[index];
+            
+            // Create order message
+            let message = `Halo ${ADMIN_NAME}, saya mau pesan produk Azbry-MD:\n\n`;
+            message += `📦 *${item.title}*\n`;
+            message += `💰 Harga: ${item.price}${item.period ? ` (${item.period})` : ''}\n\n`;
+            
+            // Add specific product info
+            if (product === 'nokos') {
+                message += `🔐 *NOKOS INDO FRESH*\n`;
+                message += `Saya ingin memesan NOKOS untuk keamanan bot WhatsApp.\n\n`;
+            } else if (product === 'script') {
+                message += `🚀 *SCRIPT AZBRY-MD*\n`;
+                message += `Saya ingin membeli script ${item.title.includes('PREMIUM') ? 'Premium' : 'Basic'} untuk bot WhatsApp.\n\n`;
+            } else if (product === 'rental') {
+                message += `🤖 *SEWA BOT AZBRY-MD*\n`;
+                message += `Saya ingin menyewa bot untuk ${item.period}.\n\n`;
+            } else if (product === 'role') {
+                message += `💎 *ROLE PREMIUM AZBRY-MD*\n`;
+                message += `Saya ingin membeli role premium untuk ${item.period}.\n\n`;
+            }
+            
+            message += `Mohon info lengkap untuk proses pemesanan dan pembayaran. Terima kasih!`;
+            
+            // Send to WhatsApp
+            sendToWhatsApp(message);
+            
+            // Add click animation
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 200);
+            
+            // Play sound
+            playSound('order');
+        });
+    });
+}
+
+function sendToWhatsApp(message) {
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/${ADMIN_PHONE}?text=${encodedMessage}`;
+    
+    // Open in new tab
+    window.open(whatsappURL, '_blank');
+}
+
+function updateWhatsAppLink() {
+    if (whatsappBtn) {
+        whatsappBtn.href = `https://wa.me/${ADMIN_PHONE}?text=${encodeURIComponent(`Halo ${ADMIN_NAME}, saya mau tanya tentang produk Azbry-MD`)}`;
+    }
+}
+
+// ===== FUNGSI LOADING =====
+function showLoading() {
+    loading.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function hideLoading() {
+    loading.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// ===== FUNGSI ANIMASI =====
+function animateProductCards() {
+    const productCards = document.querySelectorAll('.product-card');
+    
+    productCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+}
+
+function initScrollAnimations() {
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+    
+    const observer = new Inter
