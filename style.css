@@ -46,7 +46,7 @@
     --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-/* Reset & Base */
+/* ===== RESET & BASE ===== */
 * {
     margin: 0;
     padding: 0;
@@ -56,6 +56,7 @@
 html {
     font-size: 16px;
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -66,6 +67,7 @@ body {
     transition: var(--transition);
     overflow-x: hidden;
     min-height: 100vh;
+    position: relative;
 }
 
 .container {
@@ -73,14 +75,16 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--space-sm);
+    position: relative;
 }
 
-/* ===== HEADER ===== */
+/* ===== HEADER - FIXED POSITION ===== */
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    height: 70px;
     background: var(--card-bg);
     backdrop-filter: blur(10px);
     box-shadow: var(--shadow);
@@ -92,7 +96,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-sm) 0;
+    height: 70px;
     position: relative;
 }
 
@@ -158,7 +162,7 @@ nav {
 
 .nav-links {
     position: fixed;
-    top: 60px;
+    top: 70px;
     left: 0;
     width: 100%;
     background: var(--card-bg);
@@ -201,13 +205,17 @@ nav {
     background: var(--primary-light);
 }
 
-/* ===== HERO SECTION ===== */
+/* ===== HERO SECTION - FIXED POSITIONING ===== */
 .hero {
-    padding: 100px 0 var(--space-xl);
+    padding: calc(70px + var(--space-xl)) 0 var(--space-xl);
     background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
     color: white;
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    margin-top: 0 !important;
 }
 
 .hero::before {
@@ -218,12 +226,15 @@ nav {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     text-align: center;
+    width: 100%;
+    max-width: 100%;
 }
 
 .hero-badge {
@@ -266,16 +277,20 @@ nav {
     margin-left: auto;
     margin-right: auto;
     line-height: 1.5;
+    padding: 0 var(--space-sm);
 }
 
-/* Product Selector */
+/* ===== PRODUCT SELECTOR - FIXED POSITION ===== */
 .product-selector {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
-    margin: var(--space-lg) 0;
+    margin: var(--space-lg) auto;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 800px;
+    position: relative;
+    z-index: 3;
 }
 
 .selector-title {
@@ -287,9 +302,11 @@ nav {
 
 .selector-buttons {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-sm);
     margin-bottom: var(--space-md);
+    position: relative;
+    z-index: 4;
 }
 
 .selector-btn {
@@ -306,16 +323,27 @@ nav {
     flex-direction: column;
     align-items: center;
     gap: 8px;
+    position: relative;
+    z-index: 5;
+    min-height: 100px;
+    outline: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.selector-btn:hover {
+.selector-btn:hover,
+.selector-btn:active,
+.selector-btn:focus {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
+    border-color: var(--primary);
+    outline: none;
 }
 
 .selector-btn.active {
     background: var(--primary);
     border-color: var(--primary);
+    transform: translateY(-2px);
 }
 
 .selector-btn i {
@@ -329,13 +357,15 @@ nav {
     margin-top: 4px;
 }
 
-/* Hero Stats */
+/* ===== HERO STATS ===== */
 .hero-stats {
     display: flex;
     justify-content: center;
     gap: var(--space-lg);
     margin-top: var(--space-xl);
     flex-wrap: wrap;
+    position: relative;
+    z-index: 3;
 }
 
 .stat-item {
@@ -366,11 +396,16 @@ nav {
     margin-top: 2px;
 }
 
-/* ===== PRODUCT LISTS ===== */
+/* ===== PRODUCT LISTS CONTAINER - FIXED POSITION ===== */
 .product-lists-container {
     display: none;
     padding: var(--space-xl) 0;
     background: var(--light-gray);
+    position: relative;
+    min-height: 500px;
+    width: 100%;
+    margin-top: 0;
+    z-index: 10;
 }
 
 .product-lists-container.active {
@@ -383,6 +418,7 @@ nav {
     to { opacity: 1; }
 }
 
+/* ===== PRODUCT GRID ===== */
 .product-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -399,6 +435,7 @@ nav {
     border: 1px solid var(--border);
     position: relative;
     overflow: hidden;
+    width: 100%;
 }
 
 .product-card:hover {
@@ -494,6 +531,7 @@ nav {
     border-left: 3px solid var(--primary);
 }
 
+/* ===== ORDER BUTTON - FIXED POSITION ===== */
 .btn-order {
     width: 100%;
     background: var(--primary);
@@ -510,89 +548,27 @@ nav {
     justify-content: center;
     gap: 10px;
     margin-top: var(--space-md);
+    position: relative;
+    z-index: 20;
+    outline: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.btn-order:hover {
+.btn-order:hover,
+.btn-order:active,
+.btn-order:focus {
     background: var(--primary-dark);
     transform: translateY(-2px);
-}
-
-/* Terms & Features */
-.product-terms,
-.product-features-list,
-.product-security,
-.product-benefits,
-.product-info {
-    background: var(--card-bg);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-    margin-top: var(--space-lg);
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-}
-
-.product-terms h3,
-.product-features-list h3,
-.product-security h3,
-.product-benefits h3,
-.product-info h3 {
-    margin-bottom: var(--space-md);
-    color: var(--text-color);
-    font-size: 1.1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.product-terms ul,
-.product-security ul,
-.product-info ul {
-    list-style: none;
-    padding-left: var(--space-sm);
-}
-
-.product-terms li,
-.product-security li,
-.product-info li {
-    margin-bottom: var(--space-xs);
-    padding-left: var(--space-md);
-    position: relative;
-    color: var(--text-color);
-    opacity: 0.9;
-    font-size: 0.9rem;
-}
-
-.product-terms li:before,
-.product-security li:before,
-.product-info li:before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 1.2rem;
-}
-
-.features-grid,
-.benefits-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-sm);
-}
-
-.feature-item,
-.benefit-item {
-    background: var(--light-gray);
-    padding: var(--space-sm);
-    border-radius: var(--radius-sm);
-    border-left: 3px solid var(--primary);
-    font-size: 0.9rem;
+    outline: none;
 }
 
 /* ===== CONTACT SECTION ===== */
 .contact {
     padding: var(--space-xl) 0;
     background: var(--bg-color);
+    position: relative;
+    z-index: 5;
 }
 
 .section-title {
@@ -601,11 +577,13 @@ nav {
     margin-bottom: var(--space-xl);
     color: var(--text-color);
     font-weight: 700;
+    position: relative;
 }
 
 .contact-content {
     max-width: 500px;
     margin: 0 auto;
+    position: relative;
 }
 
 .contact-card {
@@ -615,6 +593,8 @@ nav {
     text-align: center;
     box-shadow: var(--shadow);
     border: 1px solid var(--border);
+    position: relative;
+    z-index: 6;
 }
 
 .contact-icon {
@@ -648,6 +628,8 @@ nav {
     font-size: 1rem;
     transition: var(--transition);
     margin-bottom: var(--space-lg);
+    position: relative;
+    z-index: 7;
 }
 
 .btn-whatsapp:hover {
@@ -655,45 +637,13 @@ nav {
     transform: translateY(-2px);
 }
 
-.payment-methods {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    margin-top: var(--space-sm);
-}
-
-.payment-method {
-    background: var(--light-gray);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    color: var(--text-color);
-    border: 1px solid var(--border);
-}
-
-.contact-info h4 {
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-xs);
-    color: var(--text-color);
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: center;
-}
-
-.contact-info p {
-    margin-bottom: var(--space-md);
-    color: var(--gray);
-    font-size: 0.9rem;
-}
-
 /* ===== FOOTER ===== */
 footer {
     background: var(--dark);
     color: white;
     padding: var(--space-xl) 0 var(--space-lg);
+    position: relative;
+    z-index: 5;
 }
 
 .footer-content {
@@ -701,57 +651,6 @@ footer {
     grid-template-columns: 1fr;
     gap: var(--space-xl);
     text-align: center;
-}
-
-.footer-brand h3 {
-    font-size: 1.5rem;
-    margin-bottom: var(--space-sm);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: center;
-}
-
-.footer-brand p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-.footer-links h4,
-.footer-info h4 {
-    margin-bottom: var(--space-md);
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.product-link {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: var(--transition);
-    padding: 4px 0;
-    font-size: 0.95rem;
-}
-
-.product-link:hover {
-    color: var(--primary);
-    padding-left: 8px;
-}
-
-.footer-info p {
-    margin-bottom: var(--space-xs);
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: center;
 }
 
 /* ===== FLOATING BUTTONS ===== */
@@ -770,9 +669,10 @@ footer {
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
-    z-index: 1000;
+    z-index: 1001;
     box-shadow: var(--shadow-lg);
     transition: var(--transition);
+    outline: none;
 }
 
 .theme-toggle:hover {
@@ -814,12 +714,13 @@ footer {
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    z-index: 1000;
+    z-index: 1001;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transition: var(--transition);
     box-shadow: var(--shadow);
+    outline: none;
 }
 
 .back-to-top.visible {
@@ -881,6 +782,10 @@ footer {
         padding: 0 var(--space-md);
     }
     
+    .hero {
+        padding: calc(70px + var(--space-xl)) 0 var(--space-xl);
+    }
+    
     .hero-title {
         font-size: 2.5rem;
     }
@@ -895,10 +800,12 @@ footer {
     
     .selector-buttons {
         grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-md);
     }
     
     .selector-btn {
         padding: var(--space-lg) var(--space-sm);
+        min-height: 120px;
     }
     
     .hero-stats {
@@ -913,19 +820,9 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .features-grid,
-    .benefits-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
     .footer-content {
         grid-template-columns: repeat(3, 1fr);
         text-align: left;
-    }
-    
-    .footer-brand h3,
-    .footer-info p {
-        justify-content: flex-start;
     }
     
     .nav-links {
@@ -965,10 +862,6 @@ footer {
         padding: 0 var(--space-lg);
     }
     
-    .hero {
-        padding: 120px 0 var(--space-xl);
-    }
-    
     .hero-title {
         font-size: 3rem;
     }
@@ -984,8 +877,6 @@ footer {
     
     .product-selector {
         max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
     }
     
     .selector-btn {
@@ -994,11 +885,6 @@ footer {
     
     .product-grid {
         grid-template-columns: repeat(4, 1fr);
-    }
-    
-    .features-grid,
-    .benefits-grid {
-        grid-template-columns: repeat(3, 1fr);
     }
     
     .section-title {
@@ -1020,196 +906,68 @@ footer {
     }
 }
 
-/* ===== LARGE DESKTOP STYLES (1200px) ===== */
+/* ===== LARGE DESKTOP (1200px) ===== */
 @media (min-width: 1200px) {
     .container {
         max-width: 1140px;
         padding: 0;
     }
-    
-    .hero-title {
-        font-size: 3.5rem;
-    }
-    
-    .gradient-text {
-        font-size: 4rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.3rem;
-    }
-    
-    .product-grid {
-        gap: var(--space-xl);
-    }
-    
-    .product-card {
-        padding: var(--space-xl);
-    }
-        }
-/* ===== FIX UNTUK TOMBOL YANG TIDAK BISA DIKLIK ===== */
+}
 
-/* Pastikan semua button bisa diklik */
+/* ===== FIXES KHUSUS UNTUK POSITIONING ===== */
+
+/* Pastikan tidak ada overflow yang hide button */
 button, 
-.btn-order, 
-.selector-btn, 
-.theme-toggle, 
-.back-to-top,
-.hamburger {
-    cursor: pointer !important;
-    pointer-events: auto !important;
-    position: relative !important;
-    z-index: 10 !important;
-}
-
-/* Fix untuk product cards */
-.product-card {
-    position: relative;
-    overflow: visible !important;
-}
-
-/* Fix untuk order button di dalam product card */
-.product-card .btn-order {
-    position: relative;
-    z-index: 20 !important;
-}
-
-/* Fix untuk loading overlay */
-.loading {
-    z-index: 9999 !important;
-}
-/* ===== FIX UNTUK TOMBOL YANG TERTUTUP ===== */
-
-/* PASTIKAN TOMBOL SELECTOR DI BERANDA BISA DIKLIK */
-.selector-buttons {
-    position: relative;
-    z-index: 100 !important;
-}
-
+a,
+.btn-order,
 .selector-btn {
+    overflow: visible !important;
     position: relative !important;
-    z-index: 101 !important;
-    cursor: pointer !important;
-    touch-action: manipulation !important;
-    -webkit-tap-highlight-color: rgba(0,0,0,0.1) !important;
 }
 
-/* FIX: Pastikan button tidak tertutup */
-.selector-btn::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    z-index: 1;
+/* Fix untuk mobile touch */
+@media (max-width: 768px) {
+    .selector-btn {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    /* Pastikan area klik cukup besar */
+    .selector-btn::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        z-index: -1;
+    }
+}
+
+/* Fix untuk product container positioning */
+#product-lists {
+    scroll-margin-top: 70px; /* Untuk scroll ke posisi yang tepat */
+}
+
+/* Fix untuk semua buttons agar tidak tertutup */
+button {
+    z-index: 100 !important;
+    position: relative !important;
+}
+
+/* Hapus semua pseudo elements yang mungkin menutupi */
+.hero::before,
+.product-selector::before {
     pointer-events: none;
 }
 
-/* PASTIKAN PRODUCT CONTAINER MUNCUL DI TEMPAT YANG BENAR */
-.product-lists-container {
-    position: relative !important;
-    z-index: 50 !important;
-    margin-top: 0 !important;
-    padding-top: 20px !important;
+/* Pastikan body tidak memiliki overflow yang salah */
+body {
+    overflow-x: hidden;
+    width: 100%;
 }
 
-/* FIX: Hilangkan overlap dengan hero section */
-.hero {
-    position: relative;
-    z-index: 40 !important;
-}
-
-/* FIX: Pastikan product cards bisa diklik */
-.product-card {
-    position: relative;
-    z-index: 60 !important;
-    overflow: visible !important;
-}
-
-.btn-order {
-    position: relative !important;
-    z-index: 70 !important;
-    cursor: pointer !important;
-    pointer-events: auto !important;
-    transform: translateZ(0) !important; /* Force GPU rendering */
-}
-
-/* FIX: Touch target lebih besar untuk mobile */
-@media (max-width: 768px) {
-    .selector-btn {
-        padding: 15px 10px !important;
-        margin: 5px !important;
-        min-height: 60px !important;
+/* Fix untuk product selector agar tidak ketutupan */
+.product-selector {
+    isolation: isolate;
     }
-    
-    /* Pastikan area klik lebih luas */
-    .selector-btn::after {
-        top: -5px;
-        left: -5px;
-        right: -5px;
-        bottom: -5px;
-    }
-}
-
-/* FIX: Hapus semua overlay yang mungkin menutupi */
-.hero::before,
-.hero::after {
-    pointer-events: none !important;
-}
-
-/* FIX: Pastikan tidak ada element yang overlap */
-.container {
-    position: relative;
-    z-index: 10;
-}
-
-/* DEBUG BORDER - Hapus setelah fix */
-/* .selector-btn {
-    border: 2px solid red !important;
-}
-
-.product-lists-container {
-    border: 2px solid blue !important;
-}
-
-.product-card {
-    border: 2px solid green !important;
-} */
-/* Fix untuk header */
-header {
-    z-index: 1000 !important;
-}
-
-/* Fix untuk floating buttons */
-.theme-toggle,
-.back-to-top {
-    z-index: 1001 !important;
-}
-
-/* Fix untuk touch devices */
-@media (max-width: 768px) {
-    button, 
-    .btn-order, 
-    .selector-btn {
-        min-height: 44px !important; /* Minimum touch target size */
-        min-width: 44px !important;
-    }
-    
-    .selector-btn {
-        padding: 12px !important;
-    }
-}
-
-/* Fix untuk button hover di mobile */
-@media (hover: none) {
-    .selector-btn:hover,
-    .btn-order:hover {
-        transform: none !important;
-    }
-    
-    .selector-btn:active,
-    .btn-order:active {
-        transform: scale(0.95) !important;
-    }
-}
