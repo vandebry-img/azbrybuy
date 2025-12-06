@@ -18,11 +18,11 @@ const whatsappBtn = document.getElementById('whatsapp-btn');
 // ===== DATA PRODUK =====
 const products = {
     script: {
-        title: "🚀 PAKET SCRIPT AZBRY-MD",
+        title: "🚀 PAKET SCRIPT AZBRY-MD (Tanyakan ke admin)",
         items: [
             {
-                title: "📦 PAKET BASIC - 15K",
-                price: "Rp 15.000",
+                title: "📦 PAKET BASIC - xxK",
+                price: "Rp xx.000",
                 period: "",
                 features: [
                     "Script terbaru & original",
@@ -36,8 +36,8 @@ const products = {
                 popular: false
             },
             {
-                title: "📦 PAKET PREMIUM - 20K",
-                price: "Rp 20.000",
+                title: "📦 PAKET PREMIUM - xxK",
+                price: "Rp xx.000",
                 period: "",
                 features: [
                     "✅ Script original & terbaru",
