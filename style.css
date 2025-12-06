@@ -675,34 +675,10 @@ footer {
     outline: none;
 }
 
-.theme-toggle:hover {
-    transform: scale(1.1);
-}
-
-.theme-toggle i {
-    position: absolute;
-    transition: var(--transition);
-}
-
-.theme-toggle .fa-sun {
-    opacity: 0;
-    transform: rotate(90deg);
-}
-
-[data-theme="dark"] .theme-toggle .fa-moon {
-    opacity: 0;
-    transform: rotate(90deg);
-}
-
-[data-theme="dark"] .theme-toggle .fa-sun {
-    opacity: 1;
-    transform: rotate(0);
-}
-
 .back-to-top {
     position: fixed;
-    bottom: calc(var(--space-lg) + 60px);
-    right: var(--space-lg);
+    bottom: calc(var(--space-lg) + 60px); /* 60px dari theme-toggle */
+    right: calc(var(--space-lg) + 5px); /* Sedikit lebih ke kiri agar sejajar */
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -729,9 +705,71 @@ footer {
     transform: translateY(0);
 }
 
+/* Efek hover */
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
 .back-to-top:hover {
     background: var(--primary);
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* Animasi icon tema */
+.theme-toggle i {
+    position: absolute;
+    transition: var(--transition);
+}
+
+.theme-toggle .fa-sun {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+[data-theme="dark"] .theme-toggle .fa-moon {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+[data-theme="dark"] .theme-toggle .fa-sun {
+    opacity: 1;
+    transform: rotate(0);
+}
+
+/* Responsive untuk mobile */
+@media (max-width: 768px) {
+    .theme-toggle {
+        bottom: 80px; /* Beri jarak dari bawah (untuk mobile navigation jika ada) */
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .back-to-top {
+        bottom: 135px; /* Sesuaikan dengan theme-toggle di mobile */
+        right: 25px;
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Untuk layar sangat kecil */
+@media (max-width: 480px) {
+    .theme-toggle {
+        bottom: 70px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    .back-to-top {
+        bottom: 120px;
+        right: 20px;
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
 }
 
 /* ===== LOADING ===== */
