@@ -1,6 +1,6 @@
 // ===== KONFIGURASI =====
 const ADMIN_PHONE = "6285189988271"; // Nomor sudah diganti
-const ADMIN_NAME = "Admin Azbry-MD";
+const ADMIN_NAME = "Admin FebryWesker";
 
 // ===== VARIABEL =====
 let currentProduct = null;
@@ -16,7 +16,7 @@ const navLinks = document.querySelector('.nav-links');
 // ===== DATA PRODUK =====
 const products = {
     script: {
-        title: "🚀 PAKET SCRIPT AZBRY-MD",
+        title: "🚀 PAKET SCRIPT AZBRY-MD (Harga langsung chat admin saja)",
         items: [
             {
                 title: "📦 BASIC - xxK",
