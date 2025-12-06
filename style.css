@@ -654,10 +654,19 @@ footer {
 }
 
 /* ===== FLOATING BUTTONS ===== */
-.theme-toggle {
+.floating-buttons-container {
     position: fixed;
-    bottom: var(--space-lg);
-    right: var(--space-lg);
+    bottom: 20px;
+    right: 40px; /* Geser 40px dari kanan */
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+/* Tombol Tema */
+.theme-toggle {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -669,16 +678,14 @@ footer {
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
-    z-index: 1001;
     box-shadow: var(--shadow-lg);
     transition: var(--transition);
     outline: none;
+    position: relative;
 }
 
+/* Tombol Back to Top */
 .back-to-top {
-    position: fixed;
-    bottom: calc(var(--space-lg) + 60px); /* 60px dari theme-toggle */
-    right: calc(var(--space-lg) + 5px); /* Sedikit lebih ke kiri agar sejajar */
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -690,32 +697,37 @@ footer {
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    z-index: 1001;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transition: var(--transition);
     box-shadow: var(--shadow);
     outline: none;
+    position: relative;
 }
 
+/* Status visible untuk back-to-top */
 .back-to-top.visible {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-/* Efek hover */
+/* Efek Hover */
 .theme-toggle:hover {
     transform: scale(1.1);
 }
 
 .back-to-top:hover {
     background: var(--primary);
-    transform: translateY(-2px) scale(1.05);
+    transform: scale(1.05);
 }
 
-/* Animasi icon tema */
+.back-to-top.visible:hover {
+    transform: scale(1.05);
+}
+
+/* Animasi Icon Tema */
 .theme-toggle i {
     position: absolute;
     transition: var(--transition);
@@ -736,39 +748,65 @@ footer {
     transform: rotate(0);
 }
 
-/* Responsive untuk mobile */
+/* Responsive untuk Tablet */
 @media (max-width: 768px) {
+    .floating-buttons-container {
+        bottom: 25px;
+        right: 30px;
+        gap: 12px;
+    }
+    
     .theme-toggle {
-        bottom: 80px; /* Beri jarak dari bawah (untuk mobile navigation jika ada) */
-        right: 20px;
         width: 45px;
         height: 45px;
+        font-size: 1.2rem;
     }
     
     .back-to-top {
-        bottom: 135px; /* Sesuaikan dengan theme-toggle di mobile */
-        right: 25px;
-        width: 35px;
-        height: 35px;
+        width: 38px;
+        height: 38px;
+        font-size: 0.95rem;
     }
 }
 
-/* Untuk layar sangat kecil */
+/* Responsive untuk Mobile */
 @media (max-width: 480px) {
+    .floating-buttons-container {
+        bottom: 20px;
+        right: 25px;
+        gap: 10px;
+    }
+    
     .theme-toggle {
-        bottom: 70px;
-        right: 15px;
-        width: 40px;
-        height: 40px;
+        width: 42px;
+        height: 42px;
         font-size: 1.1rem;
     }
     
     .back-to-top {
-        bottom: 120px;
-        right: 20px;
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
         font-size: 0.9rem;
+    }
+}
+
+/* Untuk layar sangat kecil (iPhone SE dll) */
+@media (max-width: 375px) {
+    .floating-buttons-container {
+        right: 20px;
+        bottom: 15px;
+    }
+    
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .back-to-top {
+        width: 34px;
+        height: 34px;
+        font-size: 0.85rem;
     }
 }
 
