@@ -1,6 +1,6 @@
 // ===== KONFIGURASI =====
-const ADMIN_PHONE = "628xxxxxxxxxx"; // ⚠️ GANTI DENGAN NOMOR ANDA
-const ADMIN_NAME = "Admin Azbry-MD";
+const ADMIN_PHONE = "6285189988271"; // ⚠️ GANTI DENGAN NOMOR ANDA
+const ADMIN_NAME = "Febry";
 
 // ===== VARIABEL =====
 let currentProduct = null;
@@ -16,11 +16,11 @@ const navLinks = document.querySelector('.nav-links');
 // ===== DATA PRODUK =====
 const products = {
     script: {
-        title: "🚀 PAKET SCRIPT AZBRY-MD",
+        title: "🚀 PAKET SCRIPT AZBRY-MD (PRICE TANYA LANGSUNG)",
         items: [
             {
-                title: "📦 BASIC - 15K",
-                price: "Rp 15.000",
+                title: "📦 BASIC - xxK",
+                price: "Rp xx.000",
                 period: "",
                 features: [
                     "Script terbaru",
