@@ -1,26 +1,45 @@
-// ===== KONFIGURASI =====
-const ADMIN_PHONE = "6285189988271"; // Nomor sudah diganti
-const ADMIN_NAME = "Admin FebryWesker";
+// ===== CONFIGURATION =====
+const CONFIG = {
+    ADMIN_PHONE: "6285189988271",
+    ADMIN_NAME: "Admin Azbry-MD",
+    TYPING_SPEED: 100,
+    PARTICLE_COUNT: 50,
+    COUNTER_DURATION: 2000
+};
 
-// ===== VARIABEL =====
+// ===== STATE =====
 let currentProduct = null;
+let currentSlide = 0;
+let totalSlides = 0;
+let isAnimating = false;
 
-// ===== ELEMEN DOM =====
-const themeToggle = document.getElementById('themeToggle');
-const backToTop = document.getElementById('backToTop');
-const loading = document.getElementById('loading');
-const productListsContainer = document.getElementById('product-lists');
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
+// ===== DOM ELEMENTS =====
+const elements = {
+    loading: document.getElementById('loading'),
+    header: document.getElementById('header'),
+    scrollProgress: document.getElementById('scrollProgress'),
+    themeToggle: document.getElementById('themeToggle'),
+    backToTop: document.getElementById('backToTop'),
+    hamburger: document.getElementById('hamburger'),
+    navLinks: document.getElementById('navLinks'),
+    productListsContainer: document.getElementById('product-lists'),
+    toast: document.getElementById('toast'),
+    toastMessage: document.getElementById('toastMessage'),
+    whatsappBtn: document.getElementById('whatsapp-btn'),
+    clock: document.getElementById('clock'),
+    typingText: document.getElementById('typingText'),
+    particles: document.getElementById('particles')
+};
 
-// ===== DATA PRODUK =====
+// ===== PRODUCT DATA =====
 const products = {
     script: {
-        title: "🚀 PAKET SCRIPT AZBRY-MD (Harga langsung chat admin saja)",
+        title: "🚀 PAKET SCRIPT AZBRY-MD",
+        subtitle: "Harga chat admin saja untuk info lebih lanjut",
         items: [
             {
-                title: "📦 BASIC - xxK",
-                price: "Rp xx.000",
+                title: "📦 BASIC",
+                price: "Rp XX.000",
                 period: "",
                 features: [
                     "Script terbaru",
@@ -32,8 +51,8 @@ const products = {
                 popular: false
             },
             {
-                title: "📦 PREMIUM - xxK",
-                price: "Rp xx.000",
+                title: "📦 PREMIUM",
+                price: "Rp XX.000",
                 period: "",
                 features: [
                     "Script original",
@@ -57,7 +76,7 @@ const products = {
     },
     rental: {
         title: "💰 PAKET SEWA BOT",
-        subtitle: "NOTE : 1 TRANSAKSI UNTUK 1 GRUP",
+        subtitle: "NOTE: 1 TRANSAKSI UNTUK 1 GRUP",
         items: [
             {
                 title: "📅 3 HARI",
@@ -130,6 +149,7 @@ const products = {
     },
     role: {
         title: "💎 ROLE PREMIUM",
+        subtitle: "Upgrade akun bot Anda ke Premium",
         items: [
             {
                 title: "📅 1 MINGGU",
@@ -183,6 +203,7 @@ const products = {
     },
     nokos: {
         title: "🔐 NOKOS INDO FRESH",
+        subtitle: "Nomor Indonesia untuk bot WhatsApp",
         items: [
             {
                 title: "📱 NOKOS INDO FRESH",
@@ -210,42 +231,56 @@ const products = {
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Azbry-MD Website Loaded');
+    console.log('%c🚀 AZBRY-MD WEBSITE LOADED', 'font-size: 16px; font-weight: bold; color: #00D9FF;');
     
-    // 1. Setup real-time clock
-    updateDateTime();
-    setInterval(updateDateTime, 1000);
-    
-    // 2. Setup theme
+    // Initialize all features
+    initLoading();
+    initClock();
     initTheme();
-    
-    // 3. Setup event listeners
-    setupEventListeners();
-    
-    // 4. Setup product selector
-    setupProductSelector();
-    
-    // 5. Update WhatsApp link
+    initParticles();
+    initTypingEffect();
+    initCounters();
+    initEventListeners();
     updateWhatsAppLink();
+    
+    // Hide loading after 2 seconds
+    setTimeout(() => {
+        hideLoading();
+    }, 2000);
 });
 
-// ===== FUNGSI JAM =====
-function updateDateTime() {
+// ===== LOADING SCREEN =====
+function initLoading() {
+    elements.loading.classList.add('active');
+}
+
+function hideLoading() {
+    elements.loading.style.opacity = '0';
+    setTimeout(() => {
+        elements.loading.classList.remove('active');
+        elements.loading.style.display = 'none';
+    }, 500);
+}
+
+// ===== CLOCK =====
+function initClock() {
+    updateClock();
+    setInterval(updateClock, 1000);
+}
+
+function updateClock() {
     const now = new Date();
-    
-    // Format waktu: HH:MM
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     
-    const timeElement = document.getElementById('clock');
-    if (timeElement) {
-        timeElement.textContent = `${hours}:${minutes}`;
+    if (elements.clock) {
+        elements.clock.textContent = `${hours}:${minutes}`;
     }
 }
 
-// ===== FUNGSI TEMA =====
+// ===== THEME =====
 function initTheme() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeIcon();
 }
@@ -257,330 +292,160 @@ function toggleTheme() {
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeIcon();
+    
+    showToast(`Tema ${newTheme === 'dark' ? 'Gelap' : 'Terang'} aktif`);
 }
 
 function updateThemeIcon() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
-    const moonIcon = themeToggle.querySelector('.fa-moon');
-    const sunIcon = themeToggle.querySelector('.fa-sun');
+    const moonIcon = elements.themeToggle.querySelector('.fa-moon');
+    const sunIcon = elements.themeToggle.querySelector('.fa-sun');
     
     if (currentTheme === 'dark') {
-        moonIcon.style.opacity = '0';
-        moonIcon.style.transform = 'rotate(90deg)';
-        sunIcon.style.opacity = '1';
-        sunIcon.style.transform = 'rotate(0)';
-    } else {
         moonIcon.style.opacity = '1';
         moonIcon.style.transform = 'rotate(0)';
         sunIcon.style.opacity = '0';
         sunIcon.style.transform = 'rotate(90deg)';
+    } else {
+        moonIcon.style.opacity = '0';
+        moonIcon.style.transform = 'rotate(90deg)';
+        sunIcon.style.opacity = '1';
+        sunIcon.style.transform = 'rotate(0)';
     }
 }
 
-// ===== FUNGSI PRODUK SELECTOR =====
-function setupProductSelector() {
-    const selectorButtons = document.querySelectorAll('.selector-btn');
+// ===== PARTICLES =====
+function initParticles() {
+    if (!elements.particles) return;
     
-    console.log(`Found ${selectorButtons.length} selector buttons`);
+    for (let i = 0; i < CONFIG.PARTICLE_COUNT; i++) {
+        createParticle();
+    }
+}
+
+function createParticle() {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
     
-    selectorButtons.forEach(button => {
-        // Clone button untuk reset event listeners
-        const newButton = button.cloneNode(true);
-        button.parentNode.replaceChild(newButton, button);
-    });
+    const size = Math.random() * 5 + 2;
+    const startX = Math.random() * 100;
+    const duration = Math.random() * 10 + 10;
+    const delay = Math.random() * 5;
     
-    // Re-select after clone
-    document.querySelectorAll('.selector-btn').forEach(button => {
-        button.addEventListener('click', handleProductSelect, { 
-            passive: false,
-            capture: true 
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = `${startX}%`;
+    particle.style.animationDuration = `${duration}s`;
+    particle.style.animationDelay = `${delay}s`;
+    
+    elements.particles.appendChild(particle);
+}
+
+// ===== TYPING EFFECT =====
+function initTypingEffect() {
+    if (!elements.typingText) return;
+    
+    const text = "AZBRY-MD";
+    let index = 0;
+    elements.typingText.textContent = "";
+    
+    function type() {
+        if (index < text.length) {
+            elements.typingText.textContent += text.charAt(index);
+            index++;
+            setTimeout(type, CONFIG.TYPING_SPEED);
+        }
+    }
+    
+    setTimeout(type, 500);
+}
+
+// ===== COUNTER ANIMATION =====
+function initCounters() {
+    const counters = document.querySelectorAll('.stat-number[data-count]');
+    
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                animateCounter(entry.target);
+                entry.target.classList.add('counted');
+            }
         });
-        
-        // Style untuk memastikan bisa diklik
-        button.style.cursor = 'pointer';
-        button.style.pointerEvents = 'auto';
-        button.style.userSelect = 'none';
-        button.style.webkitUserSelect = 'none';
-        button.style.touchAction = 'manipulation';
-    });
+    }, observerOptions);
+    
+    counters.forEach(counter => observer.observe(counter));
 }
 
-function handleProductSelect(event) {
-    console.log('=== PRODUCT BUTTON CLICKED ===');
-    console.log('Product:', this.dataset.product);
+function animateCounter(element) {
+    const target = parseFloat(element.getAttribute('data-count'));
+    const duration = CONFIG.COUNTER_DURATION;
+    const step = target / (duration / 16);
+    let current = 0;
     
-    event.preventDefault();
-    event.stopPropagation();
-    
-    const product = this.dataset.product;
-    
-    // 1. Update button state
-    document.querySelectorAll('.selector-btn').forEach(btn => {
-        btn.classList.remove('active');
-        btn.style.transform = 'scale(1)';
-    });
-    
-    this.classList.add('active');
-    this.style.transform = 'scale(0.98)';
-    
-    // 2. Tampilkan product container
-    const productContainer = document.getElementById('product-lists');
-    productContainer.style.display = 'block';
-    productContainer.classList.add('active');
-    productContainer.style.visibility = 'visible';
-    productContainer.style.opacity = '1';
-    
-    // 3. Load product content
-    loadProduct(product);
-    
-    // 4. Scroll ke posisi yang TEPAT
-    setTimeout(() => {
-        scrollToProductContainer();
-    }, 50);
-}
-
-function scrollToProductContainer() {
-    const productContainer = document.getElementById('product-lists');
-    const header = document.querySelector('header');
-    
-    if (!productContainer || !header) return;
-    
-    // Hitung posisi dengan benar
-    const headerHeight = header.offsetHeight;
-    const containerTop = productContainer.offsetTop;
-    
-    // Scroll ke posisi container minus header height
-    const targetScroll = containerTop - headerHeight;
-    
-    console.log(`Scrolling to: ${targetScroll}px`);
-    console.log(`Container top: ${containerTop}px`);
-    console.log(`Header height: ${headerHeight}px`);
-    
-    window.scrollTo({
-        top: targetScroll,
-        behavior: 'smooth'
-    });
-}
-
-function loadProduct(product) {
-    console.time('Load Product');
-    
-    currentProduct = product;
-    const productData = products[product];
-    const productContainer = document.getElementById('product-lists');
-    
-    // Generate HTML
-    let html = `
-        <div class="container">
-            <div class="product-list active">
-                <h2 class="section-title">${productData.title}</h2>
-    `;
-    
-    if (productData.subtitle) {
-        html += `<p class="section-subtitle">${productData.subtitle}</p>`;
-    }
-    
-    html += `<div class="product-grid">`;
-    
-    // Product cards
-    productData.items.forEach((item, index) => {
-        const popularClass = item.popular ? 'popular' : '';
-        
-        html += `
-            <div class="product-card ${popularClass}">
-                <div class="product-header">
-                    <h3>${item.title}</h3>
-                    <div class="price">
-                        ${item.price}
-                        ${item.period ? `<span class="price-period">/${item.period}</span>` : ''}
-                    </div>
-                </div>
-                
-                <div class="product-features">
-                    <h4><i class="fas fa-check"></i> Fitur:</h4>
-                    <ul class="feature-list">
-                        ${item.features.map(f => `<li>${f}</li>`).join('')}
-                    </ul>
-                </div>
-                
-                ${item.note ? `<div class="product-note">${item.note}</div>` : ''}
-                
-                <button class="btn-order" data-product="${product}" data-index="${index}">
-                    <i class="fab fa-whatsapp"></i> Pesan Sekarang
-                </button>
-            </div>
-        `;
-    });
-    
-    html += `</div>`;
-    
-    // Additional sections
-    if (productData.terms && productData.terms.length > 0) {
-        html += `
-            <div class="product-terms">
-                <h3><i class="fas fa-exclamation-triangle"></i> Syarat & Ketentuan:</h3>
-                <ul>
-                    ${productData.terms.map(term => `<li>${term}</li>`).join('')}
-                </ul>
-            </div>
-        `;
-    }
-    
-    if (productData.features && productData.features.length > 0) {
-        html += `
-            <div class="product-features-list">
-                <h3><i class="fas fa-rocket"></i> Fitur Utama:</h3>
-                <div class="features-grid">
-                    ${productData.features.map(feature => `<div class="feature-item">${feature}</div>`).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    if (productData.security && productData.security.length > 0) {
-        html += `
-            <div class="product-security">
-                <h3><i class="fas fa-shield-alt"></i> Keamanan:</h3>
-                <div class="security-content">
-                    <ul>
-                        ${productData.security.map(security => `<li>${security}</li>`).join('')}
-                    </ul>
-                </div>
-            </div>
-        `;
-    }
-    
-    if (productData.benefits && productData.benefits.length > 0) {
-        html += `
-            <div class="product-benefits">
-                <h3><i class="fas fa-gem"></i> Benefit:</h3>
-                <div class="benefits-grid">
-                    ${productData.benefits.map(benefit => `<div class="benefit-item">${benefit}</div>`).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    if (productData.info && productData.info.length > 0) {
-        html += `
-            <div class="product-info">
-                <h3><i class="fas fa-info-circle"></i> Info:</h3>
-                <div class="info-content">
-                    <ul>
-                        ${productData.info.map(info => `<li>${info}</li>`).join('')}
-                    </ul>
-                </div>
-            </div>
-        `;
-    }
-    
-    html += `</div></div>`;
-    
-    // Render ke container
-    productContainer.innerHTML = html;
-    
-    // Setup order buttons
-    setupOrderButtons();
-    
-    console.timeEnd('Load Product');
-}
-
-// ===== FUNGSI ORDER BUTTONS =====
-function setupOrderButtons() {
-    const orderButtons = document.querySelectorAll('.btn-order');
-    
-    console.log(`Found ${orderButtons.length} order buttons`);
-    
-    orderButtons.forEach(button => {
-        // Clone untuk reset listeners
-        const newButton = button.cloneNode(true);
-        button.parentNode.replaceChild(newButton, button);
-    });
-    
-    // Re-select after clone
-    document.querySelectorAll('.btn-order').forEach(button => {
-        button.addEventListener('click', handleOrderClick, { 
-            passive: false,
-            capture: true 
-        });
-        
-        button.style.cursor = 'pointer';
-        button.style.pointerEvents = 'auto';
-    });
-}
-
-function handleOrderClick(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    console.log('Order button clicked!');
-    
-    const product = this.dataset.product;
-    const index = parseInt(this.dataset.index);
-    const item = products[product].items[index];
-    
-    // Click feedback
-    this.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-        this.style.transform = 'scale(1)';
-    }, 150);
-    
-    // Create message
-    let message = `Halo ${ADMIN_NAME}, saya mau pesan:\n\n`;
-    message += `📦 *${item.title}*\n`;
-    message += `💰 ${item.price}${item.period ? ` (${item.period})` : ''}\n\n`;
-    
-    message += `Mohon info untuk pemesanan. Terima kasih!`;
-    
-    // Send to WhatsApp
-    sendToWhatsApp(message);
-}
-
-function sendToWhatsApp(message) {
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappURL = `https://wa.me/${ADMIN_PHONE}?text=${encodedMessage}`;
-    window.open(whatsappURL, '_blank', 'noopener,noreferrer');
-}
-
-function updateWhatsAppLink() {
-    const whatsappBtn = document.getElementById('whatsapp-btn');
-    if (whatsappBtn) {
-        whatsappBtn.href = `https://wa.me/${ADMIN_PHONE}?text=${encodeURIComponent(`Halo ${ADMIN_NAME}, saya mau tanya tentang produk Azbry-MD`)}`;
-    }
+    const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+            element.textContent = target % 1 === 0 ? target : target.toFixed(1);
+            clearInterval(timer);
+        } else {
+            element.textContent = current % 1 === 0 ? Math.floor(current) : current.toFixed(1);
+        }
+    }, 16);
 }
 
 // ===== EVENT LISTENERS =====
-function setupEventListeners() {
+function initEventListeners() {
     // Theme toggle
-    themeToggle.addEventListener('click', toggleTheme);
+    elements.themeToggle.addEventListener('click', toggleTheme);
     
     // Back to top
+    elements.backToTop.addEventListener('click', scrollToTop);
+    
+    // Hamburger menu
+    elements.hamburger.addEventListener('click', toggleMobileMenu);
+    
+    // Scroll events
     window.addEventListener('scroll', handleScroll);
-    backToTop.addEventListener('click', scrollToTop);
     
-    // Mobile menu
-    hamburger.addEventListener('click', toggleMobileMenu);
-    
-    // Close mobile menu
-    document.addEventListener('click', closeMobileMenuOnClickOutside);
-    
-    // Navigation
+    // Navigation links
     setupNavigationLinks();
+    
+    // Product selector buttons
+    setupProductSelector();
     
     // Product links in footer
     setupProductLinks();
+    
+    // Close menu on outside click
+    document.addEventListener('click', handleOutsideClick);
 }
 
+// ===== SCROLL HANDLER =====
 function handleScroll() {
-    // Show/hide back to top button
-    if (window.pageYOffset > 300) {
-        backToTop.classList.add('visible');
-        backToTop.style.opacity = '1';
-        backToTop.style.visibility = 'visible';
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / scrollHeight) * 100;
+    
+    // Update scroll progress
+    elements.scrollProgress.style.width = `${scrollPercent}%`;
+    
+    // Header scroll effect
+    if (scrollTop > 50) {
+        elements.header.classList.add('scrolled');
     } else {
-        backToTop.classList.remove('visible');
-        backToTop.style.opacity = '0';
-        backToTop.style.visibility = 'hidden';
+        elements.header.classList.remove('scrolled');
+    }
+    
+    // Back to top button
+    if (scrollTop > 300) {
+        elements.backToTop.classList.add('visible');
+    } else {
+        elements.backToTop.classList.remove('visible');
     }
 }
 
@@ -591,12 +456,12 @@ function scrollToTop() {
     });
 }
 
+// ===== MOBILE MENU =====
 function toggleMobileMenu() {
-    navLinks.classList.toggle('active');
+    elements.navLinks.classList.toggle('active');
     
-    // Change hamburger icon
-    const icon = this.querySelector('i');
-    if (navLinks.classList.contains('active')) {
+    const icon = elements.hamburger.querySelector('i');
+    if (elements.navLinks.classList.contains('active')) {
         icon.classList.remove('fa-bars');
         icon.classList.add('fa-times');
         document.body.style.overflow = 'hidden';
@@ -607,54 +472,387 @@ function toggleMobileMenu() {
     }
 }
 
-function closeMobileMenuOnClickOutside(event) {
-    if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
-        navLinks.classList.remove('active');
-        const icon = hamburger.querySelector('i');
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-        document.body.style.overflow = 'auto';
+function handleOutsideClick(event) {
+    if (!elements.hamburger.contains(event.target) && 
+        !elements.navLinks.contains(event.target) &&
+        elements.navLinks.classList.contains('active')) {
+        toggleMobileMenu();
     }
 }
 
+// ===== NAVIGATION =====
 function setupNavigationLinks() {
-    document.querySelectorAll('.nav-links a').forEach(link => {
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            if (this.getAttribute('href').startsWith('#')) {
+            const href = this.getAttribute('href');
+            
+            if (href.startsWith('#')) {
                 e.preventDefault();
                 
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
                 
                 if (targetElement) {
-                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const headerHeight = elements.header.offsetHeight;
                     const targetPosition = targetElement.offsetTop - headerHeight;
                     
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
                     });
-                }
-                
-                // Close mobile menu
-                if (window.innerWidth < 768 && navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    const icon = hamburger.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                    document.body.style.overflow = 'auto';
+                    
+                    // Update active state
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Close mobile menu if open
+                    if (elements.navLinks.classList.contains('active')) {
+                        toggleMobileMenu();
+                    }
                 }
             }
         });
     });
 }
 
+// ===== PRODUCT SELECTOR =====
+function setupProductSelector() {
+    const selectorButtons = document.querySelectorAll('.selector-btn');
+    
+    selectorButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            const product = this.getAttribute('data-product');
+            
+            // Update button states
+            selectorButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Load product
+            loadProduct(product);
+            
+            // Scroll to product section
+            setTimeout(() => {
+                scrollToProductSection();
+                isAnimating = false;
+            }, 300);
+        });
+    });
+}
+
+function scrollToProductSection() {
+    const productSection = elements.productListsContainer;
+    const headerHeight = elements.header.offsetHeight;
+    const targetPosition = productSection.offsetTop - headerHeight;
+    
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+    });
+}
+
+// ===== LOAD PRODUCT =====
+function loadProduct(productKey) {
+    currentProduct = productKey;
+    const productData = products[productKey];
+    
+    if (!productData) {
+        console.error('Product not found:', productKey);
+        return;
+    }
+    
+    // Show container
+    elements.productListsContainer.classList.add('active');
+    
+    // Build HTML
+    let html = `
+        <div class="container">
+            <h2 class="section-title">${productData.title}</h2>
+            ${productData.subtitle ? `<p class="section-subtitle">${productData.subtitle}</p>` : ''}
+            
+            <div class="product-carousel">
+                <div class="product-track" id="productTrack">
+    `;
+    
+    // Add product cards
+    productData.items.forEach((item, index) => {
+        html += `
+            <div class="product-card ${item.popular ? 'popular' : ''}">
+                <div class="product-header">
+                    <h3>${item.title}</h3>
+                    <div class="price">
+                        ${item.price}
+                        ${item.period ? `<span class="price-period">/${item.period}</span>` : ''}
+                    </div>
+                </div>
+                
+                <div class="product-features">
+                    <h4><i class="fas fa-check-circle"></i> Fitur:</h4>
+                    <ul class="feature-list">
+                        ${item.features.map(f => `<li>${f}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                ${item.note ? `<div class="product-note">💡 ${item.note}</div>` : ''}
+                
+                <button class="btn-order" data-product="${productKey}" data-index="${index}">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Pesan Sekarang</span>
+                </button>
+            </div>
+        `;
+    });
+    
+    html += `
+                </div>
+            </div>
+    `;
+    
+    // Add carousel controls if more than 1 item
+    if (productData.items.length > 1) {
+        html += `
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel-dots" id="carouselDots"></div>
+                <button class="carousel-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        `;
+    }
+    
+    // Add additional sections
+    if (productData.terms) {
+        html += `
+            <div class="product-terms">
+                <h3><i class="fas fa-exclamation-triangle"></i> Syarat & Ketentuan:</h3>
+                <ul>
+                    ${productData.terms.map(term => `<li>${term}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+    
+  if (productData.features) {
+        html += `
+            <div class="product-features-list">
+                <h3><i class="fas fa-rocket"></i> Fitur Utama:</h3>
+                <div class="features-grid">
+                    ${productData.features.map(f => `<div class="feature-item">${f}</div>`).join('')}
+                </div>
+            </div>
+        `;
+    }
+    
+    if (productData.security) {
+        html += `
+            <div class="product-security">
+                <h3><i class="fas fa-shield-alt"></i> Keamanan:</h3>
+                <ul>
+                    ${productData.security.map(s => `<li>${s}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+    
+    if (productData.benefits) {
+        html += `
+            <div class="product-benefits">
+                <h3><i class="fas fa-gem"></i> Benefit:</h3>
+                <div class="benefits-grid">
+                    ${productData.benefits.map(b => `<div class="benefit-item">${b}</div>`).join('')}
+                </div>
+            </div>
+        `;
+    }
+    
+    if (productData.info) {
+        html += `
+            <div class="product-info">
+                <h3><i class="fas fa-info-circle"></i> Info Penting:</h3>
+                <ul>
+                    ${productData.info.map(i => `<li>${i}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+    
+    html += `</div>`;
+    
+    // Render
+    elements.productListsContainer.innerHTML = html;
+    
+    // Setup carousel
+    if (productData.items.length > 1) {
+        setupCarousel(productData.items.length);
+    }
+    
+    // Setup order buttons
+    setupOrderButtons();
+    
+    showToast(`Produk ${productKey.toUpperCase()} ditampilkan`);
+}
+
+// ===== CAROUSEL =====
+function setupCarousel(itemCount) {
+    totalSlides = itemCount;
+    currentSlide = 0;
+    
+    const track = document.getElementById('productTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('carouselDots');
+    
+    if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+    
+    // Create dots
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+    }
+    
+    // Button events
+    prevBtn.addEventListener('click', () => changeSlide(-1));
+    nextBtn.addEventListener('click', () => changeSlide(1));
+    
+    // Touch events for mobile swipe
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        if (touchEndX < touchStartX - 50) changeSlide(1);
+        if (touchEndX > touchStartX + 50) changeSlide(-1);
+    }
+    
+    updateCarousel();
+}
+
+function changeSlide(direction) {
+    currentSlide += direction;
+    if (currentSlide < 0) currentSlide = totalSlides - 1;
+    if (currentSlide >= totalSlides) currentSlide = 0;
+    updateCarousel();
+}
+
+function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const track = document.getElementById('productTrack');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    if (!track) return;
+    
+    // Update track position
+    const slideWidth = track.children[0].offsetWidth + 16; // card width + gap
+    track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    
+    // Update dots
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+    
+    // Update buttons
+    if (prevBtn) prevBtn.disabled = currentSlide === 0;
+    if (nextBtn) nextBtn.disabled = currentSlide === totalSlides - 1;
+}
+
+// ===== ORDER BUTTONS =====
+function setupOrderButtons() {
+    const orderButtons = document.querySelectorAll('.btn-order');
+    
+    orderButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const productKey = this.getAttribute('data-product');
+            const index = parseInt(this.getAttribute('data-index'));
+            
+            handleOrder(productKey, index);
+        });
+    });
+}
+
+function handleOrder(productKey, index) {
+    const productData = products[productKey];
+    const item = productData.items[index];
+    
+    if (!item) {
+        console.error('Item not found');
+        return;
+    }
+    
+    // Create WhatsApp message
+    let message = `🛒 *PEMESANAN BARU*\n\n`;
+    message += `📦 *Produk:* ${item.title}\n`;
+    message += `💰 *Harga:* ${item.price}`;
+    
+    if (item.period) {
+        message += ` (${item.period})`;
+    }
+    
+    message += `\n\n✅ *Fitur yang didapat:*\n`;
+    item.features.forEach(feature => {
+        message += `• ${feature}\n`;
+    });
+    
+    message += `\n📝 Mohon informasi lebih lanjut dan cara pembayaran.\n\n`;
+    message += `Terima kasih! 🙏`;
+    
+    // Send to WhatsApp
+    sendToWhatsApp(message);
+    
+    showToast('Membuka WhatsApp...');
+}
+
+function sendToWhatsApp(message) {
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/${CONFIG.ADMIN_PHONE}?text=${encodedMessage}`;
+    window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+}
+
+function updateWhatsAppLink() {
+    if (elements.whatsappBtn) {
+        const message = `Halo ${CONFIG.ADMIN_NAME}, saya mau tanya tentang produk Azbry-MD`;
+        elements.whatsappBtn.href = `https://wa.me/${CONFIG.ADMIN_PHONE}?text=${encodeURIComponent(message)}`;
+    }
+}
+
+// ===== PRODUCT LINKS =====
 function setupProductLinks() {
-    document.querySelectorAll('.product-link').forEach(link => {
+    const productLinks = document.querySelectorAll('.product-link');
+    
+    productLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const product = this.dataset.product;
+            const product = this.getAttribute('data-product');
             
+            // Trigger selector button
             const selectorBtn = document.querySelector(`.selector-btn[data-product="${product}"]`);
             if (selectorBtn) {
                 selectorBtn.click();
@@ -663,107 +861,37 @@ function setupProductLinks() {
     });
 }
 
-// ===== DEBUG FUNCTIONS =====
-window.debugPosition = function() {
-    console.log('=== DEBUG POSITIONING ===');
+// ===== TOAST NOTIFICATION =====
+function showToast(message, duration = 3000) {
+    elements.toastMessage.textContent = message;
+    elements.toast.classList.add('show');
     
-    // Debug header
-    const header = document.querySelector('header');
-    const headerRect = header.getBoundingClientRect();
-    console.log('Header:', {
-        top: headerRect.top,
-        height: headerRect.height,
-        offsetTop: header.offsetTop
-    });
-    
-    // Debug hero
-    const hero = document.querySelector('.hero');
-    const heroRect = hero.getBoundingClientRect();
-    console.log('Hero:', {
-        top: heroRect.top,
-        height: heroRect.height,
-        offsetTop: hero.offsetTop
-    });
-    
-    // Debug product container
-    const productContainer = document.getElementById('product-lists');
-    const containerRect = productContainer.getBoundingClientRect();
-    console.log('Product Container:', {
-        top: containerRect.top,
-        height: containerRect.height,
-        offsetTop: productContainer.offsetTop,
-        display: window.getComputedStyle(productContainer).display
-    });
-    
-    // Debug selector buttons
-    const selectorButtons = document.querySelectorAll('.selector-btn');
-    selectorButtons.forEach((btn, i) => {
-        const rect = btn.getBoundingClientRect();
-        console.log(`Button ${i}:`, {
-            top: rect.top,
-            left: rect.left,
-            width: rect.width,
-            height: rect.height
-        });
-    });
+    setTimeout(() => {
+        elements.toast.classList.remove('show');
+    }, duration);
+}
+
+// ===== UTILITY FUNCTIONS =====
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// ===== DEBUG HELPERS =====
+window.azbryDebug = {
+    showProduct: (key) => loadProduct(key),
+    currentProduct: () => currentProduct,
+    products: products,
+    config: CONFIG
 };
 
-// ===== FIX ALL BUTTONS EMERGENCY =====
-window.fixAllButtons = function() {
-    console.log('Fixing all buttons...');
-    
-    // Fix semua buttons
-    document.querySelectorAll('button').forEach(btn => {
-        btn.style.position = 'relative';
-        btn.style.zIndex = '9999';
-        btn.style.cursor = 'pointer';
-        btn.style.pointerEvents = 'auto';
-        btn.style.outline = 'none';
-    });
-    
-    // Fix product container
-    const container = document.getElementById('product-lists');
-    if (container) {
-        container.style.position = 'relative';
-        container.style.zIndex = '100';
-        container.style.display = 'block';
-        container.style.top = '0';
-        container.style.left = '0';
-    }
-    
-    alert('All buttons should work now!');
-};
-
-// Add emergency CSS fix
-const emergencyStyle = document.createElement('style');
-emergencyStyle.textContent = `
-    /* EMERGENCY FIX - FORCE BUTTONS TO WORK */
-    .selector-btn {
-        z-index: 99999 !important;
-        position: relative !important;
-    }
-    
-    #product-lists {
-        position: relative !important;
-        z-index: 100 !important;
-        margin-top: 0 !important;
-        padding-top: 20px !important;
-    }
-    
-    /* Ensure click area */
-    button::after {
-        content: '' !important;
-        position: absolute !important;
-        top: -10px !important;
-        left: -10px !important;
-        right: -10px !important;
-        bottom: -10px !important;
-        z-index: -1 !important;
-        pointer-events: none !important;
-    }
-`;
-document.head.appendChild(emergencyStyle);
-
-console.log('%c🚀 AZBRY-MD WEBSITE READY 🚀', 'font-size: 16px; font-weight: bold; color: #25D366;');
-console.log('%cUntuk debugging, ketik: window.debugPosition()', 'color: #667EEA;');
-console.log('%cUntuk emergency fix, ketik: window.fixAllButtons()', 'color: #FF6B6B;');
+console.log('%c💡 Debug Helper Available', 'color: #00D9FF; font-weight: bold;');
+console.log('%cUse window.azbryDebug for debugging', 'color: #94A3B8;');
+console.log('%cExample: window.azbryDebug.showProduct("script")', 'color: #94A3B8;');
