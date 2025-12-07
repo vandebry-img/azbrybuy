@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -18,20 +18,35 @@
     <meta name="author" content="Azbry-MD">
     
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <link rel="icon" href="https://files.catbox.moe/ld0cyx.jpg">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Loading Screen -->
+    <div id="loading" class="loading active">
+        <div class="loading-content">
+            <img src="https://files.catbox.moe/ld0cyx.jpg" alt="Logo" class="loading-logo">
+            <div class="loading-spinner"></div>
+            <p>Loading Azbry-MD...</p>
+        </div>
+    </div>
+
     <!-- Header -->
-    <header>
+    <header id="header">
         <div class="container">
             <nav>
                 <div class="logo">
-                    <h1><i class="fas fa-robot"></i> Azbry<span class="logo-highlight">MD</span></h1>
+                    <img src="https://files.catbox.moe/ld0cyx.jpg" alt="Azbry-MD Logo" class="logo-img">
+                    <h1>Azbry<span class="logo-highlight">MD</span></h1>
                 </div>
                 
                 <div class="header-right">
@@ -42,15 +57,15 @@
                         </div>
                     </div>
                     
-                    <button class="hamburger">
+                    <button class="hamburger" id="hamburger">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
                 
-                <ul class="nav-links">
-                    <li><a href="#home" class="active"><i class="fas fa-home"></i> Beranda</a></li>
-                    <li><a href="#products"><i class="fas fa-box"></i> Produk</a></li>
-                    <li><a href="#contact"><i class="fas fa-phone"></i> Kontak</a></li>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li><a href="#products" class="nav-link"><i class="fas fa-box"></i> Produk</a></li>
+                    <li><a href="#contact" class="nav-link"><i class="fas fa-phone"></i> Kontak</a></li>
                 </ul>
             </nav>
         </div>
@@ -58,20 +73,25 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <!-- Particles Background -->
+        <div class="particles" id="particles"></div>
+        
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="badge">🔥 Happy Shop!</span>
                 </div>
+                
                 <h2 class="hero-title">
-                    <span class="gradient-text">AZBRY-MD</span>
+                    <span class="gradient-text" id="typingText">AZBRY-MD</span>
                     WhatsApp Bot
                 </h2>
+                
                 <p class="hero-subtitle">
                     Script bot WhatsApp dengan fitur AI, Downloader, dan 200+ fitur
                 </p>
                 
-                <!-- Tombol Pilihan Produk -->
+                <!-- Product Selector -->
                 <div class="product-selector">
                     <h3 class="selector-title">🎯 PILIH PRODUK</h3>
                     <div class="selector-buttons">
@@ -101,18 +121,19 @@
                     </div>
                 </div>
                 
+                <!-- Hero Stats -->
                 <div class="hero-stats">
                     <div class="stat-item">
                         <i class="fas fa-users"></i>
                         <div>
-                            <span class="stat-number">500+</span>
+                            <span class="stat-number" data-count="500">0</span>
                             <span class="stat-label">User</span>
                         </div>
                     </div>
                     <div class="stat-item">
                         <i class="fas fa-star"></i>
                         <div>
-                            <span class="stat-number">4.9</span>
+                            <span class="stat-number" data-count="4.9">0</span>
                             <span class="stat-label">Rating</span>
                         </div>
                     </div>
@@ -128,9 +149,9 @@
         </div>
     </section>
 
-    <!-- Container untuk List Produk -->
+    <!-- Product Lists Container -->
     <main id="product-lists" class="product-lists-container">
-        <!-- List akan dimuat di sini via JavaScript -->
+        <!-- Product lists will be loaded here via JavaScript -->
     </main>
 
     <!-- Contact Section -->
@@ -171,7 +192,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <h3><i class="fas fa-robot"></i> Azbry<span class="logo-highlight">MD</span></h3>
+                    <img src="https://files.catbox.moe/ld0cyx.jpg" alt="Logo" class="footer-logo">
+                    <h3>Azbry<span class="logo-highlight">MD</span></h3>
                     <p>WhatsApp Bot Script Premium</p>
                 </div>
                 
@@ -188,31 +210,32 @@
                     <p><i class="fas fa-shield-alt"></i> Aman & Terpercaya</p>
                     <p><i class="fas fa-headset"></i> Support 24/7</p>
                     <p><i class="fas fa-bolt"></i> Instant Delivery</p>
-                    <p>© 2024 Azbry-MD</p>
                 </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 Azbry-MD. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Floating Theme Toggle Button -->
+    <!-- Floating Buttons -->
     <button id="themeToggle" class="theme-toggle">
         <i class="fas fa-moon"></i>
         <i class="fas fa-sun"></i>
     </button>
 
-    <!-- Back to Top Button -->
     <button id="backToTop" class="back-to-top">
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Loading Animation -->
-    <div id="loading" class="loading">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <p>Memuat...</p>
-        </div>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Notification</span>
     </div>
 
+    <!-- Scripts -->
     <script src="./script.js"></script>
 </body>
 </html>
