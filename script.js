@@ -843,6 +843,91 @@ function updateWhatsAppLink() {
     }
 }
 
+// Floating buttons hover effect for mobile
+document.addEventListener('DOMContentLoaded', function() {
+    const floatingBtns = document.querySelectorAll('.floating-btn');
+    
+    // For mobile devices, show text on tap
+    if ('ontouchstart' in window) {
+        floatingBtns.forEach(btn => {
+            let timeout;
+            
+            btn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                this.classList.add('hover');
+                
+                // Auto hide after 3 seconds
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    this.classList.remove('hover');
+                }, 3000);
+            });
+            
+            // Hide when touching elsewhere
+            document.addEventListener('touchstart', function(e) {
+                if (!btn.contains(e.target)) {
+                    btn.classList.remove('hover');
+                }
+            });
+        });
+    }
+    
+    // Add ripple effect on click
+    floatingBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            // Create ripple element
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            // Remove ripple after animation
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+});
+
+// CSS untuk ripple effect (tambahkan di style.css)
+.floating-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.floating-btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+// Untuk mobile, class hover akan menampilkan teks
+.floating-btn.hover {
+    max-width: 200px !important;
+}
+
+.floating-btn.hover .btn-text {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
 // ===== PRODUCT LINKS =====
 function setupProductLinks() {
     const productLinks = document.querySelectorAll('.product-link');
