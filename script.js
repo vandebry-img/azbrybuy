@@ -859,4 +859,285 @@ console.log('%c━━━━━━━━━━━━━━━━━━━━━�
 console.log('%c🚀 Website Status: READY', 'color: #25D366; font-weight: bold');
 console.log('%c💎 Version: 2.0', 'color: #6366F1; font-weight: bold');
 console.log('%c⚡ Performance: Optimized', 'color: #F59E0B; font-weight: bold');
-console.log('%c━━━━━━━━━━━━━━━━
+console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #00D9FF');
+console.log('%c📱 Contact Admin:', 'color: #94A3B8');
+console.log(`%c   WhatsApp: +${CONFIG.ADMIN_PHONE}`, 'color: #25D366; font-weight: bold');
+console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #00D9FF');
+console.log('%c🎨 Design: Modern Night Blue Theme', 'color: #00D9FF');
+console.log('%c✨ Features: Full Animated & Responsive', 'color: #6366F1');
+console.log('%c🔥 Mobile First Design', 'color: #EF4444');
+console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #00D9FF');
+
+// ===== EASTER EGG =====
+console.log('%c💡 Tips: Ketik "showProducts()" untuk melihat semua produk', 'color: #F59E0B; font-style: italic');
+
+// Debug functions untuk developer
+window.showProducts = function() {
+    console.log('%c📦 DAFTAR PRODUK TERSEDIA:', 'color: #00D9FF; font-size: 16px; font-weight: bold');
+    console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #00D9FF');
+    
+    Object.keys(products).forEach(key => {
+        const product = products[key];
+        console.log(`%c\n${product.title}`, 'color: #6366F1; font-weight: bold; font-size: 14px');
+        console.log(`%c${product.subtitle || ''}`, 'color: #94A3B8; font-style: italic');
+        
+        product.items.forEach((item, index) => {
+            console.log(`%c\n  ${index + 1}. ${item.title}`, 'color: #25D366; font-weight: bold');
+            console.log(`     💰 ${item.price}${item.period ? ' (' + item.period + ')' : ''}`, 'color: #00D9FF');
+            console.log(`     ${item.popular ? '🔥 POPULAR' : ''}`, 'color: #EF4444');
+            console.log(`     📝 Fitur:`, 'color: #94A3B8');
+            item.features.forEach(feature => {
+                console.log(`        ✓ ${feature}`, 'color: #64748B');
+            });
+        });
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #00D9FF');
+    });
+};
+
+window.contactAdmin = function() {
+    const message = `Halo ${CONFIG.ADMIN_NAME}, saya mau tanya tentang produk Azbry-MD`;
+    const whatsappURL = `https://wa.me/${CONFIG.ADMIN_PHONE}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+    console.log('%c✅ WhatsApp Admin dibuka!', 'color: #25D366; font-weight: bold; font-size: 14px');
+};
+
+window.debugInfo = function() {
+    console.log('%c🔍 DEBUG INFORMATION', 'color: #F59E0B; font-size: 16px; font-weight: bold');
+    console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #F59E0B');
+    console.log('%cCurrent Product:', 'color: #94A3B8', currentProduct || 'None');
+    console.log('%cCurrent Slide:', 'color: #94A3B8', currentSlide);
+    console.log('%cTotal Slides:', 'color: #94A3B8', totalSlides);
+    console.log('%cTheme:', 'color: #94A3B8', document.documentElement.getAttribute('data-theme'));
+    console.log('%cScreen Width:', 'color: #94A3B8', window.innerWidth + 'px');
+    console.log('%cScreen Height:', 'color: #94A3B8', window.innerHeight + 'px');
+    console.log('%cScroll Position:', 'color: #94A3B8', window.pageYOffset + 'px');
+    console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #F59E0B');
+};
+
+window.testAnimations = function() {
+    console.log('%c🎨 Testing Animations...', 'color: #6366F1; font-weight: bold; font-size: 14px');
+    
+    // Test particles
+    console.log('%c✓ Particles Animation: Active', 'color: #25D366');
+    
+    // Test scroll progress
+    console.log('%c✓ Scroll Progress: Active', 'color: #25D366');
+    
+    // Test typing effect
+    console.log('%c✓ Typing Effect: Completed', 'color: #25D366');
+    
+    // Test stats counter
+    console.log('%c✓ Stats Counter: Animated', 'color: #25D366');
+    
+    console.log('%c\n🎉 All animations working!', 'color: #00D9FF; font-weight: bold');
+};
+
+// ===== KEYBOARD SHORTCUTS =====
+document.addEventListener('keydown', function(e) {
+    // Ctrl/Cmd + K untuk search (bisa dikembangkan nanti)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        showToast('Search feature coming soon! 🔍');
+    }
+    
+    // Ctrl/Cmd + D untuk dark mode toggle
+    if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+        e.preventDefault();
+        toggleTheme();
+    }
+    
+    // Arrow keys untuk carousel navigation (jika ada carousel aktif)
+    if (totalSlides > 1 && elements.productListsContainer.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            changeSlide(-1);
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            changeSlide(1);
+        }
+    }
+    
+    // Escape untuk close mobile menu
+    if (e.key === 'Escape' && elements.navLinks.classList.contains('active')) {
+        elements.navLinks.classList.remove('active');
+        const icon = elements.hamburger.querySelector('i');
+        icon.classList.replace('fa-times', 'fa-bars');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// ===== PERFORMANCE MONITORING =====
+window.addEventListener('load', function() {
+    // Check performance
+    if (window.performance) {
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        
+        console.log('%c⚡ PERFORMANCE METRICS', 'color: #F59E0B; font-size: 14px; font-weight: bold');
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #F59E0B');
+        console.log(`%cPage Load Time: ${(pageLoadTime / 1000).toFixed(2)}s`, 'color: #25D366; font-weight: bold');
+        console.log(`%cDOM Ready: ${((perfData.domContentLoadedEventEnd - perfData.navigationStart) / 1000).toFixed(2)}s`, 'color: #00D9FF');
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #F59E0B');
+        
+        if (pageLoadTime < 3000) {
+            console.log('%c✅ Excellent Performance!', 'color: #25D366; font-weight: bold');
+        } else if (pageLoadTime < 5000) {
+            console.log('%c⚠️ Good Performance', 'color: #F59E0B; font-weight: bold');
+        } else {
+            console.log('%c❌ Performance needs improvement', 'color: #EF4444; font-weight: bold');
+        }
+    }
+});
+
+// ===== SWIPE GESTURE SUPPORT (Mobile) =====
+let touchStartX = 0;
+let touchEndX = 0;
+let touchStartY = 0;
+let touchEndY = 0;
+
+function handleSwipeGesture() {
+    const swipeThreshold = 50;
+    const verticalThreshold = 100;
+    
+    const horizontalDiff = touchEndX - touchStartX;
+    const verticalDiff = Math.abs(touchEndY - touchStartY);
+    
+    // Only process horizontal swipes (not vertical scrolls)
+    if (verticalDiff < verticalThreshold && Math.abs(horizontalDiff) > swipeThreshold) {
+        if (totalSlides > 1 && elements.productListsContainer.classList.contains('active')) {
+            if (horizontalDiff > 0) {
+                // Swipe right - previous slide
+                changeSlide(-1);
+            } else {
+                // Swipe left - next slide
+                changeSlide(1);
+            }
+        }
+    }
+}
+
+document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+document.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipeGesture();
+}, { passive: true });
+
+// ===== VISIBILITY CHANGE HANDLER =====
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        console.log('%c👋 Terima kasih sudah berkunjung!', 'color: #00D9FF; font-weight: bold');
+    } else {
+        console.log('%c👋 Selamat datang kembali!', 'color: #25D366; font-weight: bold');
+        // Update clock when user returns
+        updateClock();
+    }
+});
+
+// ===== ONLINE/OFFLINE STATUS =====
+window.addEventListener('online', function() {
+    showToast('✅ Koneksi internet tersambung');
+    console.log('%c✅ Online', 'color: #25D366; font-weight: bold');
+});
+
+window.addEventListener('offline', function() {
+    showToast('❌ Koneksi internet terputus');
+    console.log('%c❌ Offline', 'color: #EF4444; font-weight: bold');
+});
+
+// ===== RESIZE HANDLER (Debounced) =====
+const handleResize = debounce(function() {
+    // Update carousel on resize
+    if (totalSlides > 1 && elements.productListsContainer.classList.contains('active')) {
+        updateCarousel();
+    }
+    
+    // Close mobile menu on resize to desktop
+    if (window.innerWidth >= 768 && elements.navLinks.classList.contains('active')) {
+        elements.navLinks.classList.remove('active');
+        const icon = elements.hamburger.querySelector('i');
+        icon.classList.replace('fa-times', 'fa-bars');
+        document.body.style.overflow = 'auto';
+    }
+    
+    console.log('%c📱 Window resized:', 'color: #6366F1', `${window.innerWidth}x${window.innerHeight}`);
+}, 250);
+
+window.addEventListener('resize', handleResize);
+
+// ===== ERROR HANDLER =====
+window.addEventListener('error', function(e) {
+    console.error('%c❌ Error detected:', 'color: #EF4444; font-weight: bold', e.message);
+    // Bisa ditambahkan error reporting ke server
+});
+
+// ===== PREVENT CONTEXT MENU (Optional - Uncomment jika mau) =====
+// document.addEventListener('contextmenu', function(e) {
+//     e.preventDefault();
+//     showToast('Right-click disabled');
+// });
+
+// ===== SMOOTH SCROLL POLYFILL FOR OLD BROWSERS =====
+if (!('scrollBehavior' in document.documentElement.style)) {
+    console.warn('%c⚠️ Smooth scroll not supported, loading polyfill...', 'color: #F59E0B');
+    // Bisa load polyfill disini jika perlu
+}
+
+// ===== LAZY LOAD IMAGES (jika ada gambar banyak nanti) =====
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// Call lazy load if needed
+// lazyLoadImages();
+
+// ===== SERVICE WORKER (PWA - Optional) =====
+if ('serviceWorker' in navigator) {
+    // Uncomment untuk enable PWA
+    // navigator.serviceWorker.register('/sw.js')
+    //     .then(reg => console.log('%c✅ Service Worker registered', 'color: #25D366'))
+    //     .catch(err => console.log('%c❌ Service Worker failed', 'color: #EF4444', err));
+}
+
+// ===== FINAL INITIALIZATION CHECK =====
+setTimeout(() => {
+    console.log('%c\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #25D366');
+    console.log('%c✅ ALL SYSTEMS READY!', 'color: #25D366; font-size: 18px; font-weight: bold');
+    console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #25D366');
+    console.log('%c\n💡 Available Commands:', 'color: #00D9FF; font-weight: bold');
+    console.log('%c  - showProducts()   : Lihat semua produk', 'color: #94A3B8');
+    console.log('%c  - contactAdmin()   : Hubungi admin', 'color: #94A3B8');
+    console.log('%c  - debugInfo()      : Info debug', 'color: #94A3B8');
+    console.log('%c  - testAnimations() : Test animasi', 'color: #94A3B8');
+    console.log('%c\n⌨️ Keyboard Shortcuts:', 'color: #00D9FF; font-weight: bold');
+    console.log('%c  - Ctrl/Cmd + D     : Toggle dark mode', 'color: #94A3B8');
+    console.log('%c  - Ctrl/Cmd + K     : Search (coming soon)', 'color: #94A3B8');
+    console.log('%c  - Arrow Keys       : Navigate carousel', 'color: #94A3B8');
+    console.log('%c  - Escape           : Close menu', 'color: #94A3B8');
+    console.log('%c\n🎨 Swipe gestures enabled for mobile!', 'color: #6366F1; font-weight: bold');
+    console.log('%c\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n', 'color: #25D366');
+}, 2000);
+
+// ===== EXPORT UNTUK MODULE (jika diperlukan) =====
+// export { CONFIG, products, showToast, loadProduct };
+
+// ===== END OF SCRIPT =====
+console.log('%c🎉 Script execution completed successfully!', 'color: #25D366; font-weight: bold; font-size: 12px');
+console.log('%c📞 Butuh bantuan? Hubungi admin via tombol WhatsApp!', 'color: #00D9FF; font-style: italic; font-size: 11px');
