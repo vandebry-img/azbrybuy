@@ -895,5 +895,3 @@ window.azbryDebug = {
 console.log('%c💡 Debug Helper Available', 'color: #00D9FF; font-weight: bold;');
 console.log('%cUse window.azbryDebug for debugging', 'color: #94A3B8;');
 console.log('%cExample: window.azbryDebug.showProduct("script")', 'color: #94A3B8;');
-    
-  
