@@ -641,8 +641,8 @@ function loadProduct(productKey) {
             </div>
         `;
     }
-    
-  if (productData.features) {
+
+     (productData.features) {
         html += `
             <div class="product-features-list">
                 <h3><i class="fas fa-rocket"></i> Fitur Utama:</h3>
@@ -822,7 +822,7 @@ function handleOrder(productKey, index) {
     });
     
     message += `\n📝 Mohon informasi lebih lanjut dan cara pembayaran.\n\n`;
-    messge += `Terima kasih! 🙏`;
+    message += `Terima kasih! 🙏`;
     
     // Send to WhatsApp
     sendToWhatsApp(message);
@@ -895,3 +895,5 @@ window.azbryDebug = {
 console.log('%c💡 Debug Helper Available', 'color: #00D9FF; font-weight: bold;');
 console.log('%cUse window.azbryDebug for debugging', 'color: #94A3B8;');
 console.log('%cExample: window.azbryDebug.showProduct("script")', 'color: #94A3B8;');
+    
+  
