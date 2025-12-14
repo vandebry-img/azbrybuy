@@ -39,11 +39,11 @@ const products = {
                 period: "",
                 features: [
                     "Script bot terbaru",
-                    "Update berkala gratis",
-                    "Support via grup",
-                    "Dokumentasi lengkap"
+                    "Tanpa bimbingan",
+                    "Tanpa tutor pemasangan",
+                    "Support terbatas"
                 ],
-                note: "Untuk yang sudah berpengalaman",
+                note: "✅ Untuk yang sudah berpengalaman",
                 popular: false
             },
             {
@@ -93,7 +93,7 @@ const products = {
                 period: "7 Hari",
                 features: [
                     "Semua fitur 3 hari",
-                    "Update rutin",
+                    "Downloader lebgkap",
                     "Priority queue",
                     "Bonus stiker pack"
                 ],
@@ -132,10 +132,10 @@ const products = {
         ],
         features: [
             "✅ Downloader ALL SOSMED",
-            "✅ Antilink & Antitag",
+            "✅ Antilink & Antitagsw",
             "✅ Auto Welcome/Goodbye",
             "✅ Tools Admin Lengkap",
-            "✅ Auto Responder AI",
+            "✅ Auto Responder AI (Premium User)",
             "✅ Support 24/7 Active"
         ],
         security: [
@@ -214,9 +214,9 @@ const products = {
                 features: [
                     "Nomor Indonesia fresh",
                     "Siap pakai untuk bot",
-                    "Aman dari banned utama",
-                    "Instant delivery",
-                    "Garansi aktif 24 jam"
+                    "Garansi nomor kenon (Awal Login)",
+                    "Garansi kode otp tidak masuk (Awal Login)",
+                    "Fast proses",
                 ],
                 note: "🔥 Stok selalu tersedia!",
                 popular: true
@@ -226,7 +226,7 @@ const products = {
             "🔐 UNTUK KEAMANAN, PAKAI NOKOS!",
             "🔐 Jangan pakai nomor utama",
             "🔐 Bot bisa kena banned anytime",
-            "🔐 Nomor tumbal = aman nomor utama",
+            "🔐 Nomor tumbal = nomor utama aman",
             "🔐 No ribet, no takut banned"
         ]
     }
