@@ -146,6 +146,58 @@ const products = {
             "🛡️ 100% AMAN UNTUK NOMOR UTAMA"
         ]
     },
+    domain: {
+        title: "🌐 DOMAIN",
+        subtitle: "Upgrade web anda menggunakan domain simple!",
+        items: [
+            {
+                title: ".my.id",
+                price: "Rp 20.000",
+                period: "1 Tahun",
+                features: [
+                    "Bebas request nama domain",
+                    "Contoh (azbry.my.id)",
+                    "Garansi selama masa aktif",
+                    "Proses cepat"
+                ],
+                note: "Untuk lebih lanjut tanyakan admin",
+                popular: true
+            },
+            {
+                title: ".web.id",
+                price: "Rp 20.000",
+                period: "1 Tahun",
+                features: [
+                    "Bebas request nama domain",
+                    "Contoh (febrydev.web.id)",
+                    "Garansi selama masa aktif",
+                    "Proses cepat"
+                ],
+                note: "Untuk lebih lanjut tanyakan admin",
+                popular: true
+            },
+            {
+                title: ".biz.id",
+                price: "Rp 15.000",
+                period: "1 Tahun",
+                features: [
+                    "Bebas request nama domain",
+                    "Contoh (azbry.biz.id)",
+                    "Garansi selama masa aktif",
+                    "Proses cepat"
+                ],
+                note: "Untuk lebih lanjut tanyakan admin",
+                popular: false
+            }
+        ],
+        benefits: [
+            "✅ Bebas connect ke web kamu",
+            "✅ Anti down 24/7",
+            "✅ Garansi selama masa aktif",
+            "✅ Bisa diperpanjang",
+            "✅ Link jadi lebih simple"
+        ]
+    },
     role: {
         title: "💎 ROLE PREMIUM",
         subtitle: "Upgrade status Anda di bot!",
