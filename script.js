@@ -35,7 +35,7 @@ const products = {
         items: [
             {
                 title: "📦 BASIC PACKAGE",
-                price: "Rp XX.000",
+                price: "Tanya Admin",
                 period: "",
                 features: [
                     "Script bot terbaru",
@@ -48,13 +48,12 @@ const products = {
             },
             {
                 title: "📦 PREMIUM PACKAGE",
-                price: "Rp XX.000",
+                price: "Tanya Admin",
                 period: "",
                 features: [
                     "Script original 100%",
                     "Tutorial instalasi lengkap",
                     "Bimbingan sampai jadi",
-                    "No encrypt (No enc)",
                     "Support 24 jam",
                     "Priority response"
                 ],
