@@ -260,7 +260,7 @@ const products = {
         items: [
             {
                 title: "📱 NOKOS INDO FRESH",
-                price: "Rp 7.000",
+                price: "Rp 8.500",
                 period: "per Nomor",
                 features: [
                     "Nomor Indonesia fresh",
