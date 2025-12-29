@@ -61,7 +61,7 @@ const products = {
       popular: true
     }
   ],
-  terms: [
+  info: [
     "➤ Pembeli wajib memiliki panel / server sendiri",
     "➤ Tidak menyediakan panel gratis",
     "➤ Wajib paham risiko penggunaan bot WhatsApp",
