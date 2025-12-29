@@ -30,45 +30,45 @@ const elements = {
 // ===== DATA PRODUK =====
 const products = {
     script: {
-  title: "🚀 SCRIPT BOT AZBRY-MD",
-  subtitle: "Untuk yang serius pakai bot, bukan sekadar coba-coba.",
-  items: [
-    {
-      title: "Akses Script",
-      price: "Chat Admin",
-      period: "",
-      features: [
-        "Source script Azbry-MD versi terbaru",
-        "Semua fitur aktif (tanpa dikunci)",
-        "Bebas deploy di panel / server sendiri",
-        "Cocok untuk yang sudah berpengalaman"
-      ],
-      note: "⚠️ Tidak termasuk bimbingan teknis",
-      popular: false
-    },
-    {
-      title: "Akses + Bimbingan",
-      price: "Chat Admin",
-      period: "",
-      features: [
-        "Source script original Azbry-MD",
-        "Panduan instalasi dari nol",
-        "Pendampingan sampai bot siap dipakai",
-        "Support aktif & prioritas respon",
-        "Versi Baileys Terbaru (Support Status Group)
-      ],
-      note: "⭐ Disarankan untuk pemula / non-teknis",
-      popular: true
-    }
-  ],
-  info: [
-    "➤ Pembeli wajib memiliki panel / server sendiri",
-    "➤ Tidak menyediakan panel gratis",
-    "➤ Wajib paham risiko penggunaan bot WhatsApp",
-    "➤ Risiko banned adalah hal normal",
-    "➤ Tidak ada refund dengan alasan apapun"
-  ]
-    },
+title: "🚀 PAKET SCRIPT AZBRY-MD",
+subtitle: "Harga lengkap chat admin untuk info detail",
+items: [
+{
+title: "📦 BASIC PACKAGE",
+price: "Tanya Admin",
+period: "",
+features: [
+"Script bot terbaru",
+"Tanpa bimbingan",
+"Tanpa tutor pemasangan",
+"Support terbatas"
+],
+note: "✅ Untuk yang sudah berpengalaman",
+popular: false
+},
+{
+title: "📦 PREMIUM PACKAGE",
+price: "Tanya Admin",
+period: "",
+features: [
+"Script original 100%",
+"Tutorial instalasi lengkap",
+"Bimbingan sampai jadi",
+"Support 24 jam",
+"Priority response"
+],
+note: "⭐ Rekomendasi untuk pemula!",
+popular: true
+}
+],
+terms: [
+"➤ WAJIB punya panel sendiri",
+"➤ TIDAK menyediakan panel gratis",
+"➤ Beli = Paham konsekuensi",
+"➤ Bot berisiko banned? ITU NORMAL!",
+"➤ No refund & no garansi"
+]
+},
     rental: {
         title: "💰 PAKET SEWA BOT",
         subtitle: "NOTE: 1 TRANSAKSI UNTUK 1 GRUP",
