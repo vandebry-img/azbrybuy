@@ -55,7 +55,7 @@ const products = {
         "Panduan instalasi dari nol",
         "Pendampingan sampai bot siap dipakai",
         "Support aktif & prioritas respon",
-        "Akses update fitur selanjutnya"
+        "Versi Baileys Terbaru (Support Status Group)
       ],
       note: "⭐ Disarankan untuk pemula / non-teknis",
       popular: true
