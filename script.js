@@ -31,42 +31,41 @@ const elements = {
 const products = {
     script: {
 title: "🚀 PAKET SCRIPT AZBRY-MD",
-subtitle: "Harga lengkap chat admin untuk info detail",
+subtitle: "Untuk yang serius pakai bot, bukan sekadar coba-coba.",
 items: [
 {
-title: "📦 BASIC PACKAGE",
-price: "Tanya Admin",
+title: "📦 Akses Script",
+price: "Chat Admin",
 period: "",
 features: [
-"Script bot terbaru",
-"Tanpa bimbingan",
-"Tanpa tutor pemasangan",
-"Support terbatas"
+        "Source script Azbry-MD versi terbaru",
+        "Semua fitur aktif (tanpa dikunci)",
+        "Bebas deploy di panel / server sendiri",
+        "Cocok untuk yang sudah berpengalaman"
 ],
-note: "✅ Untuk yang sudah berpengalaman",
+note: "⚠️ Tidak termasuk bimbingan teknis",
 popular: false
 },
 {
-title: "📦 PREMIUM PACKAGE",
-price: "Tanya Admin",
+title: "📦 Akses + Bimbingan",
+price: "Chat Admin",
 period: "",
 features: [
-"Script original 100%",
-"Tutorial instalasi lengkap",
-"Bimbingan sampai jadi",
-"Support 24 jam",
-"Priority response"
+"Source script original Azbry-MD",
+        "Panduan instalasi dari nol",
+        "Pendampingan sampai bot siap dipakai",
+        "Support aktif & prioritas respon"
 ],
-note: "⭐ Rekomendasi untuk pemula!",
+note: "⭐ Disarankan untuk pemula / non-teknis",
 popular: true
 }
 ],
 terms: [
-"➤ WAJIB punya panel sendiri",
-"➤ TIDAK menyediakan panel gratis",
-"➤ Beli = Paham konsekuensi",
-"➤ Bot berisiko banned? ITU NORMAL!",
-"➤ No refund & no garansi"
+    "➤ Pembeli wajib memiliki panel / server sendiri",
+    "➤ Tidak menyediakan panel gratis",
+    "➤ Wajib paham risiko penggunaan bot WhatsApp",
+    "➤ Risiko banned adalah hal normal",
+    "➤ Tidak ada refund dengan alasan apapun"
 ]
 },
     rental: {
@@ -203,7 +202,7 @@ terms: [
         items: [
             {
                 title: "📅 1 MINGGU",
-                price: "Rp 7.000",
+                price: "Rp 8.000",
                 period: "7 Hari",
                 features: [
                     "Unlimited Limit",
@@ -212,12 +211,12 @@ terms: [
                     "Auto Responder AI",
                     "Badge premium"
                 ],
-                note: "Untuk user yang sudah punya bot",
+                note: "Rekomendasi untuk sekedar testing",
                 popular: false
             },
             {
                 title: "📅 2 MINGGU",
-                price: "Rp 10.000",
+                price: "Rp 13.000",
                 period: "14 Hari",
                 features: [
                     "Semua fitur 1 minggu",
@@ -231,7 +230,7 @@ terms: [
             },
             {
                 title: "📅 1 BULAN",
-                price: "Rp 15.000",
+                price: "Rp 22.000",
                 period: "30 Hari",
                 features: [
                     "Semua fitur 2 minggu",
@@ -241,7 +240,7 @@ terms: [
                     "VIP badge & crown icon",
                     "Special mention di grup"
                 ],
-                note: "🔥 Paling hemat! Hanya 500/hari",
+                note: "🔥 Paling hemat!",
                 popular: false
             }
         ],
