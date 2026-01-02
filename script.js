@@ -259,7 +259,7 @@ terms: [
         items: [
             {
                 title: "📱 NOKOS INDO FRESH",
-                price: "Rp 8.500",
+                price: "Rp 7.000",
                 period: "per Nomor",
                 features: [
                     "Nomor Indonesia fresh",
