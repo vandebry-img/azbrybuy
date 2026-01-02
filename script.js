@@ -145,7 +145,7 @@ terms: [
         ]
     },
     domain: {
-        title: "🌐 DOMAIN (out of stock",
+        title: "🌐 DOMAIN (out of stock)",
         subtitle: "Upgrade web anda menggunakan domain simple!",
         items: [
             {
