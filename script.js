@@ -145,7 +145,7 @@ terms: [
         ]
     },
     domain: {
-        title: "🌐 DOMAIN (out of stock)",
+        title: "🌐 DOMAIN CUSTOM",
         subtitle: "Upgrade web anda menggunakan domain simple!",
         items: [
             {
@@ -175,7 +175,7 @@ terms: [
                 popular: true
             },
             {
-                title: ".biz.id",
+                title: ".biz.id (OUT OF STOCK)",
                 price: "Rp 15.000",
                 period: "1 Tahun",
                 features: [
