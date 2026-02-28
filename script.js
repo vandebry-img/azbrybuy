@@ -30,33 +30,25 @@ const elements = {
 // ===== DATA PRODUK =====
 const products = {
     script: {
-title: "🚀 PAKET SCRIPT AZBRY-MD",
-subtitle: "Untuk yang serius pakai bot, bukan sekadar coba-coba.",
+title: "Original Source Code",
+subtitle: "Smart and latest modern WhatsApp bot",
 items: [
-{
-title: "📦 Akses Script",
-price: "Chat Admin",
-period: "",
+  {
+    title: "Script Azbry-MD",
+    price: "Rp 30.000",
+    period: "1 Bulan Dukungan",
 features: [
-        "Source script Azbry-MD versi terbaru",
-        "Semua fitur aktif (tanpa dikunci)",
-        "Bebas deploy di panel / server sendiri",
-        "Cocok untuk yang sudah berpengalaman"
+  "Source script Azbry-MD versi terbaru",
+  "50+ plugin siap pakai (AI, Downloader, Tools, RPG)",
+  "Native Flow Button & Hybrid Menu",
+  "Downloader 12+ platform (TikTok, IG, YT, Spotify, dll)",
+  "AI Chat: Gemini, GPT, Claude, SORA & Image AI",
+  "Sistem Premium, Limit, XP & Store",
+  "Auto Sholat, Anti Spam, Auto Sticker & lebih banyak lagi",
+  "Bebas deploy di panel / server sendiri",
+  "Cocok untuk yang sudah berpengalaman",
 ],
-note: "⚠️ Tidak termasuk bimbingan teknis",
-popular: false
-},
-{
-title: "📦 Akses + Bimbingan",
-price: "Chat Admin",
-period: "",
-features: [
-"Source script original Azbry-MD",
-        "Panduan instalasi dari nol",
-        "Pendampingan sampai bot siap dipakai",
-        "Support aktif & prioritas respon"
-],
-note: "⭐ Disarankan untuk pemula / non-teknis",
+note: " 🔖 Pembelian sudah termasuk dukungan 1 bulan — jika bot mengalami error atau kendala teknis, akan langsung dibantu hingga selesai. Tidak termasuk update script.",
 popular: true
 }
 ],
@@ -202,7 +194,7 @@ terms: [
         items: [
             {
                 title: "📅 1 MINGGU",
-                price: "Rp 8.000",
+                price: "Rp 7.000",
                 period: "7 Hari",
                 features: [
                     "Unlimited Limit",
@@ -216,7 +208,7 @@ terms: [
             },
             {
                 title: "📅 2 MINGGU",
-                price: "Rp 13.000",
+                price: "Rp 14.000",
                 period: "14 Hari",
                 features: [
                     "Semua fitur 1 minggu",
@@ -230,7 +222,7 @@ terms: [
             },
             {
                 title: "📅 1 BULAN",
-                price: "Rp 22.000",
+                price: "Rp 25.000",
                 period: "30 Hari",
                 features: [
                     "Semua fitur 2 minggu",
@@ -268,7 +260,7 @@ terms: [
                     "Garansi kode otp tidak masuk (Awal Login)",
                     "Fast proses",
                 ],
-                note: "🔥 Stok selalu tersedia!",
+                note: "🔥 Stok terbatas!",
                 popular: true
             }
         ],
