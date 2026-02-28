@@ -36,7 +36,7 @@ items: [
   {
     title: "Script Azbry-MD",
     price: "Rp 30.000",
-    period: "1 Bulan Dukungan",
+    period: "",
 features: [
   "Source script Azbry-MD versi terbaru",
   "50+ plugin siap pakai (AI, Downloader, Tools, RPG)",
