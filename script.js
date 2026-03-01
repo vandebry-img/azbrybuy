@@ -39,7 +39,7 @@ items: [
     period: "",
 features: [
   "Source script Azbry-MD versi terbaru",
-  "50+ plugin siap pakai (AI, Downloader, Tools, RPG)",
+  "400+ plugin siap pakai (AI, Downloader, Tools, RPG)",
   "Native Flow Button & Hybrid Menu",
   "Downloader 12+ platform (TikTok, IG, YT, Spotify, dll)",
   "AI Chat: Gemini, GPT, Claude, SORA & Image AI",
