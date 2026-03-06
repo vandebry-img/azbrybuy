@@ -28,38 +28,61 @@ const elements = {
 };
 
 // ===== DATA PRODUK =====
+
 const products = {
-    script: {
-title: "Original Source Code",
-subtitle: "Smart and latest modern WhatsApp bot",
-items: [
-  {
-    title: "Script Azbry-MD",
-    price: "Rp 30.000",
-    period: "",
-features: [
-  "Source script Azbry-MD versi terbaru",
-  "400+ plugin siap pakai (AI, Downloader, Tools, RPG)",
-  "Native Flow Button & Hybrid Menu",
-  "Downloader 12+ platform (TikTok, IG, YT, Spotify, dll)",
-  "AI Chat: Gemini, GPT, Claude, SORA & Image AI",
-  "Sistem Premium, Limit, XP & Store",
-  "Auto Sholat, Anti Spam, Auto Sticker & lebih banyak lagi",
-  "Bebas deploy di panel / server sendiri",
-  "Cocok untuk yang sudah berpengalaman",
-],
-note: " 🔖 Pembelian sudah termasuk dukungan 1 bulan — jika bot mengalami error atau kendala teknis, akan langsung dibantu hingga selesai. Tidak termasuk update script.",
-popular: true
-}
-],
-terms: [
-    "➤ Pembeli wajib memiliki panel / server sendiri",
-    "➤ Tidak menyediakan panel gratis",
-    "➤ Wajib paham risiko penggunaan bot WhatsApp",
-    "➤ Risiko banned adalah hal normal",
-    "➤ Tidak ada refund dengan alasan apapun"
-]
-},
+  script: {
+    title: "Original Source Code",
+    subtitle: "Smart and latest modern WhatsApp bot",
+    items: [
+      {
+        title: "Script Azbry-MD",
+        price: "Rp 30.000",
+        period: "",
+        features: [
+          "Source script Azbry-MD versi terbaru",
+          "400+ plugin siap pakai (AI, Downloader, Tools, RPG)",
+          "Native Flow Button & Hybrid Menu",
+          "Downloader 12+ platform (TikTok, IG, YT, Spotify, dll)",
+          "AI Chat: Gemini, GPT, Claude, SORA & Image AI",
+          "Sistem Premium, Limit, XP & Store",
+          "Auto Sholat, Anti Spam, Auto Sticker & lebih banyak lagi",
+          "Bebas deploy di panel / server sendiri",
+          "Cocok untuk yang sudah berpengalaman"
+        ],
+        note: "🔖 Pembelian sudah termasuk dukungan 1 bulan — jika bot mengalami error atau kendala teknis, akan langsung dibantu hingga selesai. Tidak termasuk update script.",
+        popular: true
+      },
+      {
+        title: "Script Azbry-MD + Panel 1 Bulan",
+        price: "Rp 35.000",
+        period: "",
+        features: [
+          "Source script Azbry-MD versi terbaru",
+          "400+ plugin siap pakai (AI, Downloader, Tools, RPG)",
+          "Native Flow Button & Hybrid Menu",
+          "Downloader 12+ platform (TikTok, IG, YT, Spotify, dll)",
+          "AI Chat: Gemini, GPT, Claude, SORA & Image AI",
+          "Sistem Premium, Limit, XP & Store",
+          "Auto Sholat, Anti Spam, Auto Sticker & banyak fitur lainnya",
+          "Gratis panel selama 1 bulan",
+          "Panel sudah cukup untuk menjalankan script Azbry-MD dengan stabil",
+          "Tidak perlu setup server sendiri untuk pemakaian awal",
+          "Cocok untuk yang ingin langsung menjalankan bot tanpa ribet konfigurasi",
+          "Setelah panel aktif, bot bisa langsung dijalankan",
+          "Bebas pindah deploy ke panel / server sendiri kapan saja"
+        ],
+        note: "🔖 Pembelian sudah termasuk dukungan 1 bulan. Jika bot mengalami error atau kendala teknis akan dibantu sampai selesai. Panel gratis hanya bonus penggunaan selama 1 bulan dan mengikuti syarat & ketentuan panel yang berlaku. Tidak termasuk update script.",
+        popular: true
+      }
+    ],
+    terms: [
+      "➤ Pembeli wajib memiliki panel / server sendiri",
+      "➤ Tidak menyediakan panel gratis",
+      "➤ Wajib paham risiko penggunaan bot WhatsApp",
+      "➤ Risiko banned adalah hal normal",
+      "➤ Tidak ada refund dengan alasan apapun"
+    ]
+  },
     rental: {
         title: "💰 PAKET SEWA BOT",
         subtitle: "NOTE: 1 TRANSAKSI UNTUK 1 GRUP",
