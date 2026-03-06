@@ -50,7 +50,7 @@ const products = {
           "Cocok untuk yang sudah berpengalaman"
         ],
         note: "🔖 Pembelian sudah termasuk dukungan 1 bulan — jika bot mengalami error atau kendala teknis, akan langsung dibantu hingga selesai. Tidak termasuk update script.",
-        popular: true
+        popular: false
       },
       {
         title: "Script Azbry-MD + Panel 1 Bulan",
