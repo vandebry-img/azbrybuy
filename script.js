@@ -50,11 +50,11 @@ const products = {
           "Cocok untuk yang sudah berpengalaman"
         ],
         note: "🔖 Pembelian sudah termasuk dukungan 1 bulan — jika bot mengalami error atau kendala teknis, akan langsung dibantu hingga selesai. Tidak termasuk update script.",
-        popular: false
+        popular: true
       },
       {
         title: "Script Azbry-MD + Panel 1 Bulan",
-        price: "Rp 35.000",
+        price: "STOCK HABIS",
         period: "",
         features: [
           "Source script Azbry-MD versi terbaru",
@@ -72,7 +72,7 @@ const products = {
           "Bebas pindah deploy ke panel / server sendiri kapan saja"
         ],
         note: "🔖 Pembelian sudah termasuk dukungan 1 bulan. Jika bot mengalami error atau kendala teknis akan dibantu sampai selesai. Panel gratis hanya bonus penggunaan selama 1 bulan dan mengikuti syarat & ketentuan panel yang berlaku. Tidak termasuk update script.",
-        popular: true
+        popular: false
       }
     ],
     terms: [
