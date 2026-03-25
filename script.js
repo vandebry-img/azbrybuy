@@ -54,7 +54,7 @@ const products = {
       },
       {
         title: "Script Azbry-MD + Panel 1 Bulan",
-        price: "STOCK HABIS",
+        price: "Rp 35.000",
         period: "",
         features: [
           "Source script Azbry-MD versi terbaru",
