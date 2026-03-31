@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Azbry Store — Bot & Digital Products</title>
+
+  <meta property="og:title" content="Azbry Store">
+  <meta property="og:description" content="Script Bot, Sewa Bot, Role Premium, Nokos Indo & Domain. Aman, cepat, terpercaya.">
+  <meta property="og:image" content="https://api.azbry.com/api/sswebstore.jpg">
+  <meta property="og:url" content="https://azbry.com">
+  <meta property="og:type" content="website">
+  <meta name="description" content="Script WhatsApp Bot Azbry-MD, Sewa Bot, Role Premium, Nokos Indo. Murah, aman, proses cepat.">
+  <meta name="keywords" content="whatsapp bot, azbry md, script bot, sewa bot, role premium, nokos indo, domain murah">
+  <meta name="author" content="FebryWesker">
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+
+  <!-- Loading -->
+  <div id="loading" class="s-loading">
+    <div class="s-loading-inner">
+      <img src="https://cdn.jsdelivr.net/gh/vandebry-img/img@main/pp.png" alt="Logo" class="s-loading-logo">
+      <div class="s-loading-bar"><div class="s-loading-fill" id="loadingFill"></div></div>
+      <p class="s-loading-text">Memuat produk...</p>
+    </div>
+  </div>
+
+  <!-- Scroll progress -->
+  <div class="s-scroll-progress" id="scrollProgress"></div>
+
+  <!-- Orbs -->
+  <div class="s-orb-container" aria-hidden="true">
+    <div class="s-orb s-orb-1"></div>
+    <div class="s-orb s-orb-2"></div>
+    <div class="s-orb s-orb-3"></div>
+  </div>
+
+  <!-- ── HEADER ── -->
+  <header class="s-header" id="header">
+    <div class="s-header-inner">
+      <a href="#" class="s-logo">
+        <img src="https://cdn.jsdelivr.net/gh/vandebry-img/img@main/pp.png" alt="Logo" class="s-logo-img">
+        <span>Azbry<span class="s-logo-hi">MD</span></span>
+      </a>
+
+      <nav class="s-nav" id="mainNav">
+        <a href="#products" class="s-nav-link active">Produk</a>
+        <a href="#projects" class="s-nav-link">Projects</a>
+        <a href="#contact" class="s-nav-link">Kontak</a>
+      </nav>
+
+      <div class="s-header-right">
+        <div class="s-clock"><i class="far fa-clock"></i><span id="clock">00:00</span></div>
+        <button class="s-hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile nav -->
+  <div class="s-mobile-nav" id="mobileNav">
+    <a href="#products" class="s-mobile-link"><i class="fas fa-box"></i> Produk</a>
+    <a href="#projects" class="s-mobile-link"><i class="fas fa-code"></i> Projects</a>
+    <a href="#contact" class="s-mobile-link"><i class="fas fa-phone"></i> Kontak</a>
+  </div>
+
+  <!-- ══════════════════════════════════
+       HERO — minimal, langsung ke produk
+       ══════════════════════════════════ -->
+  <section id="home" class="s-hero">
+    <div class="s-container">
+      <div class="s-hero-badge">
+        <span class="s-badge-dot"></span>
+        <span>Toko Online · Aman & Terpercaya</span>
+      </div>
+      <h1 class="s-hero-title">
+        Azbry<span class="s-grad">MD</span> Store
+      </h1>
+      <p class="s-hero-sub">Script Bot · Sewa Bot · Role Premium · Nokos · Domain</p>
+
+      <!-- Stats -->
+      <div class="s-stats">
+        <div class="s-stat">
+          <span class="s-stat-val" data-count="500">0</span>
+          <span class="s-stat-label">Users</span>
+        </div>
+        <div class="s-stat-div"></div>
+        <div class="s-stat">
+          <span class="s-stat-val">4.9</span>
+          <span class="s-stat-label">Rating</span>
+        </div>
+        <div class="s-stat-div"></div>
+        <div class="s-stat">
+          <span class="s-stat-val">24/7</span>
+          <span class="s-stat-label">Support</span>
+        </div>
+      </div>
+
+      <!-- Turnstile -->
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAACnmUpBkDGDYl1B8" style="margin-top:12px;"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       PRODUCTS — utama, langsung tampil
+       ══════════════════════════════════ -->
+  <section id="products" class="s-section">
+    <div class="s-container">
+
+      <!-- Category tabs -->
+      <div class="s-tabs" id="tabs">
+        <button class="s-tab active" data-cat="script">
+          <i class="fas fa-code"></i> Script Bot
+        </button>
+        <button class="s-tab" data-cat="rental">
+          <i class="fas fa-server"></i> Sewa Bot
+        </button>
+        <button class="s-tab" data-cat="role">
+          <i class="fas fa-crown"></i> Role Premium
+        </button>
+        <button class="s-tab" data-cat="nokos">
+          <i class="fas fa-sim-card"></i> Nokos
+        </button>
+        <button class="s-tab" data-cat="domain">
+          <i class="fas fa-globe"></i> Domain
+        </button>
+      </div>
+
+      <!-- Product area -->
+      <div id="productArea"></div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       PROJECTS — dari porto feb.azbry.com
+       ══════════════════════════════════ -->
+  <section id="projects" class="s-section">
+    <div class="s-container">
+      <div class="s-section-label"><i class="fas fa-code"></i> Projects by FebryWesker</div>
+      <h2 class="s-section-title">Ekosistem <span class="s-grad">Azbry</span></h2>
+
+      <div class="s-projects-grid">
+
+        <div class="s-project-card" onclick="window.open('https://api.azbry.xyz','_blank')">
+          <div class="s-project-img-wrap">
+            <img src="https://api.azbry.com/api/sswebapi.jpg" alt="Azbry REST API"
+                 onerror="this.parentElement.style.background='linear-gradient(135deg,#7c3aed,#2563eb)'">
+            <div class="s-project-overlay"></div>
+            <div class="s-project-ext"><i class="fas fa-external-link-alt"></i></div>
+          </div>
+          <div class="s-project-body">
+            <div class="s-project-title">Azbry REST API</div>
+            <p class="s-project-desc">Public REST API service — 44+ endpoint gratis, no key required. Powering bots & apps.</p>
+            <div class="s-project-tags">
+              <span class="s-ptag s-ptag-purple">Node.js</span>
+              <span class="s-ptag s-ptag-blue">TypeScript</span>
+              <span class="s-ptag s-ptag-green">REST API</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-project-card" onclick="window.open('https://azbry.com','_blank')">
+          <div class="s-project-img-wrap">
+            <img src="https://api.azbry.com/api/sswebstore.jpg" alt="Azbry Marketplace"
+                 onerror="this.parentElement.style.background='linear-gradient(135deg,#ec4899,#8b5cf6)'">
+            <div class="s-project-overlay"></div>
+            <div class="s-project-ext"><i class="fas fa-external-link-alt"></i></div>
+          </div>
+          <div class="s-project-body">
+            <div class="s-project-title">Azbry Marketplace</div>
+            <p class="s-project-desc">Central marketplace untuk bot services, digital products & developer tools.</p>
+            <div class="s-project-tags">
+              <span class="s-ptag s-ptag-pink">Marketplace</span>
+              <span class="s-ptag s-ptag-cyan">Next.js</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-project-card" onclick="window.open('https://chat.whatsapp.com/CYa5CRl8K1lAK4NNCYmHJe','_blank')">
+          <div class="s-project-img-wrap">
+            <img src="https://api.azbry.com/api/menuazbry.jpg" alt="Azbry-MD"
+                 onerror="this.parentElement.style.background='linear-gradient(135deg,#059669,#0891b2)'">
+            <div class="s-project-overlay"></div>
+            <div class="s-project-ext"><i class="fas fa-external-link-alt"></i></div>
+          </div>
+          <div class="s-project-body">
+            <div class="s-project-title">Azbry-MD</div>
+            <p class="s-project-desc">Modular WhatsApp bot di Baileys MD. Plugin system, scalable, production-ready.</p>
+            <div class="s-project-tags">
+              <span class="s-ptag s-ptag-green">Node.js</span>
+              <span class="s-ptag s-ptag-green">Baileys</span>
+              <span class="s-ptag s-ptag-purple">WhatsApp</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-project-card" onclick="window.open('https://github.com/vandebry10-star','_blank')">
+          <div class="s-project-img-wrap">
+            <img src="https://api.azbry.com/api/wesker.jpg" alt="Wesker-MD"
+                 onerror="this.parentElement.style.background='linear-gradient(135deg,#1e1b4b,#312e81)'">
+            <div class="s-project-overlay"></div>
+            <div class="s-project-ext"><i class="fas fa-external-link-alt"></i></div>
+          </div>
+          <div class="s-project-body">
+            <div class="s-project-title">Wesker-MD</div>
+            <p class="s-project-desc">Advanced WhatsApp bot framework — Native Flow system, object-based plugins, strict validation.</p>
+            <div class="s-project-tags">
+              <span class="s-ptag s-ptag-purple">Framework</span>
+              <span class="s-ptag s-ptag-blue">Native Flow</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-project-card" onclick="window.open('https://feb.azbry.com','_blank')">
+          <div class="s-project-img-wrap">
+            <img src="https://api.azbry.com/api/jadibot.jpg" alt="Jadibot"
+                 onerror="this.parentElement.style.background='linear-gradient(135deg,#374151,#1f2937)'">
+            <div class="s-project-overlay"></div>
+            <div class="s-project-ext"><i class="fas fa-external-link-alt"></i></div>
+          </div>
+          <div class="s-project-body">
+            <div class="s-project-title">Jadibot WhatsApp</div>
+            <p class="s-project-desc">Multi-session WhatsApp bot service. Sedang dalam maintenance.</p>
+            <div class="s-project-tags">
+              <span class="s-ptag s-ptag-orange">OFFLINE</span>
+              <span class="s-ptag s-ptag-blue">Multi Device</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-project-card" onclick="window.open('https://feb.azbry.com','_blank')">
+          <div class="s-project-img-wrap" style="background:linear-gradient(135deg,#0a0518,#160028);display:flex;align-items:center;justify-content:center;">
+            <i class="fas fa-user" style="font-size:48px;color:rgba(167,139,250,0.4);"></i>
+            <div class="s-project-overlay"></div>
+            <div class="s-project-ext"><i class="fas fa-external-link-alt"></i></div>
+          </div>
+          <div class="s-project-body">
+            <div class="s-project-title">Portfolio FebryWesker</div>
+            <p class="s-project-desc">Portfolio developer — web, bot, REST API. Glassmorphism design. Hosted di feb.azbry.com</p>
+            <div class="s-project-tags">
+              <span class="s-ptag s-ptag-purple">Portfolio</span>
+              <span class="s-ptag s-ptag-pink">Glass UI</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;margin-top:24px;">
+        <a href="https://github.com/vandebry10-star" target="_blank" class="s-btn s-btn-ghost">
+          <i class="fab fa-github"></i> View All on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       CONTACT
+       ══════════════════════════════════ -->
+  <section id="contact" class="s-section">
+    <div class="s-container">
+      <div class="s-section-label"><i class="fas fa-phone"></i> Hubungi Admin</div>
+      <h2 class="s-section-title">Siap <span class="s-grad">Membantu</span></h2>
+
+      <div class="s-contact-card">
+        <div class="s-contact-wa">
+          <div class="s-wa-icon"><i class="fab fa-whatsapp"></i></div>
+          <div>
+            <div class="s-contact-name">WhatsApp Admin</div>
+            <div class="s-contact-sub">Konsultasi & pemesanan langsung</div>
+          </div>
+        </div>
+
+        <a href="https://wa.me/6285189988271?text=Halo%20admin%20Azbry-MD" target="_blank"
+           class="s-btn s-btn-wa s-btn-full" id="whatsapp-btn">
+          <i class="fab fa-whatsapp"></i> Chat Sekarang
+        </a>
+
+        <div class="s-contact-info-grid">
+          <div class="s-contact-info-item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <div class="s-ci-label">Jam Operasional</div>
+              <div class="s-ci-val">08:00 – 22:00 WIB</div>
+            </div>
+          </div>
+          <div class="s-contact-info-item">
+            <i class="fas fa-credit-card"></i>
+            <div>
+              <div class="s-ci-label">Pembayaran</div>
+              <div class="s-ci-val">Dana · OVO · GoPay · QRIS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="s-footer">
+    <div class="s-container">
+      <div class="s-footer-top">
+        <div class="s-footer-brand">
+          <img src="https://cdn.jsdelivr.net/gh/vandebry-img/img@main/pp.png" alt="Logo" class="s-footer-logo">
+          <div>
+            <div class="s-footer-name">Azbry<span class="s-logo-hi">MD</span></div>
+            <div class="s-footer-tagline">by FebryWesker</div>
+          </div>
+        </div>
+        <div class="s-footer-links">
+          <a href="#products" class="s-footer-link">Script Bot</a>
+          <a href="#products" class="s-footer-link">Sewa Bot</a>
+          <a href="#products" class="s-footer-link">Role Premium</a>
+          <a href="#projects" class="s-footer-link">Projects</a>
+          <a href="https://feb.azbry.com" target="_blank" class="s-footer-link">Portfolio</a>
+        </div>
+        <div class="s-footer-info">
+          <p><i class="fas fa-shield-alt"></i> Aman & Terpercaya</p>
+          <p><i class="fas fa-headset"></i> Support 24/7</p>
+          <p><i class="fas fa-bolt"></i> Fast Delivery</p>
+        </div>
+      </div>
+      <div class="s-footer-bottom">
+        <span>© 2026 Azbry-MD · FebryWesker</span>
+        <span class="s-footer-motto">ideas don't build themselves.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating buttons -->
+  <button id="themeToggle" class="s-theme-btn">
+    <i class="fas fa-moon"></i>
+    <i class="fas fa-sun"></i>
+  </button>
+  <button id="backToTop" class="s-back-top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Toast -->
+  <div id="toast" class="s-toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMsg">OK</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
