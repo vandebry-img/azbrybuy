@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback | Azbry-API</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta property="og:title" content="Feedback | Azbry-API">
+<meta property="og:description" content="Report bug atau request fitur baru di Azbry-API.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://api.azbry.com/feedback">
+<meta property="og:image" content="https://api.azbry.com/api/feedback.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body class="docs-page">
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="/docs" class="nav-back"><i class="fa-solid fa-arrow-left" style="font-size:13px;"></i></a>
+    <span class="nav-brand glitch" data-text="AZBRY-API">BACK TO DOCS</span>
+    <div class="nav-ticker" style="flex:1;min-width:0;margin:0 8px;">
+      <span style="color:var(--primary);font-size:8px;font-weight:700;padding:0 8px;flex-shrink:0;opacity:0.6;">▶</span>
+      <div class="nav-ticker-text">FEEDBACK &nbsp;·&nbsp; REPORT BUG &nbsp;·&nbsp; REQUEST FITUR &nbsp;·&nbsp; AZBRY-API &nbsp;·&nbsp; FEEDBACK &nbsp;·&nbsp; REPORT BUG &nbsp;·&nbsp; REQUEST FITUR &nbsp;·&nbsp; AZBRY-API &nbsp;·&nbsp;</div>
+    </div>
+    <button class="nav-icon-btn" id="themeBtn" title="Toggle theme">
+      <i class="fa-solid fa-circle-half-stroke"></i>
+    </button>
+  </nav>
+
+  <main class="main" style="max-width:560px; padding-top:28px;">
+
+    <!-- Header -->
+    <div style="text-align:center; padding:0 0 8px; animation:fadeInUp 0.4s ease-out both;">
+      <div style="font-size:36px; margin-bottom:12px; line-height:1;">
+        <i class="fa-solid fa-comment-dots" style="background:var(--grad-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"></i>
+      </div>
+      <div style="font-family:'Syne',sans-serif; font-weight:800; font-size:22px; letter-spacing:0.1em; text-transform:uppercase; background:var(--grad-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px;">Feedback</div>
+      <div style="font-size:11px; color:var(--text-3); letter-spacing:0.04em; line-height:1.7; max-width:320px; margin:0 auto;">
+        Nemu bug atau punya ide fitur? segera laporkan melalui feedback ya!
+      </div>
+    </div>
+
+    <!-- Type selector -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; animation:fadeInUp 0.4s ease-out 0.07s both;">
+
+      <button class="type-btn active" data-type="bug" onclick="selectType(this)">
+        <div class="type-btn-icon bug-icon">
+          <i class="fa-solid fa-bug"></i>
+        </div>
+        <div class="type-btn-label">Report Bug</div>
+        <div class="type-btn-desc">Ada endpoint error,<br>hasil salah, atau down?</div>
+      </button>
+
+      <button class="type-btn" data-type="request" onclick="selectType(this)">
+        <div class="type-btn-icon req-icon">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div class="type-btn-label">Request Fitur</div>
+        <div class="type-btn-desc">Mau endpoint baru<br>atau ide improvement?</div>
+      </button>
+
+    </div>
+
+    <!-- Form card -->
+    <div class="api-card" id="form-card" style="animation:fadeInUp 0.4s ease-out 0.13s both;">
+      <div style="padding:18px; display:flex; flex-direction:column; gap:16px;">
+
+        <!-- BUG FIELDS -->
+        <div id="bug-fields">
+
+          <!-- Endpoint -->
+          <div class="field-wrap">
+            <div class="field-label">
+              <span class="field-dot"></span>
+              <span>Endpoint yang Bermasalah</span>
+              <span class="param-req req" style="margin-left:auto;">REQ</span>
+            </div>
+            <div class="input-icon-wrap">
+              <i class="fa-solid fa-code input-icon"></i>
+              <input class="param-input" id="inp-endpoint" type="text" placeholder="/api/maker/ttp" autocomplete="off" style="padding-left:34px;">
+            </div>
+            <div class="field-hint">Contoh: /api/tools/removebg atau /api/ai/claude</div>
+          </div>
+
+          <!-- Detail bug -->
+          <div class="field-wrap" style="margin-top:14px;">
+            <div class="field-label">
+              <span class="field-dot"></span>
+              <span>Deskripsi Bug</span>
+              <span class="param-req req" style="margin-left:auto;">REQ</span>
+            </div>
+            <textarea class="param-input param-textarea" id="inp-bug-detail" placeholder="Ceritain bug-nya: apa yang terjadi, error message-nya apa, gimana cara reproducenya..." style="min-height:100px;"></textarea>
+            <div class="field-hint">Makin detail makin gampang difix</div>
+          </div>
+
+          <!-- Nama bug -->
+          <div class="field-wrap" style="margin-top:14px;">
+            <div class="field-label">
+              <span class="field-dot"></span>
+              <span>Nama (opsional)</span>
+              <span class="param-req opt" style="margin-left:auto;">OPT</span>
+            </div>
+            <div class="input-icon-wrap">
+              <i class="fa-solid fa-user input-icon"></i>
+              <input class="param-input" id="inp-bug-name" type="text" placeholder="Username / no WA (kalau mau di-follow up)" autocomplete="off" style="padding-left:34px;">
+            </div>
+          </div>
+
+        </div>
+
+        <!-- REQUEST FIELDS -->
+        <div id="request-fields" style="display:none;">
+
+          <!-- Request detail -->
+          <div class="field-wrap">
+            <div class="field-label">
+              <span class="field-dot"></span>
+              <span>Ide / Request</span>
+              <span class="param-req req" style="margin-left:auto;">REQ</span>
+            </div>
+            <textarea class="param-input param-textarea" id="inp-req-detail" placeholder="Jelasin ide atau fitur yang lo mau: endpoint apa, fungsinya buat apa, contoh use case-nya..." style="min-height:100px;"></textarea>
+            <div class="field-hint">Ide bagus banget? langsung diprioritaskan !</div>
+          </div>
+
+          <!-- Nama request -->
+          <div class="field-wrap" style="margin-top:14px;">
+            <div class="field-label">
+              <span class="field-dot"></span>
+              <span>Nama (opsional)</span>
+              <span class="param-req opt" style="margin-left:auto;">OPT</span>
+            </div>
+            <div class="input-icon-wrap">
+              <i class="fa-solid fa-user input-icon"></i>
+              <input class="param-input" id="inp-req-name" type="text" placeholder="Username / no WA (opsional)" autocomplete="off" style="padding-left:34px;">
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Submit -->
+        <button class="btn-execute" id="btn-submit" onclick="submitFeedback()" style="margin-top:2px; gap:8px; display:flex; align-items:center; justify-content:center;">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>SEND FEEDBACK</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="result-card" style="display:none;">
+      <div class="api-card">
+        <div class="res-header">
+          <div class="res-status-wrap">
+            <div class="res-dot" id="res-dot"></div>
+            <span class="res-status" id="res-status-text">—</span>
+          </div>
+          <span class="res-time" id="res-time"></span>
+        </div>
+        <div class="res-output" id="res-output" style="font-size:11px;"></div>
+      </div>
+    </div>
+
+    <!-- Info strip -->
+    <div class="status-card" style="animation:fadeInUp 0.4s ease-out 0.2s both;">
+      <div class="status-card-title">
+        <span><i class="fa-solid fa-circle-info" style="margin-right:6px;color:var(--info);"></i>INFO</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Sent to</span>
+        <span class="status-value" style="color:var(--primary);font-size:10px;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ee8ebecfcf7f9ebfde5ebfcceeff4ecfcf7a0ede1e3">[email&#160;protected]</a></span>
+      </div>
+      <hr class="status-divider">
+      <div class="status-row">
+        <span class="status-label">Review</span>
+        <span class="status-value" style="color:var(--text-2);font-size:10px;">Kalo gk sibuk langsung gwjh baca kok</span>
+      </div>
+      <hr class="status-divider">
+      <div class="status-row">
+        <span class="status-label">Thanks</span>
+        <span class="status-value" style="color:var(--text-2);font-size:10px;">Terima Kasih atas waktu yang telah diluangkan ✨</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="app-toast">
+    <i id="app-toast-icon" class="fa-solid fa-check-circle" style="color:var(--success);"></i>
+    <span id="app-toast-text">OK</span>
+  </div>
+
+  <style>
+    /* ── Layout override for narrow centered page ── */
+    @media (min-width:1024px) {
+      .main { grid-template-columns: 1fr !important; }
+    }
+
+    /* ── Type buttons ── */
+    .type-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 16px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      color: var(--text-3);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+      backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
+    }
+    .type-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .type-btn.bug-active::before  { background: rgba(244,63,94,0.04); opacity:1; }
+    .type-btn.req-active::before  { background: rgba(139,92,246,0.05); opacity:1; }
+    .type-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+
+    .type-btn-icon {
+      width: 38px; height: 38px;
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+    .bug-icon  { background: rgba(244,63,94,0.12); color: #f43f5e; border: 1px solid rgba(244,63,94,0.2); }
+    .req-icon  { background: rgba(139,92,246,0.12); color: var(--primary); border: 1px solid rgba(139,92,246,0.2); }
+
+    .type-btn-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+    .type-btn-desc {
+      font-size: 9px;
+      color: var(--text-3);
+      line-height: 1.6;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Active states */
+    .type-btn[data-type="bug"].active {
+      border-color: rgba(244,63,94,0.5);
+      box-shadow: 0 0 0 1px rgba(244,63,94,0.2), 0 8px 24px rgba(244,63,94,0.1);
+      background: rgba(244,63,94,0.06);
+    }
+    .type-btn[data-type="bug"].active .type-btn-label { color: #f43f5e; }
+    .type-btn[data-type="bug"].active .bug-icon { background: rgba(244,63,94,0.2); box-shadow: 0 0 12px rgba(244,63,94,0.3); }
+
+    .type-btn[data-type="request"].active {
+      border-color: rgba(139,92,246,0.5);
+      box-shadow: 0 0 0 1px rgba(139,92,246,0.2), 0 8px 24px rgba(139,92,246,0.12);
+      background: rgba(139,92,246,0.07);
+    }
+    .type-btn[data-type="request"].active .type-btn-label { color: var(--primary); }
+    .type-btn[data-type="request"].active .req-icon { background: rgba(139,92,246,0.2); box-shadow: 0 0 12px rgba(139,92,246,0.3); }
+
+    /* Selected checkmark */
+    .type-btn.active::after {
+      content: '\f058';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 12px; right: 12px;
+      font-size: 13px;
+    }
+    .type-btn[data-type="bug"].active::after    { color: #f43f5e; }
+    .type-btn[data-type="request"].active::after { color: var(--primary); }
+
+    /* ── Field styling ── */
+    .field-wrap { display: flex; flex-direction: column; }
+    .field-label {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 9px; font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      margin-bottom: 7px;
+      font-family: 'Syne', sans-serif;
+    }
+    .field-dot {
+      width: 4px; height: 4px;
+      background: var(--primary);
+      border-radius: 1px; flex-shrink: 0;
+    }
+    .field-hint {
+      font-size: 9px;
+      color: var(--text-4);
+      margin-top: 5px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+    }
+    .input-icon-wrap { position: relative; }
+    .input-icon {
+      position: absolute; left: 11px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-4); font-size: 11px;
+      pointer-events: none;
+    }
+  </style>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    let selectedType = 'bug';
+    let toastTimeout = null;
+
+    function selectType(el) {
+      document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      selectedType = el.dataset.type;
+      document.getElementById('bug-fields').style.display     = selectedType === 'bug'     ? 'block' : 'none';
+      document.getElementById('request-fields').style.display = selectedType === 'request' ? 'block' : 'none';
+      // hide result on switch
+      document.getElementById('result-card').style.display = 'none';
+    }
+
+    async function submitFeedback() {
+      let payload = { type: selectedType };
+      let valid   = true;
+
+      if (selectedType === 'bug') {
+        const endpoint = document.getElementById('inp-endpoint').value.trim();
+        const detail   = document.getElementById('inp-bug-detail').value.trim();
+        const name     = document.getElementById('inp-bug-name').value.trim();
+        if (!endpoint) { showToast('Endpoint wajib diisi dulu ya!', 'error'); return; }
+        if (!detail)   { showToast('Deskripsi bug-nya belum diisi nih', 'error'); return; }
+        payload = { ...payload, endpoint, detail, name };
+      } else {
+        const detail = document.getElementById('inp-req-detail').value.trim();
+        const name   = document.getElementById('inp-req-name').value.trim();
+        if (!detail) { showToast('Ceritain dulu request-nya ya!', 'error'); return; }
+        payload = { ...payload, detail, name };
+      }
+
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>MENGIRIM...</span>';
+
+      const start = Date.now();
+
+      try {
+        const res     = await fetch('/api/feedback', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload)
+        });
+        const json    = await res.json();
+        const elapsed = Date.now() - start;
+
+        showResult(res.ok, res.status, json, elapsed);
+
+        if (res.ok) {
+          showToast('Makasih feedbacknya!', 'success');
+          clearForm();
+        } else {
+          showToast('Gagal kirim. coba lagi ya', 'error');
+        }
+
+      } catch(e) {
+        const elapsed = Date.now() - start;
+        showResult(false, 0, { status: false, message: e.message }, elapsed);
+        showToast('Koneksi gagal: ' + e.message, 'error');
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i><span>KIRIM FEEDBACK</span>';
+    }
+
+    function clearForm() {
+      ['inp-endpoint','inp-bug-detail','inp-bug-name','inp-req-detail','inp-req-name']
+        .forEach(id => { var el = document.getElementById(id); if(el) el.value = ''; });
+    }
+
+    function showResult(ok, status, json, elapsed) {
+      const card = document.getElementById('result-card');
+      card.style.display = 'block';
+      card.style.animation = 'none';
+      void card.offsetWidth;
+      card.style.animation = 'fadeInUp 0.35s ease-out both';
+
+      document.getElementById('res-dot').style.background = ok ? 'var(--success)' : 'var(--error)';
+      const st = document.getElementById('res-status-text');
+      st.textContent = status ? status + (ok ? ' OK' : ' Error') : 'Error';
+      st.style.color = ok ? 'var(--success)' : 'var(--error)';
+      document.getElementById('res-time').textContent  = elapsed + 'ms';
+      document.getElementById('res-output').innerHTML  = syntaxHL(JSON.stringify(json, null, 2));
+    }
+
+    function syntaxHL(str) {
+      return str
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/"([^"]+)":/g, '<span class="json-key">"$1"</span>:')
+        .replace(/: "([^"]*)"/g,':<span class="json-string"> "$1"</span>')
+        .replace(/: (\d+\.?\d*)/g,':<span class="json-number"> $1</span>')
+        .replace(/: (true|false)/g,':<span class="json-boolean"> $1</span>')
+        .replace(/: null/g,': <span class="json-null">null</span>');
+    }
+
+    function showToast(msg, type) {
+      const toast = document.getElementById('app-toast');
+      const icon  = document.getElementById('app-toast-icon');
+      const text  = document.getElementById('app-toast-text');
+      icon.className = 'fa-solid ' + (type === 'error' ? 'fa-circle-exclamation' : 'fa-check-circle');
+      icon.style.color = type === 'error' ? 'var(--error)' : 'var(--success)';
+      text.textContent = msg;
+      toast.classList.add('show');
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    // Theme
+    const themeBtn = document.getElementById('themeBtn');
+    const saved    = localStorage.getItem('azbry-theme');
+    if (saved) { document.documentElement.setAttribute('data-theme', saved); document.body.setAttribute('data-theme', saved); }
+    themeBtn.addEventListener('click', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      const next    = isLight ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      document.body.setAttribute('data-theme', next);
+      localStorage.setItem('azbry-theme', next);
+    });
+  </script>
+
+</body>
+  </html>
+
