@@ -162,7 +162,7 @@ const products = {
     items: [
       {
         title: 'Nokos Indo Fresh',
-        price: 'Rp 5.000',
+        price: 'Rp 6.000',
         period: 'per Nomor',
         popular: true,
         features: [
