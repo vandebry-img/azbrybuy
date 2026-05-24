@@ -41,53 +41,88 @@
       </a>
       <nav class="s-nav" id="mainNav">
         <a href="#products" class="s-nav-link active">Produk</a>
-        <a href="#projects" class="s-nav-link">Projects</a>
         <a href="#contact" class="s-nav-link">Kontak</a>
+        <a href="#projects" class="s-nav-link">Projects</a>
       </nav>
       <div class="s-header-right">
         <div class="s-clock"><i class="far fa-clock"></i><span id="clock">00:00</span></div>
-        <button class="s-hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+        <button class="s-hamburger" id="hamburger" aria-label="Buka menu"><i class="fas fa-bars"></i></button>
       </div>
     </div>
   </header>
 
   <div class="s-mobile-nav" id="mobileNav">
     <a href="#products" class="s-mobile-link"><i class="fas fa-box"></i> Produk</a>
-    <a href="#projects" class="s-mobile-link"><i class="fas fa-code"></i> Projects</a>
     <a href="#contact" class="s-mobile-link"><i class="fas fa-phone"></i> Kontak</a>
+    <a href="#projects" class="s-mobile-link"><i class="fas fa-code"></i> Projects</a>
   </div>
 
   <section id="home" class="s-hero">
-    <div class="s-container">
-      <div class="s-hero-badge">
-        <span class="s-badge-dot"></span>
-        <span>Toko Online · Aman & Terpercaya</span>
+    <div class="s-container s-hero-grid">
+      <div class="s-hero-left">
+        <div class="s-hero-badge">
+          <span class="s-badge-dot"></span>
+          <span>Toko Online · Aman &amp; Terpercaya</span>
+        </div>
+        <h1 class="s-hero-title">Azbry<span class="s-grad">MD</span> Store</h1>
+        <p class="s-hero-sub">Script Bot, Sewa Bot, Role Premium, &amp; Nokos Indo. Solusi lengkap WhatsApp bot — siap pakai, harga jujur, support kapan saja.</p>
+        <div class="s-hero-cta">
+          <a href="#products" class="s-btn s-btn-order"><i class="fas fa-bag-shopping"></i> Lihat Produk</a>
+          <a href="https://wa.me/6285189988271?text=Halo%20admin%20Azbry-MD" target="_blank" rel="noopener" class="s-btn s-btn-ghost"><i class="fab fa-whatsapp"></i> Chat Admin</a>
+        </div>
+        <div class="s-stats">
+          <div class="s-stat">
+            <span class="s-stat-val" data-count="750">0</span>
+            <span class="s-stat-label">Users</span>
+          </div>
+          <div class="s-stat-div"></div>
+          <div class="s-stat">
+            <span class="s-stat-val">4.9</span>
+            <span class="s-stat-label">Rating</span>
+          </div>
+          <div class="s-stat-div"></div>
+          <div class="s-stat">
+            <span class="s-stat-val">24/7</span>
+            <span class="s-stat-label">Support</span>
+          </div>
+        </div>
+        <div class="s-cf-wrap">
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAACnmUpBkDGDYl1B8"></div>
+        </div>
       </div>
-      <h1 class="s-hero-title">Azbry<span class="s-grad">MD</span> Store</h1>
-      <div class="s-stats">
-        <div class="s-stat">
-          <span class="s-stat-val" data-count="750">0</span>
-          <span class="s-stat-label">Users</span>
+
+      <div class="s-hero-right" aria-hidden="true">
+        <div class="s-preview-card">
+          <div class="s-preview-top">
+            <span class="s-preview-badge"><i class="fas fa-fire"></i> Best Seller</span>
+            <div class="s-preview-icon"><i class="fas fa-code"></i></div>
+          </div>
+          <div class="s-preview-title">Script Azbry-MD</div>
+          <div class="s-preview-sub">Source code WhatsApp bot lengkap</div>
+          <div class="s-preview-price-row">
+            <div class="s-preview-price">Rp 30.000</div>
+            <div class="s-preview-price-tag">sekali bayar</div>
+          </div>
+          <ul class="s-preview-features">
+            <li><i class="fas fa-check"></i> 400+ plugin siap pakai</li>
+            <li><i class="fas fa-check"></i> Native Flow Button &amp; Hybrid Menu</li>
+            <li><i class="fas fa-check"></i> AI: Gemini, GPT, Claude, SORA</li>
+            <li><i class="fas fa-check"></i> Downloader 12+ platform</li>
+          </ul>
+          <a href="#products" class="s-preview-cta">
+            <span>Lihat semua produk</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          <div class="s-preview-glow"></div>
         </div>
-        <div class="s-stat-div"></div>
-        <div class="s-stat">
-          <span class="s-stat-val">4.9</span>
-          <span class="s-stat-label">Rating</span>
-        </div>
-        <div class="s-stat-div"></div>
-        <div class="s-stat">
-          <span class="s-stat-val">24/7</span>
-          <span class="s-stat-label">Support</span>
-        </div>
-      </div>
-      <div class="s-cf-wrap">
-  <div class="cf-turnstile" data-sitekey="0x4AAAAAACnmUpBkDGDYl1B8"></div>
       </div>
     </div>
   </section>
 
   <section id="products" class="s-section">
     <div class="s-container">
+      <div class="s-section-label"><i class="fas fa-box"></i> Pilih Kategori</div>
+      <h2 class="s-section-title">Produk <span class="s-grad">Digital</span></h2>
       <div class="s-cat-grid" id="catGrid">
         <button class="s-cat-card" data-cat="script" onclick="openCategory('script',this)">
           <div class="s-cat-icon s-cat-icon-purple"><i class="fas fa-code"></i></div>
@@ -136,12 +171,78 @@
     </div>
   </section>
 
+  <section id="contact" class="s-section">
+    <div class="s-container">
+      <div class="s-section-label"><i class="fas fa-phone"></i> Hubungi Kami</div>
+      <h2 class="s-section-title">Siap <span class="s-grad">Membantu</span></h2>
+      <div class="s-contact-grid">
+        <div class="s-contact-card">
+          <div class="s-contact-wa">
+            <div class="s-wa-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+              <div class="s-contact-name">WhatsApp Admin</div>
+              <div class="s-contact-sub">Konsultasi &amp; pemesanan langsung</div>
+            </div>
+          </div>
+          <a href="https://wa.me/6285189988271?text=Halo%20admin%20Azbry-MD" target="_blank" rel="noopener" class="s-btn s-btn-wa s-btn-full">
+            <i class="fab fa-whatsapp"></i> Chat Sekarang
+          </a>
+          <div class="s-contact-info-grid">
+            <div class="s-contact-info-item">
+              <i class="fas fa-clock"></i>
+              <div>
+                <div class="s-ci-label">Jam Operasional</div>
+                <div class="s-ci-val">08:00 – 22:00 WIB</div>
+              </div>
+            </div>
+            <div class="s-contact-info-item">
+              <i class="fas fa-credit-card"></i>
+              <div>
+                <div class="s-ci-label">Pembayaran</div>
+                <div class="s-ci-val">Dana · OVO · GoPay · QRIS</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-contact-card">
+          <div class="s-contact-wa">
+            <div class="s-wa-icon"><i class="fas fa-comments"></i></div>
+            <div>
+              <div class="s-contact-name">Channel Testimoni</div>
+              <div class="s-contact-sub">Konfirmasi pembelian produk</div>
+            </div>
+          </div>
+          <a href="https://whatsapp.com/channel/0029VbBVZWi3bbVChBcrmK3R" target="_blank" rel="noopener" class="s-btn s-btn-wa s-btn-full">
+            <i class="fab fa-whatsapp"></i> Lihat Testimoni
+          </a>
+          <div class="s-contact-info-grid">
+            <div class="s-contact-info-item">
+              <i class="fas fa-shield-halved"></i>
+              <div>
+                <div class="s-ci-label">Garansi</div>
+                <div class="s-ci-val">Support sampai jalan</div>
+              </div>
+            </div>
+            <div class="s-contact-info-item">
+              <i class="fas fa-bolt"></i>
+              <div>
+                <div class="s-ci-label">Pengiriman</div>
+                <div class="s-ci-val">Fast · &lt; 30 menit</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="projects" class="s-section">
     <div class="s-container">
       <div class="s-section-label"><i class="fas fa-code"></i> Projects by FebryWesker</div>
       <button class="s-collapse-toggle" id="projectsToggle" onclick="toggleProjects()">
         <div class="s-collapse-left">
-          <span class="s-section-title">Project <span class="s-grad">FebryWesker</span></span>
+          <span class="s-section-title-inline">Project <span class="s-grad">FebryWesker</span></span>
           <span class="s-collapse-count">masih pemula :)</span>
         </div>
         <div class="s-collapse-chevron" id="projectsChevron"><i class="fas fa-chevron-down"></i></div>
@@ -166,7 +267,7 @@
             </div>
             <div class="s-project-body">
               <div class="s-project-title">Azbry Marketplace</div>
-              <p class="s-project-desc">Central marketplace untuk bot services & digital products.</p>
+              <p class="s-project-desc">Central marketplace untuk bot services &amp; digital products.</p>
               <div class="s-project-tags"><span class="s-ptag s-ptag-pink">Marketplace</span><span class="s-ptag s-ptag-cyan">Next.js</span></div>
             </div>
           </div>
@@ -215,58 +316,10 @@
             </div>
           </div>
         </div>
-        <div style="text-align:center;margin-top:20px;">
-          <a href="https://github.com/vandebry10-star" target="_blank" class="s-btn s-btn-ghost">
+        <div class="s-projects-cta">
+          <a href="https://github.com/vandebry10-star" target="_blank" rel="noopener" class="s-btn s-btn-ghost">
             <i class="fab fa-github"></i> View All on GitHub
           </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="s-section">
-    <div class="s-container">
-      <div class="s-section-label"><i class="fas fa-phone"></i> Hubungi Admin</div>
-      <h2 class="s-section-title">Siap <span class="s-grad">Membantu</span></h2>
-      <div class="s-contact-card">
-        <div class="s-contact-wa">
-          <div class="s-wa-icon"><i class="fab fa-whatsapp"></i></div>
-          <div>
-            <div class="s-contact-name">WhatsApp Admin</div>
-            <div class="s-contact-sub">Konsultasi & pemesanan langsung</div>
-          </div>
-        </div>
-        <a href="https://wa.me/6285189988271?text=Halo%20admin%20Azbry-MD" target="_blank" class="s-btn s-btn-wa s-btn-full">
-          <i class="fab fa-whatsapp"></i> Chat Sekarang
-        </a>
-        <div class="s-contact-info-grid">
-          <div class="s-contact-info-item">
-            <i class="fas fa-clock"></i>
-            <div><div class="s-ci-label">Jam Operasional</div><div class="s-ci-val">08:00 – 22:00 WIB</div></div>
-          </div>
-          <div class="s-contact-info-item">
-            <i class="fas fa-credit-card"></i>
-            <div><div class="s-ci-label">Pembayaran</div><div class="s-ci-val">Dana · OVO · GoPay · QRIS</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="s-section">
-    <div class="s-container">
-      <div class="s-section-label"><i class="fas fa-comment"></i> Join</div>
-      <h2 class="s-section-title">Testimoni <span class="s-grad">Report</span></h2>
-      <div class="s-contact-card">
-        <div class="s-contact-wa">
-          <div class="s-wa-icon"><i class="fab fa-whatsapp"></i></div>
-          <div>
-            <div class="s-contact-name">Channel Testimoni</div>
-            <div class="s-contact-sub">Konfirmasi pembelian produk</div>
-          </div>
-        </div>
-        <a href="https://whatsapp.com/channel/0029VbBVZWi3bbVChBcrmK3R" target="_blank" class="s-btn s-btn-wa s-btn-full">
-          <i class="fab fa-whatsapp"></i> Lihat Testimoni
-        </a>
         </div>
       </div>
     </div>
@@ -286,10 +339,11 @@
           <a href="#products" class="s-footer-link">Script Bot</a>
           <a href="#products" class="s-footer-link">Sewa Bot</a>
           <a href="#products" class="s-footer-link">Role Premium</a>
+          <a href="#products" class="s-footer-link">Nokos Indo</a>
           <a href="#projects" class="s-footer-link">Projects</a>
         </div>
         <div class="s-footer-info">
-          <p><i class="fas fa-shield-alt"></i> Aman & Terpercaya</p>
+          <p><i class="fas fa-shield-alt"></i> Aman &amp; Terpercaya</p>
           <p><i class="fas fa-headset"></i> Support 24/7</p>
           <p><i class="fas fa-bolt"></i> Fast Delivery</p>
         </div>
@@ -301,10 +355,10 @@
     </div>
   </footer>
 
-  <button id="themeToggle" class="s-theme-btn">
+  <button id="themeToggle" class="s-theme-btn" aria-label="Toggle tema">
     <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
   </button>
-  <button id="backToTop" class="s-back-top">
+  <button id="backToTop" class="s-back-top" aria-label="Kembali ke atas">
     <i class="fas fa-chevron-up"></i>
   </button>
   <div id="toast" class="s-toast">
