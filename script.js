@@ -605,7 +605,7 @@ function initScrollProgress() {
 
 // ── NAV ACTIVE ────────────────────────────
 function initNavLinks() {
-  const sections = ['home', 'products', 'projects', 'contact'];
+  const sections = ['home', 'products', 'contact', 'projects'];
   const links = document.querySelectorAll('.s-nav-link');
 
   window.addEventListener('scroll', throttle(() => {
